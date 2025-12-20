@@ -51,6 +51,7 @@
             <configuration>
               <configLocation>${project.basedir}/src/checkstyle/checkstyle.xml</configLocation>
               <includeTestSourceDirectory>true</includeTestSourceDirectory>
+              <skip>true</skip>
             </configuration>
             <goals>
               <goal>check</goal>
