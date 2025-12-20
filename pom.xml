@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.hillert</groupId>
+  <artifactId>image-filters-4j</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <name>Image Processing Filters for Java</name>
+  <url>https://github.com/ghillert/image-filters-4j</url>
+
+  <licenses>
+    <license>
+      <name>MIT</name>
+      <url>https://opensource.org/license/mit</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <properties>
+    <java.version>25</java.version>
+
+    <checkstyle.version>10.26.1</checkstyle.version>
+    <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+    <spring-javaformat-checkstyle.version>0.0.47</spring-javaformat-checkstyle.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven-checkstyle-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>io.spring.javaformat</groupId>
+            <artifactId>spring-javaformat-checkstyle</artifactId>
+            <version>${spring-javaformat-checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <id>checkstyle-validation</id>
+            <phase>validate</phase>
+            <inherited>true</inherited>
+            <configuration>
+              <configLocation>${project.basedir}/src/checkstyle/checkstyle.xml</configLocation>
+              <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            </configuration>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
