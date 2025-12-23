@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class OvalFilter extends PointFilter {
 
 	private float centreX = 0;

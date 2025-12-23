@@ -5,7 +5,8 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 
 /**
  * Scales an image using the area-averaging algorithm, which can't be done with AffineTransformOp.

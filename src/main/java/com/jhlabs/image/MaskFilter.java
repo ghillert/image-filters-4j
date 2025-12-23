@@ -4,9 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
+import java.io.Serializable;
 
 /**
  * Applies a bit mask to each ARGB pixel of an image. You can use this for, say, masking out the red channel.

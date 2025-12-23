@@ -5,7 +5,8 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 
 /**
  * Scales an image using bi-cubic interpolation, which can't be done with AffineTransformOp.

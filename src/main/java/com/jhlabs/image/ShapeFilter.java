@@ -5,7 +5,6 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.image.*;
 
 // original code Copyright (C) Jerry Huxtable 1998
 //

@@ -4,9 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.util.*;
 import java.awt.*;
-import java.awt.image.*;
 
 /**
  * A filter which quantizes an image to a set number of colors - useful for producing

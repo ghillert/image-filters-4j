@@ -4,8 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-
 public class ThresholdFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = -1899610620205446828L;

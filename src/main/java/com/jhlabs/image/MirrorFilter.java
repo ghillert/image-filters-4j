@@ -5,8 +5,7 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 
 public class MirrorFilter extends AbstractBufferedImageOp {
     private float opacity = 1.0f;

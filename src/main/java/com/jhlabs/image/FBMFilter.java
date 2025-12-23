@@ -4,9 +4,10 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-import java.util.*;
 import com.jhlabs.math.*;
+
+import java.awt.image.BufferedImage;
+import java.util.Random;
 
 /**
  * A filter which produces textures from fractal Brownian motion.

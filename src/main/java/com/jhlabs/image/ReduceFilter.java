@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class ReduceFilter extends PointFilter implements java.io.Serializable {
 
 	private int numLevels;

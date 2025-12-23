@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 /**
  * A filter which 'grays out' an image by averaging each pixel with white.
  */

@@ -4,9 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-import java.util.*;
-import com.jhlabs.math.*;
+import com.jhlabs.math.Noise;
 
 /**
  * An experimental filter for rendering lens flares.

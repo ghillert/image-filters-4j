@@ -4,9 +4,8 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-import com.jhlabs.math.*;
+import com.jhlabs.math.BinaryFunction;
+import com.jhlabs.math.BlackFunction;
 
 public abstract class BinaryFilter extends WholeImageFilter {
 

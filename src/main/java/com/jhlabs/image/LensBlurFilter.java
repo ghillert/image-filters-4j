@@ -4,11 +4,9 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
-import java.awt.color.*;
-import com.jhlabs.math.*;
+import com.jhlabs.math.FFT;
+
+import java.awt.image.BufferedImage;
 
 /**
  * A filter which use FFTs to simulate lens blur on an image

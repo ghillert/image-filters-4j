@@ -4,9 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-import com.jhlabs.math.*;
+import java.awt.image.BufferedImage;
 
 /**
  * A filter which simulates the appearance of looking through glass. A separate grayscale displacement image is provided and

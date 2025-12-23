@@ -5,7 +5,6 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.image.*;
 
 /**
  * A class to emboss an image.

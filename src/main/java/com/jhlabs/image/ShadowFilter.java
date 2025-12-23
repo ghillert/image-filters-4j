@@ -5,8 +5,10 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BandCombineOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 
 public class ShadowFilter extends AbstractBufferedImageOp {
 

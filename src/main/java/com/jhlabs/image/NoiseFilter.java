@@ -4,8 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-import java.util.*;
+import java.util.Random;
 
 /**
  * A filter which adds random noise into an image.

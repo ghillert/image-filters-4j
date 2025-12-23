@@ -5,9 +5,7 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
-import com.jhlabs.math.*;
+import java.awt.geom.Point2D;
 
 public class WaterFilter extends TransformFilter {
 

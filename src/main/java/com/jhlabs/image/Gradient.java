@@ -4,9 +4,8 @@
 
 package com.jhlabs.image;
 
-import java.awt.Color;
-import java.util.Vector;
-import java.io.*;
+import java.awt.*;
+import java.io.Serializable;
 
 /**
  * A Colormap implemented using Catmull-Rom colour splines. The map has a variable number

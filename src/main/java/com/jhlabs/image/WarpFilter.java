@@ -15,8 +15,8 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
+import java.awt.image.ImageObserver;
+import java.awt.image.PixelGrabber;
 
 /**
  * A filter for warping images using the gridwarp algorithm.

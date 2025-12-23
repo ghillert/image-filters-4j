@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class ContrastFilter extends TransferFilter {
 
 	private float brightness = 1.0f;

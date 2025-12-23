@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 /**
  * A filter which uses the brightness of each pixel to lookup a color from a colormap. 
  */

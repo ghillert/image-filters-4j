@@ -4,8 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-import java.util.*;
+import java.util.Random;
 
 public class SparkleFilter extends PointFilter implements java.io.Serializable {
 

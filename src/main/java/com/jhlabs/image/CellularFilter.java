@@ -4,10 +4,12 @@
 
 package com.jhlabs.image;
 
+import com.jhlabs.math.Function2D;
+import com.jhlabs.math.Noise;
+
 import java.awt.*;
-import java.awt.image.*;
-import java.util.*;
-import com.jhlabs.math.*;
+import java.awt.image.BufferedImageOp;
+import java.util.Random;
 
 public class CellularFilter extends WholeImageFilter implements Function2D, MutatableFilter, Cloneable, java.io.Serializable {
 

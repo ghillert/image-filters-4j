@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class DitherFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 2408287445119636967L;

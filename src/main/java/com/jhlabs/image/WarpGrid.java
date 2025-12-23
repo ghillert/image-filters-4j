@@ -14,9 +14,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 /**
  * A warp grid.
  * @author Jerry Huxtable

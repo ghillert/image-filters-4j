@@ -4,8 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 
 public abstract class TransferFilter extends PointFilter {
 

@@ -4,10 +4,10 @@
 
 package com.jhlabs.image;
 
+import com.jhlabs.math.Noise;
+
 import java.awt.*;
-import java.awt.image.*;
-import java.util.*;
-import com.jhlabs.math.*;
+import java.util.Random;
 
 /**
  * A filter which simulates underwater caustics. This can be animated to get a bottom-of-the-swimming-pool effect.

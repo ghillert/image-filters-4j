@@ -4,9 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-import com.jhlabs.math.*;
+import com.jhlabs.math.Noise;
 
 public class SwimFilter extends TransformFilter {
 

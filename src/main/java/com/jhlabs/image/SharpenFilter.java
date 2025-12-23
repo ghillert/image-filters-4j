@@ -4,8 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-
 public class SharpenFilter extends ConvolveFilter {
 
 	static final long serialVersionUID = -4883137561307845895L;

@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class RGBAdjustFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 3509907597266563800L;

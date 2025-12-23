@@ -4,10 +4,9 @@
 
 package com.jhlabs.image;
 
-import java.util.*;
 import java.awt.*;
-import java.awt.image.*;
-import com.jhlabs.math.*;
+import java.util.Date;
+import java.util.Random;
 
 public class SmearFilter extends WholeImageFilter implements java.io.Serializable {
 

@@ -5,10 +5,8 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.geom.*;
+import java.awt.geom.AffineTransform;
 import java.awt.image.*;
-import java.util.*;
-import com.jhlabs.image.*;
 
 public abstract class ImageUtils {
 	

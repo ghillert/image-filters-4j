@@ -4,8 +4,10 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-import com.jhlabs.math.*;
+import com.jhlabs.math.Function2D;
+import com.jhlabs.math.Noise;
+
+import java.awt.image.RGBImageFilter;
 
 public class WoodFilter extends RGBImageFilter implements java.io.Serializable {
 

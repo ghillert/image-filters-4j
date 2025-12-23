@@ -5,8 +5,7 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
+import java.awt.geom.Point2D;
 
 /**
  * A Filter which distorts an image by twisting it from the centre out.

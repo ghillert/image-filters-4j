@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class GainFilter extends TransferFilter {
 
 	private float gain = 0.5f;

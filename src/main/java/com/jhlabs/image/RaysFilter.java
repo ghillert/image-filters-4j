@@ -4,10 +4,10 @@
 
 package com.jhlabs.image;
 
+import com.jhlabs.composite.MiscComposite;
+
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
-import com.jhlabs.composite.*;
+import java.awt.image.BufferedImage;
 
 public class RaysFilter extends MotionBlurOp {
 

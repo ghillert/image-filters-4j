@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class RescaleFilter extends TransferFilter {
 
 	static final long serialVersionUID = -2724874183243154495L;

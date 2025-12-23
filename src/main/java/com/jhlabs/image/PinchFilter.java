@@ -4,9 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
-import java.awt.image.*;
-
 public class PinchFilter extends TransformFilter {
 
 	static final long serialVersionUID = -3768964940276766810L;

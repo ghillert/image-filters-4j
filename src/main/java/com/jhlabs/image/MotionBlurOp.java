@@ -5,8 +5,8 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
+import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 
 public class MotionBlurOp extends AbstractBufferedImageOp {
     private float centreX = 0.5f, centreY = 0.5f;

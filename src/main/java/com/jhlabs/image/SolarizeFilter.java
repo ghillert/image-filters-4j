@@ -4,8 +4,6 @@
 
 package com.jhlabs.image;
 
-import java.awt.image.*;
-
 /**
  * A filter which solarizes an image.
  */

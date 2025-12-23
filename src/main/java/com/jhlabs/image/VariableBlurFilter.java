@@ -5,8 +5,10 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.image.*;
-import java.awt.geom.*;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 
 public class VariableBlurFilter extends AbstractBufferedImageOp {
 

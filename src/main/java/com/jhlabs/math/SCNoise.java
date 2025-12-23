@@ -4,7 +4,7 @@
 
 package com.jhlabs.math;
 
-import java.util.*;
+import java.util.Random;
 
 /**
  * Sparse Convolution Noise. This is computationally very expensive, but worth it.

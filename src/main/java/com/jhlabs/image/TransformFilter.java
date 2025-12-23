@@ -5,7 +5,6 @@
 package com.jhlabs.image;
 
 import java.awt.*;
-import java.awt.image.*;
 
 /**
  * An abstract superclass for filters which distort images in some way. The subclass only needs to override
