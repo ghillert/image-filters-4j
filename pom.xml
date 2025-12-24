@@ -8,6 +8,11 @@
 
   <name>Image Processing Filters for Java</name>
   <url>https://github.com/ghillert/image-filters-4j</url>
+  <inceptionYear>2025</inceptionYear>
+
+  <description>
+    A collection of image processing filters implemented in Java.
+  </description>
 
   <licenses>
     <license>
@@ -17,15 +22,64 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <id>ghillert</id>
+      <name>Gunnar Hillert</name>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/ghillert/image-filters-4j.git</connection>
+    <developerConnection>scm:git:https://github.com/ghillert/image-filters-4j.git</developerConnection>
+    <url>https://github.com/ghillert/image-filters-4j</url>
+    <tag>HEAD</tag>
+  </scm>
+
   <properties>
-    <java.version>25</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>17</java.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
 
     <checkstyle.version>10.26.1</checkstyle.version>
     <maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+    <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+    <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
     <spring-javaformat-checkstyle.version>0.0.47</spring-javaformat-checkstyle.version>
+    <versions-maven-plugin.version>2.20.1</versions-maven-plugin.version>
   </properties>
 
+
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.14.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.12.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.4.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jreleaser</groupId>
+          <artifactId>jreleaser-maven-plugin</artifactId>
+          <version>1.21.0</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -59,6 +113,133 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.jreleaser</groupId>
+        <artifactId>jreleaser-maven-plugin</artifactId>
+        <configuration>
+          <jreleaser>
+            <signing>
+              <active>ALWAYS</active>
+              <armored>true</armored>
+            </signing>
+            <deploy>
+              <maven>
+                <mavenCentral>
+                  <sonatype>
+                    <active>RELEASE</active>
+                    <url>https://central.sonatype.com/api/v1/publisher</url>
+                    <stagingRepositories>target/staging-deploy</stagingRepositories>
+                  </sonatype>
+                </mavenCentral>
+                <nexus2>
+                  <snapshot-deploy>
+                    <active>SNAPSHOT</active>
+                    <snapshotUrl>https://central.sonatype.com/repository/maven-snapshots/</snapshotUrl>
+                    <applyMavenCentralRules>true</applyMavenCentralRules>
+                    <snapshotSupported>true</snapshotSupported>
+                    <closeRepository>true</closeRepository>
+                    <releaseRepository>true</releaseRepository>
+                    <stagingRepositories>target/staging-deploy</stagingRepositories>
+                  </snapshot-deploy>
+                </nexus2>
+              </maven>
+            </deploy>
+          </jreleaser>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.6.2</version>
+        <executions>
+          <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.6.3</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>publication</id>
+      <properties>
+        <altDeploymentRepository>local::file:./target/staging-deploy</altDeploymentRepository>
+      </properties>
+      <build>
+        <defaultGoal>deploy</defaultGoal>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>${maven-javadoc-plugin.version}</version>
+            <configuration>
+              <doclint>none</doclint>
+            </configuration>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <attach>true</attach>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>${maven-source-plugin.version}</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+                <configuration>
+                  <attach>true</attach>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>versions</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>versions-maven-plugin</artifactId>
+            <version>${versions-maven-plugin.version}</version>
+            <configuration>
+              <rulesUri>file://${project.basedir}/src/rules.xml</rulesUri>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>compile</phase>
+                <goals>
+                  <goal>display-property-updates</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
