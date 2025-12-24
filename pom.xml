@@ -144,6 +144,15 @@
                 </nexus2>
               </maven>
             </deploy>
+            <release>
+              <github>
+                <owner>ghillert</owner>
+                <name>image-filters-4j</name>
+                <changelog>
+                  <formatted>ALWAYS</formatted>
+                </changelog>
+              </github>
+            </release>
           </jreleaser>
         </configuration>
       </plugin>
