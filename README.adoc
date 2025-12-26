@@ -12,6 +12,43 @@ http://www.jhlabs.com/ip/filters/download.html
 
 The goal is to have the filters available via the Maven Central repository eventually.
 
+== Getting Started
+
+=== Maven
+
+To use the filters in your Maven project, add the following dependency to your `pom.xml`:
+
+=== Usage
+
+[source,java,indent=0]
+----
+    final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    final String imageResourcePath = "images/image-filters-4j.png";
+    final BufferedImage originalBufferedImage;
+
+    try (InputStream inputStream = classLoader.getResourceAsStream(imageResourcePath)) {
+        if (inputStream == null) {
+            throw new IllegalStateException("Resource not found: " + imageResourcePath);
+        }
+        originalBufferedImage = ImageIO.read(inputStream);
+    }
+    catch (IOException ex) {
+        throw new IllegalStateException("Unable to read image at " + imageResourcePath, ex);
+    }
+
+    final BufferedImage grayscaleBufferedImage = new GrayscaleFilter().filter(originalBufferedImage, null);
+
+    final Path outputPath = Path.of("target", "image-filters-4j_output.png");
+
+    try {
+        Files.createDirectories(outputPath.getParent());
+        ImageIO.write(grayscaleBufferedImage, "png", outputPath.toFile());
+    }
+    catch (IOException ex) {
+        throw new IllegalStateException("Unable to write image to " + outputPath, ex);
+    }
+----
+
 == Maven Dependencies
 
 Currently, snapshot releases are available via the following Maven repository:
