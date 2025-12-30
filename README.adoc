@@ -67,6 +67,193 @@ Currently, snapshot releases are available via the following Maven repository:
 </repository>
 ----
 
+== List of Filters
+
+The following filters are included in this library:
+
+=== Color Adjustment Filters
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|ChannelMixFilter |
+|ContrastFilter |
+|CurvesFilter |
+|DiffusionFilter |
+|DitherFilter |
+|ExposureFilter |
+|GainFilter |
+|GammaFilter |
+|GrayFilter |
+|GrayscaleFilter |
+|HSBAdjustFilter |
+|InvertAlphaFilter |
+|InvertFilter |
+|LevelsFilter |
+|LookupFilter |
+|MapColorsFilter |
+|MaskFilter |
+|PosterizeFilter |
+|QuantizeFilter |
+|RescaleFilter |
+|RGBAdjustFilter |
+|SepiaFilter | ✅
+|SolarizeFilter |
+|ThresholdFilter |
+|TritoneFilter |
+|===
+
+=== Distortion & Warping Filters
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|BicubicScaleFilter |
+|CircleFilter |
+|CropFilter |
+|DiffuseFilter |
+|DisplaceFilter |
+|DissolveFilter |
+|FieldWarpFilter |
+|FlipFilter |
+|KaleidoscopeFilter |
+|MarbleFilter |
+|MirrorFilter |
+|OffsetFilter |
+|PerspectiveFilter |
+|PinchFilter |
+|PolarFilter |
+|RippleFilter |
+|RotateFilter |
+|ScaleFilter |
+|ShearFilter |
+|SphereFilter |
+|SwimFilter |
+|TileImageFilter |
+|TwirlFilter |
+|WarpFilter |
+|WaterFilter |
+|===
+
+=== Effects Filters
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|BlockFilter |
+|BorderFilter |
+|ChromeFilter |
+|ColorHalftoneFilter |
+|CrystallizeFilter |
+|EmbossFilter |
+|FeedbackFilter |
+|HalftoneFilter |
+|LightFilter |
+|NoiseFilter |
+|PointillizeFilter |
+|ShadowFilter |
+|ShapeFilter |
+|StampFilter |
+|WeaveFilter |
+|===
+
+=== Texturing Filters
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|BrushedMetalFilter |
+|CausticsFilter |
+|CellularFilter |
+|CheckFilter |
+|FBMFilter |
+|FillFilter |
+|FlareFilter |
+|FourColorFilter |
+|GradientFilter |
+|PlasmaFilter |
+|TextureFilter |
+|ScratchFilter |
+|SmearFilter |
+|SparkleFilter |
+|WoodFilter |
+|===
+
+=== Blurring & Sharpening Filters
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|BlurFilter |
+|BoxBlurFilter |
+|BumpFilter |
+|ConvolveFilter |
+|DespeckleFilter |
+|GaussianFilter |
+|GlowFilter |
+|HighPassFilter |
+|LensBlurFilter |
+|MaximumFilter |
+|MedianFilter |
+|MinimumFilter |
+|MotionBlurFilter |
+|OilFilter |
+|RaysFilter |
+|ReduceNoiseFilter |
+|SharpenFilter |
+|SmartBlurFilter |
+|UnsharpFilter |
+|VariableBlurFilter |
+|===
+
+=== Edge Detection
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|DoGFilter |
+|EdgeFilter |
+|LaplaceFilter |
+|===
+
+=== Transitions
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|BlurTransition |
+|GradientWipeFilter |
+|===
+
+=== Alpha Channel Filters
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|OpacityFilter |
+|PremultiplyFilter |
+|UnpremultiplyFilter |
+|===
+
+=== Miscellaneous Filters
+
+[cols="6,1",options="header"]
+|===
+|Filter |New
+
+|CompoundFilter |
+|IteratedFilter |
+|===
+
+
 == License
 
 MIT. See link:LICENSE[LICENSE].
