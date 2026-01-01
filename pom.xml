@@ -4,7 +4,7 @@
 
   <groupId>com.hillert</groupId>
   <artifactId>image-filters-4j</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0-M1</version>
 
   <name>Image Processing Filters for Java</name>
   <url>https://github.com/ghillert/image-filters-4j</url>
