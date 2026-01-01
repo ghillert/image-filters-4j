@@ -4,7 +4,7 @@
 
   <groupId>com.hillert</groupId>
   <artifactId>image-filters-4j</artifactId>
-  <version>1.0.0-M1</version>
+  <version>1.0.0-SNAPSHOT</version>
 
   <name>Image Processing Filters for Java</name>
   <url>https://github.com/ghillert/image-filters-4j</url>
@@ -142,7 +142,7 @@
               <maven>
                 <mavenCentral>
                   <sonatype>
-                    <active>RELEASE</active>
+                    <active>NEVER</active>
                     <url>https://central.sonatype.com/api/v1/publisher</url>
                     <stagingRepositories>target/staging-deploy</stagingRepositories>
                   </sonatype>
