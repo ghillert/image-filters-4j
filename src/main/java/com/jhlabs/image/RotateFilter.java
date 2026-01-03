@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -9,7 +9,7 @@ import java.awt.*;
 public class RotateFilter extends TransformFilter {
 
 	static final long serialVersionUID = 1166374736665848180L;
-	
+
 	private float angle;
 	private float cos, sin;
 	private boolean resize = true;
@@ -29,16 +29,17 @@ public class RotateFilter extends TransformFilter {
 
 	public void setAngle(float angle) {
 		this.angle = angle;
-		cos = (float)Math.cos(this.angle);
-		sin = (float)Math.sin(this.angle);
+		this.cos = (float) Math.cos(this.angle);
+		this.sin = (float) Math.sin(this.angle);
 	}
 
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
 
+	@Override
 	protected void transformSpace(Rectangle rect) {
-		if (resize) {
+		if (this.resize) {
 			Point out = new Point(0, 0);
 			int minx = Integer.MAX_VALUE;
 			int miny = Integer.MAX_VALUE;
@@ -49,12 +50,20 @@ public class RotateFilter extends TransformFilter {
 			int x = rect.x;
 			int y = rect.y;
 
-			for (int i = 0; i < 4; i++)  {
+			for (int i = 0; i < 4; i++) {
 				switch (i) {
-				case 0: transform(x, y, out); break;
-				case 1: transform(x + w, y, out); break;
-				case 2: transform(x, y + h, out); break;
-				case 3: transform(x + w, y + h, out); break;
+					case 0:
+						transform(x, y, out);
+						break;
+					case 1:
+						transform(x + w, y, out);
+						break;
+					case 2:
+						transform(x, y + h, out);
+						break;
+					case 3:
+						transform(x + w, y + h, out);
+						break;
 				}
 				minx = Math.min(minx, out.x);
 				miny = Math.min(miny, out.y);
@@ -70,17 +79,19 @@ public class RotateFilter extends TransformFilter {
 	}
 
 	protected void transform(int x, int y, Point out) {
-		out.x = (int)((x * cos) + (y * sin));
-		out.y = (int)((y * cos) - (x * sin));
+		out.x = (int) ((x * this.cos) + (y * this.sin));
+		out.y = (int) ((y * this.cos) - (x * this.sin));
 	}
 
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		out[0] = (x * cos) - (y * sin);
-		out[1] = (y * cos) + (x * sin);
+		out[0] = (x * this.cos) - (y * this.sin);
+		out[1] = (y * this.cos) + (x * this.sin);
 	}
 
+	@Override
 	public String toString() {
-		return "Rotate "+(int)(angle * 180 / Math.PI);
+		return "Rotate " + (int) (this.angle * 180 / Math.PI);
 	}
 
 }

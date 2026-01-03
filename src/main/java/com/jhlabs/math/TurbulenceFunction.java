@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.math;
 
@@ -12,20 +12,22 @@ public class TurbulenceFunction extends CompoundFunction2D {
 		super(basis);
 		this.octaves = octaves;
 	}
-	
+
 	public void setOctaves(float octaves) {
 		this.octaves = octaves;
 	}
 
 	public float getOctaves() {
-		return octaves;
+		return this.octaves;
 	}
 
+	@Override
 	public float evaluate(float x, float y) {
 		float t = 0.0f;
 
-		for (float f = 1.0f; f <= octaves; f *= 2)
-			t += Math.abs(basis.evaluate(f * x, f * y)) / f;
+		for (float f = 1.0f; f <= this.octaves; f *= 2) {
+			t += Math.abs(this.basis.evaluate(f * x, f * y)) / f;
+		}
 		return t;
 	}
 

@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -21,21 +21,21 @@ public class SwimFilter extends TransformFilter {
 
 	public SwimFilter() {
 	}
-	
+
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	
+
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
-	
+
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
 
 	public float getScale() {
-		return scale;
+		return this.scale;
 	}
 
 	public void setStretch(float stretch) {
@@ -43,21 +43,21 @@ public class SwimFilter extends TransformFilter {
 	}
 
 	public float getStretch() {
-		return stretch;
+		return this.stretch;
 	}
 
 	public void setAngle(float angle) {
 		this.angle = angle;
-		float cos = (float)Math.cos(angle);
-		float sin = (float)Math.sin(angle);
-		m00 = cos;
-		m01 = sin;
-		m10 = -sin;
-		m11 = cos;
+		float cos = (float) Math.cos(angle);
+		float sin = (float) Math.sin(angle);
+		this.m00 = cos;
+		this.m01 = sin;
+		this.m10 = -sin;
+		this.m11 = cos;
 	}
 
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
 
 	public void setTurbulence(float turbulence) {
@@ -65,7 +65,7 @@ public class SwimFilter extends TransformFilter {
 	}
 
 	public float getTurbulence() {
-		return turbulence;
+		return this.turbulence;
 	}
 
 	public void setTime(float time) {
@@ -73,24 +73,27 @@ public class SwimFilter extends TransformFilter {
 	}
 
 	public float getTime() {
-		return time;
+		return this.time;
 	}
 
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		float nx = m00*x + m01*y;
-		float ny = m10*x + m11*y;
-		nx /= scale;
-		ny /= scale * stretch;
+		float nx = this.m00 * x + this.m01 * y;
+		float ny = this.m10 * x + this.m11 * y;
+		nx /= this.scale;
+		ny /= this.scale * this.stretch;
 
-		if ( turbulence == 1.0f ) {
-			out[0] = x + amount * Noise.noise3(nx+0.5f, ny, time);
-			out[1] = y + amount * Noise.noise3(nx, ny+0.5f, time);
-		} else {
-			out[0] = x + amount * Noise.turbulence3(nx+0.5f, ny, turbulence, time);
-			out[1] = y + amount * Noise.turbulence3(nx, ny+0.5f, turbulence, time);
+		if (this.turbulence == 1.0f) {
+			out[0] = x + this.amount * Noise.noise3(nx + 0.5f, ny, this.time);
+			out[1] = y + this.amount * Noise.noise3(nx, ny + 0.5f, this.time);
+		}
+		else {
+			out[0] = x + this.amount * Noise.turbulence3(nx + 0.5f, ny, this.turbulence, this.time);
+			out[1] = y + this.amount * Noise.turbulence3(nx, ny + 0.5f, this.turbulence, this.time);
 		}
 	}
 
+	@Override
 	public String toString() {
 		return "Distort/Swim...";
 	}

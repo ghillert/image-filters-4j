@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -19,7 +19,7 @@ public abstract class BinaryFilter extends WholeImageFilter {
 	}
 
 	public int getIterations() {
-		return iterations;
+		return this.iterations;
 	}
 
 	public void setColormap(Colormap colormap) {
@@ -27,7 +27,7 @@ public abstract class BinaryFilter extends WholeImageFilter {
 	}
 
 	public Colormap getColormap() {
-		return colormap;
+		return this.colormap;
 	}
 
 	public void setNewColor(int newColor) {
@@ -35,7 +35,7 @@ public abstract class BinaryFilter extends WholeImageFilter {
 	}
 
 	public int getNewColor() {
-		return newColor;
+		return this.newColor;
 	}
 
 	public void setBlackFunction(BinaryFunction blackFunction) {
@@ -43,7 +43,7 @@ public abstract class BinaryFilter extends WholeImageFilter {
 	}
 
 	public BinaryFunction getBlackFunction() {
-		return blackFunction;
+		return this.blackFunction;
 	}
 
 }

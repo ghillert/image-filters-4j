@@ -34,22 +34,24 @@ package com.jhlabs.image;
 public class SepiaFilter extends PointFilter {
 
 	public SepiaFilter() {
-		canFilterIndexColorModel = true;
+		this.canFilterIndexColorModel = true;
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
 		int a = rgb & 0xff000000;
 		int r = (rgb >> 16) & 0xff;
 		int g = (rgb >> 8) & 0xff;
 		int b = rgb & 0xff;
 
-		int sepiaR = Math.min(255, (int)Math.round(0.393 * r + 0.769 * g + 0.189 * b));
-		int sepiaG = Math.min(255, (int)Math.round(0.349 * r + 0.686 * g + 0.168 * b));
-		int sepiaB = Math.min(255, (int)Math.round(0.272 * r + 0.534 * g + 0.131 * b));
+		int sepiaR = Math.min(255, (int) Math.round(0.393 * r + 0.769 * g + 0.189 * b));
+		int sepiaG = Math.min(255, (int) Math.round(0.349 * r + 0.686 * g + 0.168 * b));
+		int sepiaB = Math.min(255, (int) Math.round(0.272 * r + 0.534 * g + 0.131 * b));
 
 		return a | (sepiaR << 16) | (sepiaG << 8) | sepiaB;
 	}
 
+	@Override
 	public String toString() {
 		return "Colors/Sepia Out";
 	}

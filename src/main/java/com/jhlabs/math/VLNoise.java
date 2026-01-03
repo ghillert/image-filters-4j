@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.math;
 
@@ -13,13 +13,14 @@ public class VLNoise implements Function2D {
 	}
 
 	public float getDistortion() {
-		return distortion;
+		return this.distortion;
 	}
 
+	@Override
 	public float evaluate(float x, float y) {
-		float ox = Noise.noise2(x+0.5f, y) * distortion;
-		float oy = Noise.noise2(x, y+0.5f) * distortion;
-		return Noise.noise2(x+ox, y+oy);
+		float ox = Noise.noise2(x + 0.5f, y) * this.distortion;
+		float oy = Noise.noise2(x, y + 0.5f) * this.distortion;
+		return Noise.noise2(x + ox, y + oy);
 	}
 
 }

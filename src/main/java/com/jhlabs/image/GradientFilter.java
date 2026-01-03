@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -13,17 +13,17 @@ import java.awt.image.BufferedImage;
  */
 public class GradientFilter extends AbstractBufferedImageOp {
 
-	public final static int LINEAR = 0;
-	public final static int BILINEAR = 1;
-	public final static int RADIAL = 2;
-	public final static int CONICAL = 3;
-	public final static int BICONICAL = 4;
-	public final static int SQUARE = 5;
+	public static final int LINEAR = 0;
+	public static final int BILINEAR = 1;
+	public static final int RADIAL = 2;
+	public static final int CONICAL = 3;
+	public static final int BICONICAL = 4;
+	public static final int SQUARE = 5;
 
-	public final static int INT_LINEAR = 0;
-	public final static int INT_CIRCLE_UP = 1;
-	public final static int INT_CIRCLE_DOWN = 2;
-	public final static int INT_SMOOTH = 3;
+	public static final int INT_LINEAR = 0;
+	public static final int INT_CIRCLE_UP = 1;
+	public static final int INT_CIRCLE_DOWN = 2;
+	public static final int INT_SMOOTH = 3;
 
 	private float angle = 0;
 	private int color1 = 0xff000000;
@@ -50,7 +50,7 @@ public class GradientFilter extends AbstractBufferedImageOp {
 		this.repeat = repeat;
 		this.type = type;
 		this.interpolation = interpolation;
-		colormap = new LinearColormap(color1, color2);
+		this.colormap = new LinearColormap(color1, color2);
 	}
 
 	public void setPoint1(Point point1) {
@@ -58,7 +58,7 @@ public class GradientFilter extends AbstractBufferedImageOp {
 	}
 
 	public Point getPoint1() {
-		return p1;
+		return this.p1;
 	}
 
 	public void setPoint2(Point point2) {
@@ -66,7 +66,7 @@ public class GradientFilter extends AbstractBufferedImageOp {
 	}
 
 	public Point getPoint2() {
-		return p2;
+		return this.p2;
 	}
 
 	public void setType(int type) {
@@ -74,7 +74,7 @@ public class GradientFilter extends AbstractBufferedImageOp {
 	}
 
 	public int getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setInterpolation(int interpolation) {
@@ -82,59 +82,62 @@ public class GradientFilter extends AbstractBufferedImageOp {
 	}
 
 	public int getInterpolation() {
-		return interpolation;
+		return this.interpolation;
 	}
 
 	public void setAngle(float angle) {
 		this.angle = angle;
-		p2 = new Point((int)(64*Math.cos(angle)), (int)(64*Math.sin(angle)));
+		this.p2 = new Point((int) (64 * Math.cos(angle)), (int) (64 * Math.sin(angle)));
 	}
-	
+
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
-	
+
 	public void setColormap(Colormap colormap) {
 		this.colormap = colormap;
 	}
-	
+
 	public Colormap getColormap() {
-		return colormap;
+		return this.colormap;
 	}
-	
+
 	public void setPaintMode(int paintMode) {
 		this.paintMode = paintMode;
 	}
 
 	public int getPaintMode() {
-		return paintMode;
+		return this.paintMode;
 	}
 
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-        int width = src.getWidth();
-        int height = src.getHeight();
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		int width = src.getWidth();
+		int height = src.getHeight();
 
-        if ( dst == null )
-            dst = createCompatibleDestImage( src, null );
+		if (dst == null) {
+			dst = createCompatibleDestImage(src, null);
+		}
 
 		int rgb1, rgb2;
 		float x1, y1, x2, y2;
-		x1 = p1.x;
-		x2 = p2.x;
+		x1 = this.p1.x;
+		x2 = this.p2.x;
 
-		if (x1 > x2 && type != RADIAL) {
+		if (x1 > x2 && this.type != RADIAL) {
 			y1 = x1;
 			x1 = x2;
 			x2 = y1;
-			y1 = p2.y;
-			y2 = p1.y;
-			rgb1 = color2;
-			rgb2 = color1;
-		} else {
-			y1 = p1.y;
-			y2 = p2.y;
-			rgb1 = color1;
-			rgb2 = color2;
+			y1 = this.p2.y;
+			y2 = this.p1.y;
+			rgb1 = this.color2;
+			rgb2 = this.color1;
+		}
+		else {
+			y1 = this.p1.y;
+			y2 = this.p2.y;
+			rgb1 = this.color1;
+			rgb2 = this.color2;
 		}
 		float dx = x2 - x1;
 		float dy = y2 - y1;
@@ -144,7 +147,7 @@ public class GradientFilter extends AbstractBufferedImageOp {
 		if (lenSq >= Float.MIN_VALUE) {
 			dx = dx / lenSq;
 			dy = dy / lenSq;
-			if (repeat) {
+			if (this.repeat) {
 				dx = dx % 1.0f;
 				dy = dy % 1.0f;
 			}
@@ -152,29 +155,29 @@ public class GradientFilter extends AbstractBufferedImageOp {
 		this.dx = dx;
 		this.dy = dy;
 
-        int[] pixels = new int[width];
-        for (int y = 0; y < height; y++ ) {
-			getRGB( src, 0, y, width, 1, pixels );
-			switch (type) {
-			case LINEAR:
-			case BILINEAR:
-				linearGradient(pixels, y, width, 1);
-				break;
-			case RADIAL:
-				radialGradient(pixels, y, width, 1);
-				break;
-			case CONICAL:
-			case BICONICAL:
-				conicalGradient(pixels, y, width, 1);
-				break;
-			case SQUARE:
-				squareGradient(pixels, y, width, 1);
-				break;
+		int[] pixels = new int[width];
+		for (int y = 0; y < height; y++) {
+			getRGB(src, 0, y, width, 1, pixels);
+			switch (this.type) {
+				case LINEAR:
+				case BILINEAR:
+					linearGradient(pixels, y, width, 1);
+					break;
+				case RADIAL:
+					radialGradient(pixels, y, width, 1);
+					break;
+				case CONICAL:
+				case BICONICAL:
+					conicalGradient(pixels, y, width, 1);
+					break;
+				case SQUARE:
+					squareGradient(pixels, y, width, 1);
+					break;
 			}
-			setRGB( dst, 0, y, width, 1, pixels );
-        }
+			setRGB(dst, 0, y, width, 1, pixels);
+		}
 		return dst;
-    }
+	}
 
 	private void repeatGradient(int[] pixels, int w, int h, float rowrel, float dx, float dy) {
 		int off = 0;
@@ -183,11 +186,13 @@ public class GradientFilter extends AbstractBufferedImageOp {
 			int j = w;
 			int rgb;
 			while (--j >= 0) {
-				if (type == BILINEAR)
-					rgb = colormap.getColor(map(ImageMath.triangle(colrel)));
-				else
-					rgb = colormap.getColor(map(ImageMath.mod(colrel, 1.0f)));
-				pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], paintMode);
+				if (this.type == BILINEAR) {
+					rgb = this.colormap.getColor(map(ImageMath.triangle(colrel)));
+				}
+				else {
+					rgb = this.colormap.getColor(map(ImageMath.mod(colrel, 1.0f)));
+				}
+				pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 				off++;
 				colrel += dx;
 			}
@@ -202,29 +207,33 @@ public class GradientFilter extends AbstractBufferedImageOp {
 			int j = w;
 			int rgb;
 			if (colrel <= 0.0) {
-				rgb = colormap.getColor(0);
+				rgb = this.colormap.getColor(0);
 				do {
-					pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], paintMode);
+					pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 					off++;
 					colrel += dx;
 				} while (--j > 0 && colrel <= 0.0);
 			}
 			while (colrel < 1.0 && --j >= 0) {
-				if (type == BILINEAR)
-					rgb = colormap.getColor(map(ImageMath.triangle(colrel)));
-				else
-					rgb = colormap.getColor(map(colrel));
-				pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], paintMode);
+				if (this.type == BILINEAR) {
+					rgb = this.colormap.getColor(map(ImageMath.triangle(colrel)));
+				}
+				else {
+					rgb = this.colormap.getColor(map(colrel));
+				}
+				pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 				off++;
 				colrel += dx;
 			}
 			if (j > 0) {
-				if (type == BILINEAR)
-					rgb = colormap.getColor(0.0f);
-				else
-					rgb = colormap.getColor(1.0f);
+				if (this.type == BILINEAR) {
+					rgb = this.colormap.getColor(0.0f);
+				}
+				else {
+					rgb = this.colormap.getColor(1.0f);
+				}
 				do {
-					pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], paintMode);
+					pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 					off++;
 				} while (--j > 0);
 			}
@@ -234,81 +243,90 @@ public class GradientFilter extends AbstractBufferedImageOp {
 
 	private void linearGradient(int[] pixels, int y, int w, int h) {
 		int x = 0;
-		float rowrel = (x - x1) * dx + (y - y1) * dy;
-		if (repeat)
-			repeatGradient(pixels, w, h, rowrel, dx, dy);
-		else
-			singleGradient(pixels, w, h, rowrel, dx, dy);
+		float rowrel = (x - this.x1) * this.dx + (y - this.y1) * this.dy;
+		if (this.repeat) {
+			repeatGradient(pixels, w, h, rowrel, this.dx, this.dy);
+		}
+		else {
+			singleGradient(pixels, w, h, rowrel, this.dx, this.dy);
+		}
 	}
-	
+
 	private void radialGradient(int[] pixels, int y, int w, int h) {
 		int off = 0;
-		float radius = distance(p2.x-p1.x, p2.y-p1.y);
+		float radius = distance(this.p2.x - this.p1.x, this.p2.y - this.p1.y);
 		for (int x = 0; x < w; x++) {
-			float distance = distance(x-p1.x, y-p1.y);
+			float distance = distance(x - this.p1.x, y - this.p1.y);
 			float ratio = distance / radius;
-			if (repeat)
+			if (this.repeat) {
 				ratio = ratio % 2;
-			else if (ratio > 1.0)
+			}
+			else if (ratio > 1.0) {
 				ratio = 1.0f;
-			int rgb = colormap.getColor(map(ratio));
-			pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], paintMode);
+			}
+			int rgb = this.colormap.getColor(map(ratio));
+			pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 			off++;
 		}
 	}
-	
+
 	private void squareGradient(int[] pixels, int y, int w, int h) {
 		int off = 0;
-		float radius = Math.max(Math.abs(p2.x-p1.x), Math.abs(p2.y-p1.y));
+		float radius = Math.max(Math.abs(this.p2.x - this.p1.x), Math.abs(this.p2.y - this.p1.y));
 		for (int x = 0; x < w; x++) {
-			float distance = Math.max(Math.abs(x-p1.x), Math.abs(y-p1.y));
+			float distance = Math.max(Math.abs(x - this.p1.x), Math.abs(y - this.p1.y));
 			float ratio = distance / radius;
-			if (repeat)
+			if (this.repeat) {
 				ratio = ratio % 2;
-			else if (ratio > 1.0)
+			}
+			else if (ratio > 1.0) {
 				ratio = 1.0f;
-			int rgb = colormap.getColor(map(ratio));
-			pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], paintMode);
+			}
+			int rgb = this.colormap.getColor(map(ratio));
+			pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 			off++;
 		}
 	}
-	
+
 	private void conicalGradient(int[] pixels, int y, int w, int h) {
 		int off = 0;
-		float angle0 = (float)Math.atan2(p2.x-p1.x, p2.y-p1.y);
+		float angle0 = (float) Math.atan2(this.p2.x - this.p1.x, this.p2.y - this.p1.y);
 		for (int x = 0; x < w; x++) {
-			float angle = (float)(Math.atan2(x-p1.x, y-p1.y) - angle0) / (ImageMath.TWO_PI);
+			float angle = (float) (Math.atan2(x - this.p1.x, y - this.p1.y) - angle0) / (ImageMath.TWO_PI);
 			angle += 1.0f;
 			angle %= 1.0f;
-			if (type == BICONICAL)
+			if (this.type == BICONICAL) {
 				angle = ImageMath.triangle(angle);
-			int rgb = colormap.getColor(map(angle));
-			pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], paintMode);
+			}
+			int rgb = this.colormap.getColor(map(angle));
+			pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 			off++;
 		}
 	}
-	
+
 	private float map(float v) {
-		if (repeat)
-			v = v > 1.0 ? 2.0f-v : v;
-		switch (interpolation) {
-		case INT_CIRCLE_UP:
-			v = ImageMath.circleUp(ImageMath.clamp(v, 0.0f, 1.0f));
-			break;
-		case INT_CIRCLE_DOWN:
-			v = ImageMath.circleDown(ImageMath.clamp(v, 0.0f, 1.0f));
-			break;
-		case INT_SMOOTH:
-			v = ImageMath.smoothStep(0, 1, v);
-			break;
+		if (this.repeat) {
+			v = v > 1.0 ? 2.0f - v : v;
+		}
+		switch (this.interpolation) {
+			case INT_CIRCLE_UP:
+				v = ImageMath.circleUp(ImageMath.clamp(v, 0.0f, 1.0f));
+				break;
+			case INT_CIRCLE_DOWN:
+				v = ImageMath.circleDown(ImageMath.clamp(v, 0.0f, 1.0f));
+				break;
+			case INT_SMOOTH:
+				v = ImageMath.smoothStep(0, 1, v);
+				break;
 		}
 		return v;
 	}
-	
+
 	private float distance(float a, float b) {
-		return (float)Math.sqrt(a*a+b*b);
+		return (float) Math.sqrt(a * a + b * b);
 	}
-	
+
+	@Override
 	public String toString() {
 		return "Other/Gradient Fill...";
 	}

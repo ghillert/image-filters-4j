@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.math;
 
@@ -11,47 +11,51 @@ public class CellularFunction2D implements Function2D {
 	public float distancePower = 2;
 	public boolean cells = false;
 	public boolean angular = false;
-	private float[] coefficients = { 1, 0, 0, 0 };
-	private Random random = new Random();
+	private final float[] coefficients = {1, 0, 0, 0};
+	private final Random random = new Random();
 	private Point[] results = null;
-	
+
 	public CellularFunction2D() {
-		results = new Point[2];
-		for (int j = 0; j < results.length; j++)
-			results[j] = new Point();
+		this.results = new Point[2];
+		for (int j = 0; j < this.results.length; j++) {
+			this.results[j] = new Point();
+		}
 	}
-	
+
 	public void setCoefficient(int c, float v) {
-		coefficients[c] = v;
+		this.coefficients[c] = v;
 	}
-	
+
 	public float getCoefficient(int c) {
-		return coefficients[c];
+		return this.coefficients[c];
 	}
-	
+
 	class Point {
 		int index;
 		float x, y;
 		float distance;
 	}
-	
+
 	private float checkCube(float x, float y, int cubeX, int cubeY, Point[] results) {
-		random.setSeed(571*cubeX + 23*cubeY);
-		int numPoints = 3 + random.nextInt() % 4;
+		this.random.setSeed(571L * cubeX + 23L * cubeY);
+		int numPoints = 3 + this.random.nextInt() % 4;
 		numPoints = 4;
 
 		for (int i = 0; i < numPoints; i++) {
-			float px = random.nextFloat();
-			float py = random.nextFloat();
-			float dx = Math.abs(x-px);
-			float dy = Math.abs(y-py);
+			float px = this.random.nextFloat();
+			float py = this.random.nextFloat();
+			float dx = Math.abs(x - px);
+			float dy = Math.abs(y - py);
 			float d;
-			if (distancePower == 1.0f)
+			if (this.distancePower == 1.0f) {
 				d = dx + dy;
-			else if (distancePower == 2.0f)
-				d = (float)Math.sqrt(dx*dx + dy*dy);
-			else
-				d = (float)Math.pow(Math.pow(dx, distancePower) + Math.pow(dy, distancePower), 1/distancePower);
+			}
+			else if (this.distancePower == 2.0f) {
+				d = (float) Math.sqrt(dx * dx + dy * dy);
+			}
+			else {
+				d = (float) Math.pow(Math.pow(dx, this.distancePower) + Math.pow(dy, this.distancePower), 1 / this.distancePower);
+			}
 
 			// Insertion sort
 			for (int j = 0; j < results.length; j++) {
@@ -62,10 +66,12 @@ public class CellularFunction2D implements Function2D {
 					last.y = py;
 					results[j] = last;
 					break;
-				} else if (d < results[j].distance) {
-					Point last = results[results.length-1];
-					for (int k = results.length-1; k > j; k--)
-						results[k] = results[k-1];
+				}
+				else if (d < results[j].distance) {
+					Point last = results[results.length - 1];
+					for (int k = results.length - 1; k > j; k--) {
+						results[k] = results[k - 1];
+					}
 					last.distance = d;
 					last.x = px;
 					last.y = py;
@@ -76,42 +82,52 @@ public class CellularFunction2D implements Function2D {
 		}
 		return results[1].distance;
 	}
-	
+
+	@Override
 	public float evaluate(float x, float y) {
-		for (int j = 0; j < results.length; j++)
-			results[j].distance = Float.POSITIVE_INFINITY;
-
-		int ix = (int)x;
-		int iy = (int)y;
-		float fx = x-ix;
-		float fy = y-iy;
-
-		float d = checkCube(fx, fy, ix, iy, results);
-		if (d > fy)
-			d = checkCube(fx, fy+1, ix, iy-1, results);
-		if (d > 1-fy)
-			d = checkCube(fx, fy-1, ix, iy+1, results);
-		if (d > fx) {
-			checkCube(fx+1, fy, ix-1, iy, results);
-			if (d > fy)
-				d = checkCube(fx+1, fy+1, ix-1, iy-1, results);
-			if (d > 1-fy)
-				d = checkCube(fx+1, fy-1, ix-1, iy+1, results);
+		for (int j = 0; j < this.results.length; j++) {
+			this.results[j].distance = Float.POSITIVE_INFINITY;
 		}
-		if (d > 1-fx) {
-			d = checkCube(fx-1, fy, ix+1, iy, results);
-			if (d > fy)
-				d = checkCube(fx-1, fy+1, ix+1, iy-1, results);
-			if (d > 1-fy)
-				d = checkCube(fx-1, fy-1, ix+1, iy+1, results);
+
+		int ix = (int) x;
+		int iy = (int) y;
+		float fx = x - ix;
+		float fy = y - iy;
+
+		float d = checkCube(fx, fy, ix, iy, this.results);
+		if (d > fy) {
+			d = checkCube(fx, fy + 1, ix, iy - 1, this.results);
+		}
+		if (d > 1 - fy) {
+			d = checkCube(fx, fy - 1, ix, iy + 1, this.results);
+		}
+		if (d > fx) {
+			checkCube(fx + 1, fy, ix - 1, iy, this.results);
+			if (d > fy) {
+				d = checkCube(fx + 1, fy + 1, ix - 1, iy - 1, this.results);
+			}
+			if (d > 1 - fy) {
+				d = checkCube(fx + 1, fy - 1, ix - 1, iy + 1, this.results);
+			}
+		}
+		if (d > 1 - fx) {
+			d = checkCube(fx - 1, fy, ix + 1, iy, this.results);
+			if (d > fy) {
+				d = checkCube(fx - 1, fy + 1, ix + 1, iy - 1, this.results);
+			}
+			if (d > 1 - fy) {
+				d = checkCube(fx - 1, fy - 1, ix + 1, iy + 1, this.results);
+			}
 		}
 
 		float t = 0;
-		for (int i = 0; i < 2; i++)
-			t += coefficients[i] * results[i].distance;
-		if (angular)
-			t += Math.atan2(fy-results[0].y, fx-results[0].x) / (2*Math.PI) + 0.5;
+		for (int i = 0; i < 2; i++) {
+			t += this.coefficients[i] * this.results[i].distance;
+		}
+		if (this.angular) {
+			t += Math.atan2(fy - this.results[0].y, fx - this.results[0].x) / (2 * Math.PI) + 0.5;
+		}
 		return t;
 	}
-	
+
 }

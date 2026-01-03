@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -19,78 +19,81 @@ public class DisplaceFilter extends TransformFilter {
 
 	public DisplaceFilter() {
 	}
-	
+
 	public void setDisplacementMap(BufferedImage displacementMap) {
 		this.displacementMap = displacementMap;
 	}
 
 	public BufferedImage getDisplacementMap() {
-		return displacementMap;
+		return this.displacementMap;
 	}
 
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	
+
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
-	
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
+
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
 		int w = src.getWidth();
 		int h = src.getHeight();
 
-		BufferedImage dm = displacementMap != null ? displacementMap : src;
+		BufferedImage dm = (this.displacementMap != null) ? this.displacementMap : src;
 
-		dw = dm.getWidth();
-		dh = dm.getHeight();
-		
-		int[] mapPixels = new int[dw*dh];
-		getRGB( dm, 0, 0, dw, dh, mapPixels );
-		xmap = new int[dw*dh];
-		ymap = new int[dw*dh];
-		
+		this.dw = dm.getWidth();
+		this.dh = dm.getHeight();
+
+		int[] mapPixels = new int[this.dw * this.dh];
+		getRGB(dm, 0, 0, this.dw, this.dh, mapPixels);
+		this.xmap = new int[this.dw * this.dh];
+		this.ymap = new int[this.dw * this.dh];
+
 		int i = 0;
-		for ( int y = 0; y < dh; y++ ) {
-			for ( int x = 0; x < dw; x++ ) {
+		for (int y = 0; y < this.dh; y++) {
+			for (int x = 0; x < this.dw; x++) {
 				int rgb = mapPixels[i];
 				int r = (rgb >> 16) & 0xff;
 				int g = (rgb >> 8) & 0xff;
 				int b = rgb & 0xff;
-				mapPixels[i] = (r+g+b) / 8; // An arbitrary scaling factor which gives a good range for "amount"
+				mapPixels[i] = (r + g + b) / 8; // An arbitrary scaling factor which gives a good range for "amount"
 				i++;
 			}
 		}
 
 		i = 0;
-		for ( int y = 0; y < dh; y++ ) {
-			int j1 = ((y+dh-1) % dh) * dw;
-			int j2 = y*dw;
-			int j3 = ((y+1) % dh) * dw;
-			for ( int x = 0; x < dw; x++ ) {
-				int k1 = (x+dw-1) % dw;
+		for (int y = 0; y < this.dh; y++) {
+			int j1 = ((y + this.dh - 1) % this.dh) * this.dw;
+			int j2 = y * this.dw;
+			int j3 = ((y + 1) % this.dh) * this.dw;
+			for (int x = 0; x < this.dw; x++) {
+				int k1 = (x + this.dw - 1) % this.dw;
 				int k2 = x;
-				int k3 = (x+1) % dw;
-				xmap[i] = mapPixels[k1+j1] + mapPixels[k1+j2] + mapPixels[k1+j3] - mapPixels[k3+j1] - mapPixels[k3+j2] - mapPixels[k3+j3];
-				ymap[i] = mapPixels[k1+j3] + mapPixels[k2+j3] + mapPixels[k3+j3] - mapPixels[k1+j1] - mapPixels[k2+j1] - mapPixels[k3+j1];
+				int k3 = (x + 1) % this.dw;
+				this.xmap[i] = mapPixels[k1 + j1] + mapPixels[k1 + j2] + mapPixels[k1 + j3] - mapPixels[k3 + j1] - mapPixels[k3 + j2] - mapPixels[k3 + j3];
+				this.ymap[i] = mapPixels[k1 + j3] + mapPixels[k2 + j3] + mapPixels[k3 + j3] - mapPixels[k1 + j1] - mapPixels[k2 + j1] - mapPixels[k3 + j1];
 				i++;
 			}
 		}
 		mapPixels = null;
-		dst = super.filter( src, dst );
-		xmap = ymap = null;
+		dst = super.filter(src, dst);
+		this.xmap = this.ymap = null;
 		return dst;
 	}
-	
+
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
 		float xDisplacement, yDisplacement;
 		float nx = x;
 		float ny = y;
-		int i = (y % dh)*dw + x % dw;
-		out[0] = x + amount * xmap[i];
-		out[1] = y + amount * ymap[i];
+		int i = (y % this.dh) * this.dw + x % this.dw;
+		out[0] = x + this.amount * this.xmap[i];
+		out[1] = y + this.amount * this.ymap[i];
 	}
 
+	@Override
 	public String toString() {
 		return "Distort/Displace...";
 	}

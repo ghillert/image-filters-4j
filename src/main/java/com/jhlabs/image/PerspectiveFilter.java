@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -11,15 +11,15 @@ public class PerspectiveFilter extends TransformFilter {
 	private float x0, y0, x1, y1, x2, y2, x3, y3;
 	private float dx1, dy1, dx2, dy2, dx3, dy3;
 	private float A, B, C, D, E, F, G, H, I;
-	
+
 	public PerspectiveFilter() {
 		this(0, 0, 100, 0, 100, 100, 0, 100);
 	}
-	
+
 	public PerspectiveFilter(float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3) {
 		setCorners(x0, y0, x1, y1, x2, y2, x3, y3);
 	}
-	
+
 	public void setCorners(float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3) {
 		this.x0 = x0;
 		this.y0 = y0;
@@ -29,59 +29,61 @@ public class PerspectiveFilter extends TransformFilter {
 		this.y2 = y2;
 		this.x3 = x3;
 		this.y3 = y3;
-		
-		dx1 = x1-x2;
-		dy1 = y1-y2;
-		dx2 = x3-x2;
-		dy2 = y3-y2;
-		dx3 = x0-x1+x2-x3;
-		dy3 = y0-y1+y2-y3;
-		
+
+		this.dx1 = x1 - x2;
+		this.dy1 = y1 - y2;
+		this.dx2 = x3 - x2;
+		this.dy2 = y3 - y2;
+		this.dx3 = x0 - x1 + x2 - x3;
+		this.dy3 = y0 - y1 + y2 - y3;
+
 		float a11, a12, a13, a21, a22, a23, a31, a32;
 
-		if (dx3 == 0 && dy3 == 0) {
-			a11 = x1-x0;
-			a21 = x2-x1;
+		if (this.dx3 == 0 && this.dy3 == 0) {
+			a11 = x1 - x0;
+			a21 = x2 - x1;
 			a31 = x0;
-			a12 = y1-y0;
-			a22 = y2-y1;
+			a12 = y1 - y0;
+			a22 = y2 - y1;
 			a32 = y0;
 			a13 = a23 = 0;
-		} else {
-			a13 = (dx3*dy2-dx2*dy3)/(dx1*dy2-dy1*dx2);
-			a23 = (dx1*dy3-dy1*dx3)/(dx1*dy2-dy1*dx2);
-			a11 = x1-x0+a13*x1;
-			a21 = x3-x0+a23*x3;
+		}
+		else {
+			a13 = (this.dx3 * this.dy2 - this.dx2 * this.dy3) / (this.dx1 * this.dy2 - this.dy1 * this.dx2);
+			a23 = (this.dx1 * this.dy3 - this.dy1 * this.dx3) / (this.dx1 * this.dy2 - this.dy1 * this.dx2);
+			a11 = x1 - x0 + a13 * x1;
+			a21 = x3 - x0 + a23 * x3;
 			a31 = x0;
-			a12 = y1-y0+a13*y1;
-			a22 = y3-y0+a23*y3;
+			a12 = y1 - y0 + a13 * y1;
+			a22 = y3 - y0 + a23 * y3;
 			a32 = y0;
 		}
 
-	    A = a22 - a32*a23;
-	    B = a31*a23 - a21;
-	    C = a21*a32 - a31*a22;
-	    D = a32*a13 - a12;
-	    E = a11 - a31*a13;
-	    F = a31*a12 - a11*a32;
-	    G = a12*a23 - a22*a13;
-	    H = a21*a13 - a11*a23;
-	    I = a11*a22 - a21*a12;
+		this.A = a22 - a32 * a23;
+		this.B = a31 * a23 - a21;
+		this.C = a21 * a32 - a31 * a22;
+		this.D = a32 * a13 - a12;
+		this.E = a11 - a31 * a13;
+		this.F = a31 * a12 - a11 * a32;
+		this.G = a12 * a23 - a22 * a13;
+		this.H = a21 * a13 - a11 * a23;
+		this.I = a11 * a22 - a21 * a12;
 	}
 
+	@Override
 	protected void transformSpace(Rectangle rect) {
-		rect.x = (int)Math.min( Math.min( x0, x1 ), Math.min( x2, x3 ) );
-		rect.y = (int)Math.min( Math.min( y0, y1 ), Math.min( y2, y3 ) );
-		rect.width = (int)Math.max( Math.max( x0, x1 ), Math.max( x2, x3 ) ) - rect.x;
-		rect.height = (int)Math.max( Math.max( y0, y1 ), Math.max( y2, y3 ) ) - rect.y;
+		rect.x = (int) Math.min(Math.min(this.x0, this.x1), Math.min(this.x2, this.x3));
+		rect.y = (int) Math.min(Math.min(this.y0, this.y1), Math.min(this.y2, this.y3));
+		rect.width = (int) Math.max(Math.max(this.x0, this.x1), Math.max(this.x2, this.x3)) - rect.x;
+		rect.height = (int) Math.max(Math.max(this.y0, this.y1), Math.max(this.y2, this.y3)) - rect.y;
 	}
 
 	public float getOriginX() {
-		return x0 - (int)Math.min( Math.min( x0, x1 ), Math.min( x2, x3 ) );
+		return this.x0 - (int) Math.min(Math.min(this.x0, this.x1), Math.min(this.x2, this.x3));
 	}
 
 	public float getOriginY() {
-		return y0 - (int)Math.min( Math.min( y0, y1 ), Math.min( y2, y3 ) );
+		return this.y0 - (int) Math.min(Math.min(this.y0, this.y1), Math.min(this.y2, this.y3));
 	}
 
 /*
@@ -106,7 +108,8 @@ public class PerspectiveFilter extends TransformFilter {
 			a22 = y2-y1;
 			a32 = y0;
 			a13 = a23 = 0;
-		} else {
+		}
+		else {
 			a13 = (dx3*dy2-dx2*dy3)/(dx1*dy2-dy1*dx2);
 			a23 = (dx1*dy3-dy1*dx3)/(dx1*dy2-dy1*dx2);
 			a11 = x1-x0+a13*x1;
@@ -126,11 +129,13 @@ public class PerspectiveFilter extends TransformFilter {
     }
 */
 
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		out[0] = 0.5f + originalSpace.width * (A*x+B*y+C)/(G*x+H*y+I);
-		out[1] = 0.5f + originalSpace.height * (D*x+E*y+F)/(G*x+H*y+I);
+		out[0] = 0.5f + this.originalSpace.width * (this.A * x + this.B * y + this.C) / (this.G * x + this.H * y + this.I);
+		out[1] = 0.5f + this.originalSpace.height * (this.D * x + this.E * y + this.F) / (this.G * x + this.H * y + this.I);
 	}
 
+	@Override
 	public String toString() {
 		return "Distort/Perspective...";
 	}

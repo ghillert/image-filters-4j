@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -25,11 +25,12 @@ public class FillFilter extends PointFilter {
 	}
 
 	public int getFillColor() {
-		return fillColor;
+		return this.fillColor;
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		return fillColor;
+		return this.fillColor;
 	}
 }
 

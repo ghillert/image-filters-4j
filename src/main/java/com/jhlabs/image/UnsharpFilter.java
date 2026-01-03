@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * A filter which subtracts Gaussian blur from an image, sharpening it.
+ *
  * @author Jerry Huxtable
  */
 public class UnsharpFilter extends GaussianFilter {
@@ -16,50 +17,52 @@ public class UnsharpFilter extends GaussianFilter {
 
 	private float amount = 0.5f;
 	private int threshold = 1;
-	
+
 	public UnsharpFilter() {
-		radius = 2;
+		this.radius = 2;
 	}
-	
-	public void setThreshold( int threshold ) {
+
+	public void setThreshold(int threshold) {
 		this.threshold = threshold;
 	}
-	
+
 	public int getThreshold() {
-		return threshold;
+		return this.threshold;
 	}
-	
-	public void setAmount( float amount ) {
+
+	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	
+
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
-	
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-        int width = src.getWidth();
-        int height = src.getHeight();
 
-        if ( dst == null )
-            dst = createCompatibleDestImage( src, null );
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		int width = src.getWidth();
+		int height = src.getHeight();
 
-        int[] inPixels = new int[width*height];
-        int[] outPixels = new int[width*height];
-        src.getRGB( 0, 0, width, height, inPixels, 0, width );
-
-		if ( radius > 0 ) {
-			convolveAndTranspose(kernel, inPixels, outPixels, width, height, alpha, CLAMP_EDGES);
-			convolveAndTranspose(kernel, outPixels, inPixels, height, width, alpha, CLAMP_EDGES);
+		if (dst == null) {
+			dst = createCompatibleDestImage(src, null);
 		}
 
-        src.getRGB( 0, 0, width, height, outPixels, 0, width );
+		int[] inPixels = new int[width * height];
+		int[] outPixels = new int[width * height];
+		src.getRGB(0, 0, width, height, inPixels, 0, width);
 
-		float a = 4*amount;
+		if (this.radius > 0) {
+			convolveAndTranspose(this.kernel, inPixels, outPixels, width, height, this.alpha, CLAMP_EDGES);
+			convolveAndTranspose(this.kernel, outPixels, inPixels, height, width, this.alpha, CLAMP_EDGES);
+		}
+
+		src.getRGB(0, 0, width, height, outPixels, 0, width);
+
+		float a = 4 * this.amount;
 
 		int index = 0;
-		for ( int y = 0; y < height; y++ ) {
-			for ( int x = 0; x < width; x++ ) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
 				int rgb1 = outPixels[index];
 				int r1 = (rgb1 >> 16) & 0xff;
 				int g1 = (rgb1 >> 8) & 0xff;
@@ -70,22 +73,26 @@ public class UnsharpFilter extends GaussianFilter {
 				int g2 = (rgb2 >> 8) & 0xff;
 				int b2 = rgb2 & 0xff;
 
-				if ( Math.abs( r1 -  r2 ) >= threshold )
-					r1 = PixelUtils.clamp( (int)((a+1) * (r1-r2) + r2) );
-				if ( Math.abs( g1 -  g2 ) >= threshold )
-					g1 = PixelUtils.clamp( (int)((a+1) * (g1-g2) + g2) );
-				if ( Math.abs( b1 -  b2 ) >= threshold )
-					b1 = PixelUtils.clamp( (int)((a+1) * (b1-b2) + b2) );
+				if (Math.abs(r1 - r2) >= this.threshold) {
+					r1 = PixelUtils.clamp((int) ((a + 1) * (r1 - r2) + r2));
+				}
+				if (Math.abs(g1 - g2) >= this.threshold) {
+					g1 = PixelUtils.clamp((int) ((a + 1) * (g1 - g2) + g2));
+				}
+				if (Math.abs(b1 - b2) >= this.threshold) {
+					b1 = PixelUtils.clamp((int) ((a + 1) * (b1 - b2) + b2));
+				}
 
 				inPixels[index] = (rgb1 & 0xff000000) | (r1 << 16) | (g1 << 8) | b1;
 				index++;
 			}
 		}
 
-        dst.setRGB( 0, 0, width, height, inPixels, 0, width );
-        return dst;
-    }
+		dst.setRGB(0, 0, width, height, inPixels, 0, width);
+		return dst;
+	}
 
+	@Override
 	public String toString() {
 		return "Blur/Unsharp Mask...";
 	}

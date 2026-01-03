@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -11,7 +11,7 @@ import java.awt.image.ColorModel;
 public class TileImageFilter extends AbstractBufferedImageOp implements java.io.Serializable {
 
 	static final long serialVersionUID = 4926390225069192478L;
-	
+
 	public static final int FLIP_NONE = 0;
 	public static final int FLIP_H = 1;
 	public static final int FLIP_V = 2;
@@ -37,7 +37,7 @@ public class TileImageFilter extends AbstractBufferedImageOp implements java.io.
 	}
 
 	public int getWidth() {
-		return width;
+		return this.width;
 	}
 
 	public void setHeight(int height) {
@@ -45,42 +45,44 @@ public class TileImageFilter extends AbstractBufferedImageOp implements java.io.
 	}
 
 	public int getHeight() {
-		return height;
+		return this.height;
 	}
 
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-        int tileWidth = src.getWidth();
-        int tileHeight = src.getHeight();
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		int tileWidth = src.getWidth();
+		int tileHeight = src.getHeight();
 
-        if ( dst == null ) {
-            ColorModel dstCM = src.getColorModel();
-			dst = new BufferedImage(dstCM, dstCM.createCompatibleWritableRaster(width, height), dstCM.isAlphaPremultiplied(), null);
+		if (dst == null) {
+			ColorModel dstCM = src.getColorModel();
+			dst = new BufferedImage(dstCM, dstCM.createCompatibleWritableRaster(this.width, this.height), dstCM.isAlphaPremultiplied(), null);
 		}
 
 		Graphics2D g = dst.createGraphics();
-		for ( int y = 0; y < height; y += tileHeight) {
-			for ( int x = 0; x < width; x += tileWidth ) {
-				g.drawImage( src, null, x, y );
+		for (int y = 0; y < this.height; y += tileHeight) {
+			for (int x = 0; x < this.width; x += tileWidth) {
+				g.drawImage(src, null, x, y);
 			}
 		}
 		g.dispose();
 
-        return dst;
-    }
+		return dst;
+	}
 
 	private int[][] symmetryMatrix = null;
 	private int symmetryRows = 2, symmetryCols = 2;
 
 	public void setSymmetryMatrix(int[][] symmetryMatrix) {
 		this.symmetryMatrix = symmetryMatrix;
-		symmetryRows = symmetryMatrix.length;
-		symmetryCols = symmetryMatrix[0].length;
+		this.symmetryRows = symmetryMatrix.length;
+		this.symmetryCols = symmetryMatrix[0].length;
 	}
 
 	public int[][] getSymmetryMatrix() {
-		return symmetryMatrix;
+		return this.symmetryMatrix;
 	}
 
+	@Override
 	public String toString() {
 		return "Tile";
 	}

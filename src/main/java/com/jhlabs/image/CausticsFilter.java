@@ -1,12 +1,12 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
 import com.jhlabs.math.Noise;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.util.Random;
 
 /**
@@ -15,7 +15,7 @@ import java.util.Random;
 public class CausticsFilter extends WholeImageFilter {
 
 	private float scale = 32;
-	private float angle = 0.0f;
+	private final float angle = 0.0f;
 	public int brightness = 10;
 	public float amount = 1.0f;
 	public float turbulence = 1.0f;
@@ -34,7 +34,7 @@ public class CausticsFilter extends WholeImageFilter {
 	}
 
 	public float getScale() {
-		return scale;
+		return this.scale;
 	}
 
 	public void setBrightness(int brightness) {
@@ -42,7 +42,7 @@ public class CausticsFilter extends WholeImageFilter {
 	}
 
 	public int getBrightness() {
-		return brightness;
+		return this.brightness;
 	}
 
 	public void setTurbulence(float turbulence) {
@@ -50,57 +50,58 @@ public class CausticsFilter extends WholeImageFilter {
 	}
 
 	public float getTurbulence() {
-		return turbulence;
+		return this.turbulence;
 	}
 
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	
+
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
-	
+
 	public void setDispersion(float dispersion) {
 		this.dispersion = dispersion;
 	}
-	
+
 	public float getDispersion() {
-		return dispersion;
+		return this.dispersion;
 	}
-	
+
 	public void setTime(float time) {
 		this.time = time;
 	}
-	
+
 	public float getTime() {
-		return time;
+		return this.time;
 	}
-	
+
 	public void setSamples(int samples) {
 		this.samples = samples;
 	}
-	
+
 	public int getSamples() {
-		return samples;
+		return this.samples;
 	}
-	
+
 	public void setBgColor(int c) {
-		bgColor = c;
+		this.bgColor = c;
 	}
 
 	public int getBgColor() {
-		return bgColor;
+		return this.bgColor;
 	}
 
-	protected int[] filterPixels( int width, int height, int[] inPixels, Rectangle transformedSpace ) {
+	@Override
+	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
 		Random random = new Random(0);
 
-		s = (float)Math.sin(0.1);
-		c = (float)Math.cos(0.1);
+		this.s = (float) Math.sin(0.1);
+		this.c = (float) Math.cos(0.1);
 
-		int srcWidth = originalSpace.width;
-		int srcHeight = originalSpace.height;
+		int srcWidth = this.originalSpace.width;
+		int srcHeight = this.originalSpace.height;
 		int outWidth = transformedSpace.width;
 		int outHeight = transformedSpace.height;
 		int index = 0;
@@ -108,64 +109,74 @@ public class CausticsFilter extends WholeImageFilter {
 
 		for (int y = 0; y < outHeight; y++) {
 			for (int x = 0; x < outWidth; x++) {
-				pixels[index++] = bgColor;
+				pixels[index++] = this.bgColor;
 			}
 		}
-		
-		int v = brightness/samples;
-		if (v == 0)
-			v = 1;
 
-		float rs = 1.0f/scale;
+		int v = this.brightness / this.samples;
+		if (v == 0) {
+			v = 1;
+		}
+
+		float rs = 1.0f / this.scale;
 		float d = 0.95f;
 		index = 0;
 		for (int y = 0; y < outHeight; y++) {
 			for (int x = 0; x < outWidth; x++) {
-				for (int s = 0; s < samples; s++) {
-					float sx = x+random.nextFloat();
-					float sy = y+random.nextFloat();
-					float nx = sx*rs;
-					float ny = sy*rs;
+				for (int s = 0; s < this.samples; s++) {
+					float sx = x + random.nextFloat();
+					float sy = y + random.nextFloat();
+					float nx = sx * rs;
+					float ny = sy * rs;
 					float xDisplacement, yDisplacement;
-					float focus = 0.1f+amount;
-					xDisplacement = evaluate(nx-d, ny) - evaluate(nx+d, ny);
-					yDisplacement = evaluate(nx, ny+d) - evaluate(nx, ny-d);
+					float focus = 0.1f + this.amount;
+					xDisplacement = evaluate(nx - d, ny) - evaluate(nx + d, ny);
+					yDisplacement = evaluate(nx, ny + d) - evaluate(nx, ny - d);
 
-					if (dispersion > 0) {
+					if (this.dispersion > 0) {
 						for (int c = 0; c < 3; c++) {
-							float ca = (1+c*dispersion);
-							float srcX = sx + scale*focus * xDisplacement*ca;
-							float srcY = sy + scale*focus * yDisplacement*ca;
+							float ca = (1 + c * this.dispersion);
+							float srcX = sx + this.scale * focus * xDisplacement * ca;
+							float srcY = sy + this.scale * focus * yDisplacement * ca;
 
-							if (srcX < 0 || srcX >= outWidth-1 || srcY < 0 || srcY >= outHeight-1) {
-							} else {
-								int i = ((int)srcY)*outWidth+(int)srcX;
+							if (srcX < 0 || srcX >= outWidth - 1 || srcY < 0 || srcY >= outHeight - 1) {
+							}
+							else {
+								int i = ((int) srcY) * outWidth + (int) srcX;
 								int rgb = pixels[i];
 								int r = (rgb >> 16) & 0xff;
 								int g = (rgb >> 8) & 0xff;
 								int b = rgb & 0xff;
-								if (c == 2)
+								if (c == 2) {
 									r += v;
-								else if (c == 1)
+								}
+								else if (c == 1) {
 									g += v;
-								else
+								}
+								else {
 									b += v;
-								if (r > 255)
+								}
+								if (r > 255) {
 									r = 255;
-								if (g > 255)
+								}
+								if (g > 255) {
 									g = 255;
-								if (b > 255)
+								}
+								if (b > 255) {
 									b = 255;
+								}
 								pixels[i] = 0xff000000 | (r << 16) | (g << 8) | b;
 							}
 						}
-					} else {
-						float srcX = sx + scale*focus * xDisplacement;
-						float srcY = sy + scale*focus * yDisplacement;
+					}
+					else {
+						float srcX = sx + this.scale * focus * xDisplacement;
+						float srcY = sy + this.scale * focus * yDisplacement;
 
-						if (srcX < 0 || srcX >= outWidth-1 || srcY < 0 || srcY >= outHeight-1) {
-						} else {
-							int i = ((int)srcY)*outWidth+(int)srcX;
+						if (srcX < 0 || srcX >= outWidth - 1 || srcY < 0 || srcY >= outHeight - 1) {
+						}
+						else {
+							int i = ((int) srcY) * outWidth + (int) srcX;
 							int rgb = pixels[i];
 							int r = (rgb >> 16) & 0xff;
 							int g = (rgb >> 8) & 0xff;
@@ -173,12 +184,15 @@ public class CausticsFilter extends WholeImageFilter {
 							r += v;
 							g += v;
 							b += v;
-							if (r > 255)
+							if (r > 255) {
 								r = 255;
-							if (g > 255)
+							}
+							if (g > 255) {
 								g = 255;
-							if (b > 255)
+							}
+							if (b > 255) {
 								b = 255;
+							}
 							pixels[i] = 0xff000000 | (r << 16) | (g << 8) | b;
 						}
 					}
@@ -195,68 +209,79 @@ public class CausticsFilter extends WholeImageFilter {
 		r += brightness;
 		g += brightness;
 		b += brightness;
-		if (r > 255)
+		if (r > 255) {
 			r = 255;
-		if (g > 255)
+		}
+		if (g > 255) {
 			g = 255;
-		if (b > 255)
+		}
+		if (b > 255) {
 			b = 255;
+		}
 		return 0xff000000 | (r << 16) | (g << 8) | b;
 	}
-	
+
 	private static int add(int rgb, float brightness, int c) {
 		int r = (rgb >> 16) & 0xff;
 		int g = (rgb >> 8) & 0xff;
 		int b = rgb & 0xff;
-		if (c == 2)
+		if (c == 2) {
 			r += brightness;
-		else if (c == 1)
+		}
+		else if (c == 1) {
 			g += brightness;
-		else
+		}
+		else {
 			b += brightness;
-		if (r > 255)
+		}
+		if (r > 255) {
 			r = 255;
-		if (g > 255)
+		}
+		if (g > 255) {
 			g = 255;
-		if (b > 255)
+		}
+		if (b > 255) {
 			b = 255;
+		}
 		return 0xff000000 | (r << 16) | (g << 8) | b;
 	}
-	
+
 	public static float turbulence2(float x, float y, float time, float octaves) {
 		float value = 0.0f;
 		float remainder;
 		float lacunarity = 2.0f;
 		float f = 1.0f;
 		int i;
-		
+
 		// to prevent "cascading" effects
 		x += 371;
 		y += 529;
-		
-		for (i = 0; i < (int)octaves; i++) {
+
+		for (i = 0; i < (int) octaves; i++) {
 			value += Noise.noise3(x, y, time) / f;
 			x *= lacunarity;
 			y *= lacunarity;
 			f *= 2;
 		}
 
-		remainder = octaves - (int)octaves;
-		if (remainder != 0)
+		remainder = octaves - (int) octaves;
+		if (remainder != 0) {
 			value += remainder * Noise.noise3(x, y, time) / f;
+		}
 
 		return value;
 	}
 
 	protected float evaluate(float x, float y) {
-		float xt = s*x + c*time;
-		float tt = c*x - c*time;
-		float f = turbulence == 0.0 ? Noise.noise3(xt, y, tt) : turbulence2(xt, y, tt, turbulence);
+		float xt = this.s * x + this.c * this.time;
+		float tt = this.c * x - this.c * this.time;
+		float f = this.turbulence == 0.0 ? Noise.noise3(xt, y, tt) : turbulence2(xt, y, tt, this.turbulence);
 		return f;
 	}
-	
+
+	@Override
 	public String toString() {
 		return "Texture/Caustics...";
 	}
-	
+
 }

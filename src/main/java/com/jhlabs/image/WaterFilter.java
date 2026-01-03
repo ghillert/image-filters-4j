@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -10,7 +10,7 @@ import java.awt.geom.Point2D;
 public class WaterFilter extends TransformFilter {
 
 	static final long serialVersionUID = 8789236343162990941L;
-	
+
 	private float wavelength = 16;
 	private float amplitude = 10;
 	private float phase = 0;
@@ -23,7 +23,7 @@ public class WaterFilter extends TransformFilter {
 	private float icentreY;
 
 	public WaterFilter() {
-		setEdgeAction( CLAMP );
+		setEdgeAction(CLAMP);
 	}
 
 	public void setWavelength(float wavelength) {
@@ -31,7 +31,7 @@ public class WaterFilter extends TransformFilter {
 	}
 
 	public float getWavelength() {
-		return wavelength;
+		return this.wavelength;
 	}
 
 	public void setAmplitude(float amplitude) {
@@ -39,7 +39,7 @@ public class WaterFilter extends TransformFilter {
 	}
 
 	public float getAmplitude() {
-		return amplitude;
+		return this.amplitude;
 	}
 
 	public void setPhase(float phase) {
@@ -47,75 +47,81 @@ public class WaterFilter extends TransformFilter {
 	}
 
 	public float getPhase() {
-		return phase;
+		return this.phase;
 	}
 
-	public void setCentreX( float centreX ) {
+	public void setCentreX(float centreX) {
 		this.centreX = centreX;
 	}
 
 	public float getCentreX() {
-		return centreX;
+		return this.centreX;
 	}
-	
-	public void setCentreY( float centreY ) {
+
+	public void setCentreY(float centreY) {
 		this.centreY = centreY;
 	}
 
 	public float getCentreY() {
-		return centreY;
+		return this.centreY;
 	}
-	
-	public void setCentre( Point2D centre ) {
-		this.centreX = (float)centre.getX();
-		this.centreY = (float)centre.getY();
+
+	public void setCentre(Point2D centre) {
+		this.centreX = (float) centre.getX();
+		this.centreY = (float) centre.getY();
 	}
 
 	public Point2D getCentre() {
-		return new Point2D.Float( centreX, centreY );
+		return new Point2D.Float(this.centreX, this.centreY);
 	}
-	
+
 	public void setRadius(float radius) {
 		this.radius = radius;
 	}
 
 	public float getRadius() {
-		return radius;
+		return this.radius;
 	}
 
 	private boolean inside(int v, int a, int b) {
 		return a <= v && v <= b;
 	}
-	
-	protected int[] filterPixels( int width, int height, int[] inPixels, Rectangle transformedSpace ) {
-		icentreX = width * centreX;
-		icentreY = height * centreY;
-		if ( radius == 0 )
-			radius = Math.min(icentreX, icentreY);
-		radius2 = radius*radius;
-		return super.filterPixels( width, height, inPixels, transformedSpace );
+
+	@Override
+	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
+		this.icentreX = width * this.centreX;
+		this.icentreY = height * this.centreY;
+		if (this.radius == 0) {
+			this.radius = Math.min(this.icentreX, this.icentreY);
+		}
+		this.radius2 = this.radius * this.radius;
+		return super.filterPixels(width, height, inPixels, transformedSpace);
 	}
-	
+
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		float dx = x-icentreX;
-		float dy = y-icentreY;
-		float distance2 = dx*dx + dy*dy;
-		if (distance2 > radius2) {
+		float dx = x - this.icentreX;
+		float dy = y - this.icentreY;
+		float distance2 = dx * dx + dy * dy;
+		if (distance2 > this.radius2) {
 			out[0] = x;
 			out[1] = y;
-		} else {
-			float distance = (float)Math.sqrt(distance2);
-			float amount = amplitude * (float)Math.sin(distance / wavelength * ImageMath.TWO_PI - phase);
-			amount *= (radius-distance)/radius;
-			if ( distance != 0 )
-				amount *= wavelength/distance;
-			out[0] = x + dx*amount;
-			out[1] = y + dy*amount;
+		}
+		else {
+			float distance = (float) Math.sqrt(distance2);
+			float amount = this.amplitude * (float) Math.sin(distance / this.wavelength * ImageMath.TWO_PI - this.phase);
+			amount *= (this.radius - distance) / this.radius;
+			if (distance != 0) {
+				amount *= this.wavelength / distance;
+			}
+			out[0] = x + dx * amount;
+			out[1] = y + dy * amount;
 		}
 	}
 
+	@Override
 	public String toString() {
 		return "Distort/Water Ripples...";
 	}
-	
+
 }

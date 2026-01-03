@@ -1,22 +1,25 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Point;
 
 /**
  * A Filter to pixellate images.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class BlockFilter extends TransformFilter {
 
 	static final long serialVersionUID = 8077109551486196569L;
-	
+
 	private int blockSize = 2;
 
 	/**
-	 * Set the pixel block size
+	 * Set the pixel block size.
 	 * @param blockSize the number of pixels along each block edge
 	 */
 	public void setBlockSize(int blockSize) {
@@ -24,27 +27,32 @@ public class BlockFilter extends TransformFilter {
 	}
 
 	/**
-	 * Get the pixel block size
+	 * Get the pixel block size.
 	 * @return the number of pixels along each block edge
 	 */
 	public int getBlockSize() {
-		return blockSize;
+		return this.blockSize;
 	}
 
 
+	/**
+	 * Construct a BlockFilter.
+	 */
 	public BlockFilter() {
 	}
 
 	protected void transform(int x, int y, Point out) {
-		out.x = (x / blockSize) * blockSize;
-		out.y = (y / blockSize) * blockSize;
+		out.x = (x / this.blockSize) * this.blockSize;
+		out.y = (y / this.blockSize) * this.blockSize;
 	}
 
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		out[0] = (x / blockSize) * blockSize;
-		out[1] = (y / blockSize) * blockSize;
+		out[0] = (x / this.blockSize) * this.blockSize;
+		out[1] = (y / this.blockSize) * this.blockSize;
 	}
 
+	@Override
 	public String toString() {
 		return "Stylize/Mosaic...";
 	}

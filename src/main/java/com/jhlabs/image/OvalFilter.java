@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -16,24 +16,28 @@ public class OvalFilter extends PointFilter {
 	public OvalFilter() {
 	}
 
+	@Override
 	public void setDimensions(int width, int height) {
 		super.setDimensions(width, height);
-		centreX = a = width/2;
-		centreY = b = height/2;
-		a2 = a*a;
-		b2 = b*b;
+		this.centreX = this.a = width / 2;
+		this.centreY = this.b = height / 2;
+		this.a2 = this.a * this.a;
+		this.b2 = this.b * this.b;
 	}
-	
+
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		float dx = x-centreX;
-		float dy = y-centreY;
-		float x2 = dx*dx;
-		float y2 = dy*dy;
-		if (y2 >= (b2 - (b2*x2)/a2))
+		float dx = x - this.centreX;
+		float dy = y - this.centreY;
+		float x2 = dx * dx;
+		float y2 = dy * dy;
+		if (y2 >= (this.b2 - (this.b2 * x2) / this.a2)) {
 			return 0x00000000;
+		}
 		return rgb;
 	}
 
+	@Override
 	public String toString() {
 		return "Stylize/Oval...";
 	}

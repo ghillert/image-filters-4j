@@ -1,20 +1,20 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
 public class ThresholdFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = -1899610620205446828L;
-	
+
 	private int lowerThreshold;
 	private int lowerThreshold3;
 	private int upperThreshold;
 	private int upperThreshold3;
 	private int white = 0xffffff;
 	private int black = 0x000000;
-	
+
 	public ThresholdFilter() {
 		this(127);
 	}
@@ -26,20 +26,20 @@ public class ThresholdFilter extends PointFilter implements java.io.Serializable
 
 	public void setLowerThreshold(int lowerThreshold) {
 		this.lowerThreshold = lowerThreshold;
-		lowerThreshold3 = lowerThreshold*3;
+		this.lowerThreshold3 = lowerThreshold * 3;
 	}
-	
+
 	public int getLowerThreshold() {
-		return lowerThreshold;
+		return this.lowerThreshold;
 	}
-	
+
 	public void setUpperThreshold(int upperThreshold) {
 		this.upperThreshold = upperThreshold;
-		upperThreshold3 = upperThreshold*3;
+		this.upperThreshold3 = upperThreshold * 3;
 	}
 
 	public int getUpperThreshold() {
-		return upperThreshold;
+		return this.upperThreshold;
 	}
 
 	public void setWhite(int white) {
@@ -47,7 +47,7 @@ public class ThresholdFilter extends PointFilter implements java.io.Serializable
 	}
 
 	public int getWhite() {
-		return white;
+		return this.white;
 	}
 
 	public void setBlack(int black) {
@@ -55,22 +55,26 @@ public class ThresholdFilter extends PointFilter implements java.io.Serializable
 	}
 
 	public int getBlack() {
-		return black;
+		return this.black;
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
 		int a = rgb & 0xff000000;
 		int r = (rgb >> 16) & 0xff;
 		int g = (rgb >> 8) & 0xff;
 		int b = rgb & 0xff;
 		int l = r + g + b;
-		if (l < lowerThreshold3)
-			return a | black;
-		else if (l > upperThreshold3)
-			return a | white;
+		if (l < this.lowerThreshold3) {
+			return a | this.black;
+		}
+		else if (l > this.upperThreshold3) {
+			return a | this.white;
+		}
 		return rgb;
 	}
 
+	@Override
 	public String toString() {
 		return "Stylize/Threshold...";
 	}

@@ -1,10 +1,10 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -35,7 +35,7 @@ public class CropFilter extends AbstractBufferedImageOp {
 	}
 
 	public int getX() {
-		return x;
+		return this.x;
 	}
 
 	public void setY(int y) {
@@ -43,7 +43,7 @@ public class CropFilter extends AbstractBufferedImageOp {
 	}
 
 	public int getY() {
-		return y;
+		return this.y;
 	}
 
 	public void setWidth(int width) {
@@ -51,7 +51,7 @@ public class CropFilter extends AbstractBufferedImageOp {
 	}
 
 	public int getWidth() {
-		return width;
+		return this.width;
 	}
 
 	public void setHeight(int height) {
@@ -59,25 +59,27 @@ public class CropFilter extends AbstractBufferedImageOp {
 	}
 
 	public int getHeight() {
-		return height;
+		return this.height;
 	}
 
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-        int w = src.getWidth();
-        int h = src.getHeight();
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		int w = src.getWidth();
+		int h = src.getHeight();
 
-        if ( dst == null ) {
-            ColorModel dstCM = src.getColorModel();
-			dst = new BufferedImage(dstCM, dstCM.createCompatibleWritableRaster(width, height), dstCM.isAlphaPremultiplied(), null);
+		if (dst == null) {
+			ColorModel dstCM = src.getColorModel();
+			dst = new BufferedImage(dstCM, dstCM.createCompatibleWritableRaster(this.width, this.height), dstCM.isAlphaPremultiplied(), null);
 		}
 
 		Graphics2D g = dst.createGraphics();
-		g.drawRenderedImage( src, AffineTransform.getTranslateInstance(-x, -y) );
+		g.drawRenderedImage(src, AffineTransform.getTranslateInstance(-this.x, -this.y));
 		g.dispose();
 
-        return dst;
-    }
+		return dst;
+	}
 
+	@Override
 	public String toString() {
 		return "Distort/Crop";
 	}

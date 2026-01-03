@@ -1,16 +1,22 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
+
+import java.awt.Rectangle;
+import java.awt.image.BufferedImageOp;
+import java.util.Random;
 
 import com.jhlabs.math.Function2D;
 import com.jhlabs.math.Noise;
 
-import java.awt.*;
-import java.awt.image.BufferedImageOp;
-import java.util.Random;
-
+/**
+ * A filter which produces cellular patterns (also known as Worley noise or Voronoi diagrams).
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class CellularFilter extends WholeImageFilter implements Function2D, MutatableFilter, Cloneable, java.io.Serializable {
 
 	protected float scale = 32;
@@ -23,7 +29,7 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	public float distancePower = 2;
 	public boolean useColor = false;
 	protected Colormap colormap = new Gradient();
-	protected float[] coefficients = { 1, 0, 0, 0 };
+	protected float[] coefficients = {1, 0, 0, 0};
 	protected float angleCoefficient;
 	protected Random random = new Random();
 	protected float m00 = 1.0f;
@@ -37,41 +43,47 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	private float max;
 	private static byte[] probabilities;
 	private float gradientCoefficient;
-	
-	public final static int RANDOM = 0;
-	public final static int SQUARE = 1;
-	public final static int HEXAGONAL = 2;
-	public final static int OCTAGONAL = 3;
-	public final static int TRIANGULAR = 4;
 
+	public static final int RANDOM = 0;
+	public static final int SQUARE = 1;
+	public static final int HEXAGONAL = 2;
+	public static final int OCTAGONAL = 3;
+	public static final int TRIANGULAR = 4;
+
+	/**
+	 * Constructor for CellularFilter.
+	 */
 	public CellularFilter() {
-		results = new Point[3];
-		for (int j = 0; j < results.length; j++)
-			results[j] = new Point();
+		this.results = new Point[3];
+		for (int j = 0; j < this.results.length; j++) {
+			this.results[j] = new Point();
+		}
 		if (probabilities == null) {
 			probabilities = new byte[8192];
 			float factorial = 1;
 			float total = 0;
 			float mean = 2.5f;
 			for (int i = 0; i < 10; i++) {
-				if (i > 1)
+				if (i > 1) {
 					factorial *= i;
-				float probability = (float)Math.pow(mean, i) * (float)Math.exp(-mean) / factorial;
-				int start = (int)(total * 8192);
+				}
+				float probability = (float) Math.pow(mean, i) * (float) Math.exp(-mean) / factorial;
+				int start = (int) (total * 8192);
 				total += probability;
-				int end = (int)(total * 8192);
-				for (int j = start; j < end; j++)
-					probabilities[j] = (byte)i;
-			}	
+				int end = (int) (total * 8192);
+				for (int j = start; j < end; j++) {
+					probabilities[j] = (byte) i;
+				}
+			}
 		}
 	}
-	
+
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
 
 	public float getScale() {
-		return scale;
+		return this.scale;
 	}
 
 	public void setStretch(float stretch) {
@@ -79,29 +91,29 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	}
 
 	public float getStretch() {
-		return stretch;
+		return this.stretch;
 	}
 
 	public void setAngle(float angle) {
 		this.angle = angle;
-		float cos = (float)Math.cos(angle);
-		float sin = (float)Math.sin(angle);
-		m00 = cos;
-		m01 = sin;
-		m10 = -sin;
-		m11 = cos;
+		float cos = (float) Math.cos(angle);
+		float sin = (float) Math.sin(angle);
+		this.m00 = cos;
+		this.m01 = sin;
+		this.m10 = -sin;
+		this.m11 = cos;
 	}
 
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
 
 	public void setCoefficient(int i, float v) {
-		coefficients[i] = v;
+		this.coefficients[i] = v;
 	}
 
 	public float getCoefficient(int i) {
-		return coefficients[i];
+		return this.coefficients[i];
 	}
 
 	public void setAngleCoefficient(float angleCoefficient) {
@@ -109,7 +121,7 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	}
 
 	public float getAngleCoefficient() {
-		return angleCoefficient;
+		return this.angleCoefficient;
 	}
 
 	public void setGradientCoefficient(float gradientCoefficient) {
@@ -117,55 +129,55 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	}
 
 	public float getGradientCoefficient() {
-		return gradientCoefficient;
+		return this.gradientCoefficient;
 	}
 
-	public void setF1( float v ) {
-		coefficients[0] = v;
+	public void setF1(float v) {
+		this.coefficients[0] = v;
 	}
 
 	public float getF1() {
-		return coefficients[0];
+		return this.coefficients[0];
 	}
 
-	public void setF2( float v ) {
-		coefficients[1] = v;
+	public void setF2(float v) {
+		this.coefficients[1] = v;
 	}
 
 	public float getF2() {
-		return coefficients[1];
+		return this.coefficients[1];
 	}
 
-	public void setF3( float v ) {
-		coefficients[2] = v;
+	public void setF3(float v) {
+		this.coefficients[2] = v;
 	}
 
 	public float getF3() {
-		return coefficients[2];
+		return this.coefficients[2];
 	}
 
-	public void setF4( float v ) {
-		coefficients[3] = v;
+	public void setF4(float v) {
+		this.coefficients[3] = v;
 	}
 
 	public float getF4() {
-		return coefficients[3];
+		return this.coefficients[3];
 	}
 
 	public void setColormap(Colormap colormap) {
 		this.colormap = colormap;
 	}
-	
+
 	public Colormap getColormap() {
-		return colormap;
+		return this.colormap;
 	}
-	
+
 	public void setRandomness(float randomness) {
 		this.randomness = randomness;
 	}
 
 	public float getRandomness() {
-		return randomness;
+		return this.randomness;
 	}
 
 	public void setGridType(int gridType) {
@@ -173,7 +185,7 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	}
 
 	public int getGridType() {
-		return gridType;
+		return this.gridType;
 	}
 
 	public void setDistancePower(float distancePower) {
@@ -181,7 +193,7 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	}
 
 	public float getDistancePower() {
-		return distancePower;
+		return this.distancePower;
 	}
 
 	public void setTurbulence(float turbulence) {
@@ -189,7 +201,7 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	}
 
 	public float getTurbulence() {
-		return turbulence;
+		return this.turbulence;
 	}
 
 	public void setAmount(float amount) {
@@ -197,134 +209,147 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	}
 
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
 
-	public class Point {
-		public int index;
-		public float x, y;
-		public float dx, dy;
-		public float cubeX, cubeY;
-		public float distance;
-	}
-	
-/*
-	class Grid {
-		public int setup(int x, int y);
-		public int getNumPoints();
-		public int getX();
-		public int getY();
-	}
+	/*
+		class Grid {
+			public int setup(int x, int y);
+			public int getNumPoints();
+			public int getX();
+			public int getY();
+		}
 
-	class RandomGrid extends Grid {
-		public int setup(int x, int y) {
-			random.setSeed(571*cubeX + 23*cubeY);
+		class RandomGrid extends Grid {
+			public int setup(int x, int y) {
+				random.setSeed(571*cubeX + 23*cubeY);
+			}
+
+			public int getNumPoints() {
+				return 3 + random.nextInt() % 4;
+			}
+
+			public int getX() {
+				return random.nextfloat();
+			}
+
+			public int getY() {
+				return random.nextfloat();
+			}
 		}
-		
-		public int getNumPoints() {
-			return 3 + random.nextInt() % 4;
-		}
-		
-		public int getX() {
-			return random.nextfloat();
-		}
-		
-		public int getY() {
-			return random.nextfloat();
-		}
-	}
-*/
-	
+	*/
+
 	private float checkCube(float x, float y, int cubeX, int cubeY, Point[] results) {
 		int numPoints;
-		random.setSeed(571*cubeX + 23*cubeY);
-		switch (gridType) {
-		case RANDOM:
-		default:
-//			numPoints = 3 + random.nextInt() % 4;
-			numPoints = probabilities[random.nextInt() & 0x1fff];
-//			numPoints = 4;
-			break;
-		case SQUARE:
-			numPoints = 1;
-			break;
-		case HEXAGONAL:
-			numPoints = 1;
-			break;
-		case OCTAGONAL:
-			numPoints = 2;
-			break;
-		case TRIANGULAR:
-			numPoints = 2;
-			break;
-		}
-		for (int i = 0; i < numPoints; i++) {
-			float px = 0, py = 0;
-			float weight = 1.0f;
-			switch (gridType) {
+		this.random.setSeed(571L * cubeX + 23L * cubeY);
+		switch (this.gridType) {
 			case RANDOM:
-				px = random.nextFloat();
-				py = random.nextFloat();
+			default:
+//			numPoints = 3 + random.nextInt() % 4;
+				numPoints = probabilities[this.random.nextInt() & 0x1fff];
+//			numPoints = 4;
 				break;
 			case SQUARE:
-				px = py = 0.5f;
-				if (randomness != 0) {
-					px += randomness * (random.nextFloat()-0.5);
-					py += randomness * (random.nextFloat()-0.5);
-				}
+				numPoints = 1;
 				break;
 			case HEXAGONAL:
-				if ((cubeX & 1) == 0) {
-					px = 0.75f; py = 0;
-				} else {
-					px = 0.75f; py = 0.5f;
-				}
-				if (randomness != 0) {
-					px += randomness * Noise.noise2(271*(cubeX+px), 271*(cubeY+py));
-					py += randomness * Noise.noise2(271*(cubeX+px)+89, 271*(cubeY+py)+137);
-				}
+				numPoints = 1;
 				break;
 			case OCTAGONAL:
-				switch (i) {
-				case 0: px = 0.207f; py = 0.207f; break;
-				case 1: px = 0.707f; py = 0.707f; weight = 1.6f; break;
-				}
-				if (randomness != 0) {
-					px += randomness * Noise.noise2(271*(cubeX+px), 271*(cubeY+py));
-					py += randomness * Noise.noise2(271*(cubeX+px)+89, 271*(cubeY+py)+137);
-				}
+				numPoints = 2;
 				break;
 			case TRIANGULAR:
-				if ((cubeY & 1) == 0) {
-					if (i == 0) {
-						px = 0.25f; py = 0.35f;
-					} else {
-						px = 0.75f; py = 0.65f;
-					}
-				} else {
-					if (i == 0) {
-						px = 0.75f; py = 0.35f;
-					} else {
-						px = 0.25f; py = 0.65f;
-					}
-				}
-				if (randomness != 0) {
-					px += randomness * Noise.noise2(271*(cubeX+px), 271*(cubeY+py));
-					py += randomness * Noise.noise2(271*(cubeX+px)+89, 271*(cubeY+py)+137);
-				}
+				numPoints = 2;
 				break;
+		}
+		for (int i = 0; i < numPoints; i++) {
+			float px = 0;
+			float py = 0;
+			float weight = 1.0f;
+			switch (this.gridType) {
+				case RANDOM:
+					px = this.random.nextFloat();
+					py = this.random.nextFloat();
+					break;
+				case SQUARE:
+					px = py = 0.5f;
+					if (this.randomness != 0) {
+						px += this.randomness * (this.random.nextFloat() - 0.5);
+						py += this.randomness * (this.random.nextFloat() - 0.5);
+					}
+					break;
+				case HEXAGONAL:
+					if ((cubeX & 1) == 0) {
+						px = 0.75f;
+						py = 0;
+					}
+					else {
+						px = 0.75f;
+						py = 0.5f;
+					}
+					if (this.randomness != 0) {
+						px += this.randomness * Noise.noise2(271 * (cubeX + px), 271 * (cubeY + py));
+						py += this.randomness * Noise.noise2(271 * (cubeX + px) + 89, 271 * (cubeY + py) + 137);
+					}
+					break;
+				case OCTAGONAL:
+					switch (i) {
+						case 0:
+							px = 0.207f;
+							py = 0.207f;
+							break;
+						case 1:
+							px = 0.707f;
+							py = 0.707f;
+							weight = 1.6f;
+							break;
+					}
+					if (this.randomness != 0) {
+						px += this.randomness * Noise.noise2(271 * (cubeX + px), 271 * (cubeY + py));
+						py += this.randomness * Noise.noise2(271 * (cubeX + px) + 89, 271 * (cubeY + py) + 137);
+					}
+					break;
+				case TRIANGULAR:
+					if ((cubeY & 1) == 0) {
+						if (i == 0) {
+							px = 0.25f;
+							py = 0.35f;
+						}
+						else {
+							px = 0.75f;
+							py = 0.65f;
+						}
+					}
+					else {
+						if (i == 0) {
+							px = 0.75f;
+							py = 0.35f;
+						}
+						else {
+							px = 0.25f;
+							py = 0.65f;
+						}
+					}
+					if (this.randomness != 0) {
+						px += this.randomness * Noise.noise2(271 * (cubeX + px), 271 * (cubeY + py));
+						py += this.randomness * Noise.noise2(271 * (cubeX + px) + 89, 271 * (cubeY + py) + 137);
+					}
+					break;
 			}
-			float dx = (float)Math.abs(x-px);
-			float dy = (float)Math.abs(y-py);
+			float dx = Math.abs(x - px);
+			float dy = Math.abs(y - py);
 			float d;
 			dx *= weight;
 			dy *= weight;
-			if (distancePower == 1.0f)
+			if (this.distancePower == 1.0f) {
 				d = dx + dy;
-			else if (distancePower == 2.0f)
-				d = (float)Math.sqrt(dx*dx + dy*dy);
-			else
-				d = (float)Math.pow((float)Math.pow(dx, distancePower) + (float)Math.pow(dy, distancePower), 1/distancePower);
+			}
+			else if (this.distancePower == 2.0f) {
+				d = (float) Math.sqrt(dx * dx + dy * dy);
+			}
+			else {
+				d = (float) Math.pow((float) Math.pow(dx, this.distancePower) + (float) Math.pow(dy, this.distancePower), 1 / this.distancePower);
+			}
 
 			// Insertion sort the long way round to speed it up a bit
 			if (d < results[0].distance) {
@@ -335,124 +360,139 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 				p.distance = d;
 				p.dx = dx;
 				p.dy = dy;
-				p.x = cubeX+px;
-				p.y = cubeY+py;
-			} else if (d < results[1].distance) {
+				p.x = cubeX + px;
+				p.y = cubeY + py;
+			}
+			else if (d < results[1].distance) {
 				Point p = results[2];
 				results[2] = results[1];
 				results[1] = p;
 				p.distance = d;
 				p.dx = dx;
 				p.dy = dy;
-				p.x = cubeX+px;
-				p.y = cubeY+py;
-			} else if (d < results[2].distance) {
+				p.x = cubeX + px;
+				p.y = cubeY + py;
+			}
+			else if (d < results[2].distance) {
 				Point p = results[2];
 				p.distance = d;
 				p.dx = dx;
 				p.dy = dy;
-				p.x = cubeX+px;
-				p.y = cubeY+py;
+				p.x = cubeX + px;
+				p.y = cubeY + py;
 			}
 		}
 		return results[2].distance;
 	}
-	
+
+	@Override
 	public float evaluate(float x, float y) {
-		for (int j = 0; j < results.length; j++)
-			results[j].distance = Float.POSITIVE_INFINITY;
-
-		int ix = (int)x;
-		int iy = (int)y;
-		float fx = x-ix;
-		float fy = y-iy;
-
-		float d = checkCube(fx, fy, ix, iy, results);
-		if (d > fy)
-			d = checkCube(fx, fy+1, ix, iy-1, results);
-		if (d > 1-fy)
-			d = checkCube(fx, fy-1, ix, iy+1, results);
-		if (d > fx) {
-			checkCube(fx+1, fy, ix-1, iy, results);
-			if (d > fy)
-				d = checkCube(fx+1, fy+1, ix-1, iy-1, results);
-			if (d > 1-fy)
-				d = checkCube(fx+1, fy-1, ix-1, iy+1, results);
+		for (int j = 0; j < this.results.length; j++) {
+			this.results[j].distance = Float.POSITIVE_INFINITY;
 		}
-		if (d > 1-fx) {
-			d = checkCube(fx-1, fy, ix+1, iy, results);
-			if (d > fy)
-				d = checkCube(fx-1, fy+1, ix+1, iy-1, results);
-			if (d > 1-fy)
-				d = checkCube(fx-1, fy-1, ix+1, iy+1, results);
+
+		int ix = (int) x;
+		int iy = (int) y;
+		float fx = x - ix;
+		float fy = y - iy;
+
+		float d = checkCube(fx, fy, ix, iy, this.results);
+		if (d > fy) {
+			d = checkCube(fx, fy + 1, ix, iy - 1, this.results);
+		}
+		if (d > 1 - fy) {
+			d = checkCube(fx, fy - 1, ix, iy + 1, this.results);
+		}
+		if (d > fx) {
+			checkCube(fx + 1, fy, ix - 1, iy, this.results);
+			if (d > fy) {
+				d = checkCube(fx + 1, fy + 1, ix - 1, iy - 1, this.results);
+			}
+			if (d > 1 - fy) {
+				d = checkCube(fx + 1, fy - 1, ix - 1, iy + 1, this.results);
+			}
+		}
+		if (d > 1 - fx) {
+			d = checkCube(fx - 1, fy, ix + 1, iy, this.results);
+			if (d > fy) {
+				d = checkCube(fx - 1, fy + 1, ix + 1, iy - 1, this.results);
+			}
+			if (d > 1 - fy) {
+				d = checkCube(fx - 1, fy - 1, ix + 1, iy + 1, this.results);
+			}
 		}
 
 		float t = 0;
-		for (int i = 0; i < 3; i++)
-			t += coefficients[i] * results[i].distance;
-		if (angleCoefficient != 0) {
-			float angle = (float)Math.atan2(y-results[0].y, x-results[0].x);
-			if (angle < 0)
-				angle += 2*(float)Math.PI;
-			angle /= 4*(float)Math.PI;
-			t += angleCoefficient * angle;
+		for (int i = 0; i < 3; i++) {
+			t += this.coefficients[i] * this.results[i].distance;
 		}
-		if (gradientCoefficient != 0) {
-			float a = 1/(results[0].dy+results[0].dx);
-			t += gradientCoefficient * a;
+		if (this.angleCoefficient != 0) {
+			float angle = (float) Math.atan2(y - this.results[0].y, x - this.results[0].x);
+			if (angle < 0) {
+				angle += 2 * (float) Math.PI;
+			}
+			angle /= 4 * (float) Math.PI;
+			t += this.angleCoefficient * angle;
+		}
+		if (this.gradientCoefficient != 0) {
+			float a = 1 / (this.results[0].dy + this.results[0].dx);
+			t += this.gradientCoefficient * a;
 		}
 		return t;
 	}
-	
+
 	public float turbulence2(float x, float y, float freq) {
 		float t = 0.0f;
 
-		for (float f = 1.0f; f <= freq; f *= 2)
-			t += evaluate(f*x, f*y) / f;
+		for (float f = 1.0f; f <= freq; f *= 2) {
+			t += evaluate(f * x, f * y) / f;
+		}
 		return t;
 	}
 
 	public int getPixel(int x, int y, int[] inPixels, int width, int height) {
-try {
-		float nx = m00*x + m01*y;
-		float ny = m10*x + m11*y;
-		nx /= scale;
-		ny /= scale * stretch;
-		nx += 1000;
-		ny += 1000;	// Reduce artifacts around 0,0
-		float f = turbulence == 1.0f ? evaluate(nx, ny) : turbulence2(nx, ny, turbulence);
-		// Normalize to 0..1
-//		f = (f-min)/(max-min);
-		f *= 2;
-		f *= amount;
-		int a = 0xff000000;
-		int v;
-		if (colormap != null) {
-			v = colormap.getColor(f);
-			if (useColor) {
-				int srcx = ImageMath.clamp((int)((results[0].x-1000)*scale), 0, width-1);
-				int srcy = ImageMath.clamp((int)((results[0].y-1000)*scale), 0, height-1);
-				v = inPixels[srcy * width + srcx];
-				f = (results[1].distance - results[0].distance) / (results[1].distance + results[0].distance);
-				f = ImageMath.smoothStep(coefficients[1], coefficients[0], f);
-				v = ImageMath.mixColors(f, 0xff000000, v);
+		try {
+			float nx = this.m00 * x + this.m01 * y;
+			float ny = this.m10 * x + this.m11 * y;
+			nx /= this.scale;
+			ny /= this.scale * this.stretch;
+			nx += 1000;
+			ny += 1000;    // Reduce artifacts around 0,0
+			float f = (this.turbulence == 1.0f) ? evaluate(nx, ny) : turbulence2(nx, ny, this.turbulence);
+			// Normalize to 0..1
+			//		f = (f-min)/(max-min);
+			f *= 2;
+			f *= this.amount;
+			int a = 0xff000000;
+			int v;
+			if (this.colormap != null) {
+				v = this.colormap.getColor(f);
+				if (this.useColor) {
+					int srcx = ImageMath.clamp((int) ((this.results[0].x - 1000) * this.scale), 0, width - 1);
+					int srcy = ImageMath.clamp((int) ((this.results[0].y - 1000) * this.scale), 0, height - 1);
+					v = inPixels[srcy * width + srcx];
+					f = (this.results[1].distance - this.results[0].distance) / (this.results[1].distance + this.results[0].distance);
+					f = ImageMath.smoothStep(this.coefficients[1], this.coefficients[0], f);
+					v = ImageMath.mixColors(f, 0xff000000, v);
+				}
+				return v;
 			}
-			return v;
-		} else {
-			v = PixelUtils.clamp((int)(f*255));
-			int r = v << 16;
-			int g = v << 8;
-			int b = v;
-			return a|r|g|b;
+			else {
+				v = PixelUtils.clamp((int) (f * 255));
+				int r = v << 16;
+				int g = v << 8;
+				int b = v;
+				return a | r | g | b;
+			}
 		}
-}
-catch (Exception e) {
-	e.printStackTrace();
-	return 0;
-}
+		catch (Exception ex) {
+			ex.printStackTrace();
+			return 0;
+		}
 	}
 
-	protected int[] filterPixels( int width, int height, int[] inPixels, Rectangle transformedSpace ) {
+	@Override
+	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
 //		float[] minmax = Noise.findRange(this, null);
 //		min = minmax[0];
 //		max = minmax[1];
@@ -468,10 +508,11 @@ catch (Exception e) {
 		return outPixels;
 	}
 
+	@Override
 	public void mutate(float mutationLevel, BufferedImageOp d, boolean keepShape, boolean keepColors) {
-		CellularFilter dst = (CellularFilter)d;
-		random.setSeed((int)System.currentTimeMillis());
-		if (keepShape || amount == 0) {
+		CellularFilter dst = (CellularFilter) d;
+		this.random.setSeed((int) System.currentTimeMillis());
+		if (keepShape || this.amount == 0) {
 			dst.setGridType(getGridType());
 			dst.setRandomness(getRandomness());
 			dst.setScale(getScale());
@@ -482,56 +523,77 @@ catch (Exception e) {
 			dst.setColormap(getColormap());
 			dst.setDistancePower(getDistancePower());
 			dst.setAngleCoefficient(getAngleCoefficient());
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 4; i++) {
 				dst.setCoefficient(i, getCoefficient(i));
-		} else {
-			dst.scale = mutate(scale, mutationLevel, 0.4f, 5, 3, 200);
-			dst.setAngle(mutate(angle, mutationLevel, 0.3f, (float)Math.PI/2));
-			dst.stretch = mutate(stretch, mutationLevel, 0.3f, 3, 1, 10);
-			dst.amount = mutate(amount, mutationLevel, 0.3f, 0.2f, 0, 1);
-			dst.turbulence = mutate(turbulence, mutationLevel, 0.3f, 0.5f, 1, 8);
-			dst.distancePower = mutate(distancePower, mutationLevel, 0.2f, 0.5f, 1, 3);
-			dst.randomness = mutate(randomness, mutationLevel, 0.4f, 0.2f, 0, 1);
-			for (int i = 0; i < coefficients.length; i++)
-				dst.coefficients[i] = mutate(coefficients[i], mutationLevel, 0.3f, 0.2f, -1, 1);
-			if (random.nextFloat() <= mutationLevel*0.2)
-				dst.gridType = random.nextInt() % 5;
-			dst.angleCoefficient = mutate(angleCoefficient, mutationLevel, 0.2f, 0.5f, -1, 1);
+			}
 		}
-		if (keepColors || mutationLevel == 0)
+		else {
+			dst.scale = mutate(this.scale, mutationLevel, 0.4f, 5, 3, 200);
+			dst.setAngle(mutate(this.angle, mutationLevel, 0.3f, (float) Math.PI / 2));
+			dst.stretch = mutate(this.stretch, mutationLevel, 0.3f, 3, 1, 10);
+			dst.amount = mutate(this.amount, mutationLevel, 0.3f, 0.2f, 0, 1);
+			dst.turbulence = mutate(this.turbulence, mutationLevel, 0.3f, 0.5f, 1, 8);
+			dst.distancePower = mutate(this.distancePower, mutationLevel, 0.2f, 0.5f, 1, 3);
+			dst.randomness = mutate(this.randomness, mutationLevel, 0.4f, 0.2f, 0, 1);
+			for (int i = 0; i < this.coefficients.length; i++) {
+				dst.coefficients[i] = mutate(this.coefficients[i], mutationLevel, 0.3f, 0.2f, -1, 1);
+			}
+			if (this.random.nextFloat() <= mutationLevel * 0.2) {
+				dst.gridType = this.random.nextInt() % 5;
+			}
+			dst.angleCoefficient = mutate(this.angleCoefficient, mutationLevel, 0.2f, 0.5f, -1, 1);
+		}
+		if (keepColors || mutationLevel == 0) {
 			dst.setColormap(getColormap());
-		else if ( random.nextFloat() <= mutationLevel ) {
-			if ( random.nextFloat() <= mutationLevel )
+		}
+		else if (this.random.nextFloat() <= mutationLevel) {
+			if (this.random.nextFloat() <= mutationLevel) {
 				dst.setColormap(Gradient.randomGradient());
-			else
-				((Gradient)dst.getColormap()).mutate(mutationLevel);
+			}
+			else {
+				((Gradient) dst.getColormap()).mutate(mutationLevel);
+			}
 		}
 	}
-	
+
 	private float mutate(float n, float mutationLevel, float probability, float amount, float lower, float upper) {
-		if (random.nextFloat() <= mutationLevel*probability)
+		if (this.random.nextFloat() <= mutationLevel * probability) {
 			return n;
-		return ImageMath.clamp(n + mutationLevel*amount * (float)random.nextGaussian(), lower, upper);
+		}
+		return ImageMath.clamp(n + mutationLevel * amount * (float) this.random.nextGaussian(), lower, upper);
 	}
 
 	private float mutate(float n, float mutationLevel, float probability, float amount) {
-		if (random.nextFloat() <= mutationLevel*probability)
+		if (this.random.nextFloat() <= mutationLevel * probability) {
 			return n;
-		return n + mutationLevel*amount * (float)random.nextGaussian();
+		}
+		return n + mutationLevel * amount * (float) this.random.nextGaussian();
 	}
 
+	@Override
 	public Object clone() {
-		CellularFilter f = (CellularFilter)super.clone();
-		f.coefficients = (float[])coefficients.clone();
-		f.results = (Point[])results.clone();
+		CellularFilter f = (CellularFilter) super.clone();
+		f.coefficients = this.coefficients.clone();
+		f.results = this.results.clone();
 		f.random = new Random();
 //		if (colormap != null)
 //			f.colormap = (Colormap)colormap.clone();
 		return f;
 	}
-	
+
+	@Override
 	public String toString() {
 		return "Texture/Cellular...";
 	}
-	
+
+	public class Point {
+		public int index;
+		public float x;
+		public float y;
+		public float dx;
+		public float dy;
+		public float cubeX;
+		public float cubeY;
+		public float distance;
+	}
 }

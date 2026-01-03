@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -17,39 +17,40 @@ public abstract class WholeImageFilter extends AbstractBufferedImageOp implement
 
 	protected Rectangle transformedSpace;
 	protected Rectangle originalSpace;
-	
+
 	/**
 	 * Construct a WholeImageFilter
 	 */
 	public WholeImageFilter() {
 	}
 
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-        int width = src.getWidth();
-        int height = src.getHeight();
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		int width = src.getWidth();
+		int height = src.getHeight();
 		int type = src.getType();
 		WritableRaster srcRaster = src.getRaster();
 
-		originalSpace = new Rectangle(0, 0, width, height);
-		transformedSpace = new Rectangle(0, 0, width, height);
-		transformSpace(transformedSpace);
+		this.originalSpace = new Rectangle(0, 0, width, height);
+		this.transformedSpace = new Rectangle(0, 0, width, height);
+		transformSpace(this.transformedSpace);
 
-        if ( dst == null ) {
-            ColorModel dstCM = src.getColorModel();
-			dst = new BufferedImage(dstCM, dstCM.createCompatibleWritableRaster(transformedSpace.width, transformedSpace.height), dstCM.isAlphaPremultiplied(), null);
+		if (dst == null) {
+			ColorModel dstCM = src.getColorModel();
+			dst = new BufferedImage(dstCM, dstCM.createCompatibleWritableRaster(this.transformedSpace.width, this.transformedSpace.height), dstCM.isAlphaPremultiplied(), null);
 		}
 		WritableRaster dstRaster = dst.getRaster();
 
-		int[] inPixels = getRGB( src, 0, 0, width, height, null );
-		inPixels = filterPixels( width, height, inPixels, transformedSpace );
-		setRGB( dst, 0, 0, transformedSpace.width, transformedSpace.height, inPixels );
+		int[] inPixels = getRGB(src, 0, 0, width, height, null);
+		inPixels = filterPixels(width, height, inPixels, this.transformedSpace);
+		setRGB(dst, 0, 0, this.transformedSpace.width, this.transformedSpace.height, inPixels);
 
-        return dst;
-    }
+		return dst;
+	}
 
 	protected void transformSpace(Rectangle rect) {
 	}
-	
-	protected abstract int[] filterPixels( int width, int height, int[] inPixels, Rectangle transformedSpace );
+
+	protected abstract int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace);
 }
 

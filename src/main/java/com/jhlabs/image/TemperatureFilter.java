@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -8,41 +8,42 @@ import java.awt.image.BufferedImage;
 
 public class TemperatureFilter extends PointFilter {
 
-    private float temperature = 6650f;
+	private float temperature = 6650f;
 
 	private float rFactor, gFactor, bFactor;
 
 	public TemperatureFilter() {
-		canFilterIndexColorModel = true;
+		this.canFilterIndexColorModel = true;
 	}
-    
-	public void setTemperature( float temperature ) {
+
+	public void setTemperature(float temperature) {
 		this.temperature = temperature;
 	}
-	
-	public float getTemperature() {
-		return temperature;
-	}
-	
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-        temperature = Math.max( 1000, Math.min( 10000, temperature ) );
-        
-		int t = 3 * (int)((temperature-1000) / 100.0f);
-        rFactor = 1.0f / blackBodyRGB[t];
-        gFactor = 1.0f / blackBodyRGB[t+1];
-        bFactor = 1.0f / blackBodyRGB[t+2];
-        
-        // Normalize
-		float m = Math.max( Math.max(rFactor, gFactor), bFactor );
-        rFactor /= m;
-        gFactor /= m;
-        bFactor /= m;
 
-        return super.filter( src, dst );
-    }
-    
+	public float getTemperature() {
+		return this.temperature;
+	}
+
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		this.temperature = Math.max(1000, Math.min(10000, this.temperature));
+
+		int t = 3 * (int) ((this.temperature - 1000) / 100.0f);
+		this.rFactor = 1.0f / blackBodyRGB[t];
+		this.gFactor = 1.0f / blackBodyRGB[t + 1];
+		this.bFactor = 1.0f / blackBodyRGB[t + 2];
+
+		// Normalize
+		float m = Math.max(Math.max(this.rFactor, this.gFactor), this.bFactor);
+		this.rFactor /= m;
+		this.gFactor /= m;
+		this.bFactor /= m;
+
+		return super.filter(src, dst);
+	}
+
 	// Black body table from http://www.vendian.org/mncharity/dir3/blackbody/UnstableURLs/bbr_color.html
-	static float blackBodyRGB[] = {
+	static float[] blackBodyRGB = {
 			/* 1000 K */ 1.0000f, 0.0337f, 0.0000f,
 			/* 1100 K */ 1.0000f, 0.0592f, 0.0000f,
 			/* 1200 K */ 1.0000f, 0.0846f, 0.0000f,
@@ -134,46 +135,50 @@ public class TemperatureFilter extends PointFilter {
 			/* 9800 K */ 0.6382f, 0.7124f, 1.0000f,
 			/* 9900 K */ 0.6324f, 0.7081f, 1.0000f,
 			/* 10000 K */ 0.6268f, 0.7039f, 1.0000f
- 		};
+	};
 
-    public void setTemperatureFromRGB( int rgb ) {
+	public void setTemperatureFromRGB(int rgb) {
 		float r = (rgb >> 16) & 0xff;
 		float g = (rgb >> 8) & 0xff;
 		float b = rgb & 0xff;
 
-        int start, end, m;
-        float rb;
-        
-        rb = r/b;
-			
-        start = 0;
-        end = blackBodyRGB.length/3;
-        m = (start+end) / 2;
-        
-        for ( start = 0, r = blackBodyRGB.length, m = (start+end)/2 ; end-start > 1 ; m = (start+end)/2 ) {
-            int m3 = m*3;
-            if ( blackBodyRGB[m3]/blackBodyRGB[m3+2] > rb )
-                start = m;
-            else
-                end = m;
-        }
-        
-        setTemperature( m*100.0f+1000.0f );
-    }
+		int start, end, m;
+		float rb;
 
+		rb = r / b;
+
+		start = 0;
+		end = blackBodyRGB.length / 3;
+		m = (start + end) / 2;
+
+		for (start = 0, r = blackBodyRGB.length, m = (start + end) / 2; end - start > 1; m = (start + end) / 2) {
+			int m3 = m * 3;
+			if (blackBodyRGB[m3] / blackBodyRGB[m3 + 2] > rb) {
+				start = m;
+			}
+			else {
+				end = m;
+			}
+		}
+
+		setTemperature(m * 100.0f + 1000.0f);
+	}
+
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
 		int a = rgb & 0xff000000;
 		int r = (rgb >> 16) & 0xff;
 		int g = (rgb >> 8) & 0xff;
 		int b = rgb & 0xff;
 
-        r *= rFactor;
-        g *= gFactor;
-        b *= bFactor;
+		r *= this.rFactor;
+		g *= this.gFactor;
+		b *= this.bFactor;
 
 		return a | (r << 16) | (g << 8) | b;
 	}
 
+	@Override
 	public String toString() {
 		return "Colors/Temperature...";
 	}

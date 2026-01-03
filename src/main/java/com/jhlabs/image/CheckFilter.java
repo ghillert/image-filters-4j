@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -29,7 +29,7 @@ public class CheckFilter extends PointFilter {
 	}
 
 	public int getForeground() {
-		return foreground;
+		return this.foreground;
 	}
 
 	public void setBackground(int background) {
@@ -37,7 +37,7 @@ public class CheckFilter extends PointFilter {
 	}
 
 	public int getBackground() {
-		return background;
+		return this.background;
 	}
 
 	public void setXScale(int xScale) {
@@ -45,7 +45,7 @@ public class CheckFilter extends PointFilter {
 	}
 
 	public int getXScale() {
-		return xScale;
+		return this.xScale;
 	}
 
 	public void setYScale(int yScale) {
@@ -53,7 +53,7 @@ public class CheckFilter extends PointFilter {
 	}
 
 	public int getYScale() {
-		return yScale;
+		return this.yScale;
 	}
 
 	public void setFuzziness(int fuzziness) {
@@ -61,44 +61,46 @@ public class CheckFilter extends PointFilter {
 	}
 
 	public int getFuzziness() {
-		return fuzziness;
+		return this.fuzziness;
 	}
 
 	public void setOperation(int operation) {
 		this.operation = operation;
 	}
-	
+
 	public int getOperation() {
-		return operation;
+		return this.operation;
 	}
-	
+
 	public void setAngle(float angle) {
 		this.angle = angle;
-		float cos = (float)Math.cos(angle);
-		float sin = (float)Math.sin(angle);
-		m00 = cos;
-		m01 = sin;
-		m10 = -sin;
-		m11 = cos;
+		float cos = (float) Math.cos(angle);
+		float sin = (float) Math.sin(angle);
+		this.m00 = cos;
+		this.m01 = sin;
+		this.m10 = -sin;
+		this.m11 = cos;
 	}
 
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		float nx = (m00*x + m01*y) / xScale;
-		float ny = (m10*x + m11*y) / yScale;
-		float f = ((int)(nx+100000) % 2 != (int)(ny+100000) % 2) ? 1.0f : 0.0f;
-		if (fuzziness != 0) {
-			float fuzz = (fuzziness/100.0f);
-			float fx = ImageMath.smoothPulse(0, fuzz, 1-fuzz, 1, ImageMath.mod(nx, 1));
-			float fy = ImageMath.smoothPulse(0, fuzz, 1-fuzz, 1, ImageMath.mod(ny, 1));
-			f *= fx*fy;
+		float nx = (this.m00 * x + this.m01 * y) / this.xScale;
+		float ny = (this.m10 * x + this.m11 * y) / this.yScale;
+		float f = ((int) (nx + 100000) % 2 != (int) (ny + 100000) % 2) ? 1.0f : 0.0f;
+		if (this.fuzziness != 0) {
+			float fuzz = (this.fuzziness / 100.0f);
+			float fx = ImageMath.smoothPulse(0, fuzz, 1 - fuzz, 1, ImageMath.mod(nx, 1));
+			float fy = ImageMath.smoothPulse(0, fuzz, 1 - fuzz, 1, ImageMath.mod(ny, 1));
+			f *= fx * fy;
 		}
-		return ImageMath.mixColors(f, foreground, background);
+		return ImageMath.mixColors(f, this.foreground, this.background);
 	}
 
+	@Override
 	public String toString() {
 		return "Texture/Checkerboard...";
 	}

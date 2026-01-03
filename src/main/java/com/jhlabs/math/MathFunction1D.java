@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.math;
 
@@ -15,30 +15,31 @@ public class MathFunction1D implements Function1D {
 	public final static int ATAN = -3;
 	public final static int SQR = -4;
 
-	private int operation;
-	
+	private final int operation;
+
 	public MathFunction1D(int operation) {
 		this.operation = operation;
 	}
-	
+
+	@Override
 	public float evaluate(float v) {
-		switch (operation) {
-		case SIN:
-			return (float)Math.sin(v);
-		case COS:
-			return (float)Math.cos(v);
-		case TAN:
-			return (float)Math.tan(v);
-		case SQRT:
-			return (float)Math.sqrt(v);
-		case ASIN:
-			return (float)Math.asin(v);
-		case ACOS:
-			return (float)Math.acos(v);
-		case ATAN:
-			return (float)Math.atan(v);
-		case SQR:
-			return v*v;
+		switch (this.operation) {
+			case SIN:
+				return (float) Math.sin(v);
+			case COS:
+				return (float) Math.cos(v);
+			case TAN:
+				return (float) Math.tan(v);
+			case SQRT:
+				return (float) Math.sqrt(v);
+			case ASIN:
+				return (float) Math.asin(v);
+			case ACOS:
+				return (float) Math.acos(v);
+			case ATAN:
+				return (float) Math.atan(v);
+			case SQR:
+				return v * v;
 		}
 		return v;
 	}

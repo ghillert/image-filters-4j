@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -27,12 +27,12 @@ public class ShapeFilter extends WholeImageFilter {
 	private boolean merge = false;
 	private int type;
 
-	private final static int one   = 41;
-	private final static int sqrt2 = (int)(41*Math.sqrt(2));
-	private final static int sqrt5 = (int)(41*Math.sqrt(5));
+	private final static int one = 41;
+	private final static int sqrt2 = (int) (41 * Math.sqrt(2));
+	private final static int sqrt5 = (int) (41 * Math.sqrt(5));
 
 	public ShapeFilter() {
-		colormap = new LinearColormap();
+		this.colormap = new LinearColormap();
 	}
 
 	public void setFactor(float factor) {
@@ -40,7 +40,7 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	public float getFactor() {
-		return factor;
+		return this.factor;
 	}
 
 	public void setColormap(Colormap colormap) {
@@ -48,7 +48,7 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	public Colormap getColormap() {
-		return colormap;
+		return this.colormap;
 	}
 
 	public void setUseAlpha(boolean useAlpha) {
@@ -56,7 +56,7 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	public boolean getUseAlpha() {
-		return useAlpha;
+		return this.useAlpha;
 	}
 
 	public void setType(int type) {
@@ -64,7 +64,7 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	public int getType() {
-		return type;
+		return this.type;
 	}
 
 	public void setInvert(boolean invert) {
@@ -72,7 +72,7 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	public boolean getInvert() {
-		return invert;
+		return this.invert;
 	}
 
 	public void setMerge(boolean merge) {
@@ -80,19 +80,21 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	public boolean getMerge() {
-		return merge;
+		return this.merge;
 	}
 
-	protected int[] filterPixels( int width, int height, int[] inPixels, Rectangle transformedSpace ) {
+	@Override
+	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
 		if (false) {
-		float[] map = new float[width * height];
-		float max = gddistanceMap(inPixels, map, width, height);
-		applyMap(map, inPixels, width, height, max);
-		} else {
-		int[] map = new int[width * height];
-		makeMap(inPixels, map, width, height);
-		int max = distanceMap(map, width, height);
-		applyMap(map, inPixels, width, height, max);
+			float[] map = new float[width * height];
+			float max = gddistanceMap(inPixels, map, width, height);
+			applyMap(map, inPixels, width, height, max);
+		}
+		else {
+			int[] map = new int[width * height];
+			makeMap(inPixels, map, width, height);
+			int max = distanceMap(map, width, height);
+			applyMap(map, inPixels, width, height, max);
 		}
 
 		return inPixels;
@@ -103,30 +105,36 @@ public class ShapeFilter extends WholeImageFilter {
 		int ymax = height - 3;
 		int max = 0;
 		int v;
-		
+
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				int offset = x + y * width;
 				if (map[offset] > 0) {
-					if (x < 2 || x > xmax || y < 2 || y > ymax)
+					if (x < 2 || x > xmax || y < 2 || y > ymax) {
 						v = setEdgeValue(x, y, map, width, offset, xmax, ymax);
-					else
+					}
+					else {
 						v = setValue(map, width, offset);
-					if (v > max)
+					}
+					if (v > max) {
 						max = v;
+					}
 				}
 			}
 		}
-		for (int y = height-1; y >= 0; y--) {
-			for (int x = width-1; x >= 0; x--) {
+		for (int y = height - 1; y >= 0; y--) {
+			for (int x = width - 1; x >= 0; x--) {
 				int offset = x + y * width;
 				if (map[offset] > 0) {
-					if (x < 2 || x > xmax || y < 2 || y > ymax)
+					if (x < 2 || x > xmax || y < 2 || y > ymax) {
 						v = setEdgeValue(x, y, map, width, offset, xmax, ymax);
-					else
+					}
+					else {
 						v = setValue(map, width, offset);
-					if (v > max)
+					}
+					if (v > max) {
 						max = v;
+					}
 				}
 			}
 		}
@@ -137,15 +145,16 @@ public class ShapeFilter extends WholeImageFilter {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				int offset = x + y * width;
-				int b = useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
+				int b = this.useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
 				map[offset] = b * one;
 			}
 		}
 	}
 
 	private void applyMap(int[] map, int[] pixels, int width, int height, int max) {
-		if (max == 0)
+		if (max == 0) {
 			max = 1;
+		}
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				int offset = x + y * width;
@@ -156,72 +165,81 @@ public class ShapeFilter extends WholeImageFilter {
 				if (m == 0) {
 					// default color
 					sa = sr = sg = sb = 0;
-				} else {
+				}
+				else {
 					// get V from map
-					v = ImageMath.clamp(factor * m / max, 0, 1);
-					switch (type) {
-						case CIRCLE_UP :
+					v = ImageMath.clamp(this.factor * m / max, 0, 1);
+					switch (this.type) {
+						case CIRCLE_UP:
 							v = (ImageMath.circleUp(v));
 							break;
-						case CIRCLE_DOWN :
+						case CIRCLE_DOWN:
 							v = (ImageMath.circleDown(v));
 							break;
-						case SMOOTH :
+						case SMOOTH:
 							v = (ImageMath.smoothStep(0, 1, v));
 							break;
 					}
-						
-					if (colormap == null) {
-						sr = sg = sb = (int)(v*255);
-					} else {
-						int c = (colormap.getColor(v));
+
+					if (this.colormap == null) {
+						sr = sg = sb = (int) (v * 255);
+					}
+					else {
+						int c = (this.colormap.getColor(v));
 
 						sr = (c >> 16) & 0xFF;
 						sg = (c >> 8) & 0xFF;
 						sb = (c) & 0xFF;
 					}
-					
-					sa = useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
-					
+
+					sa = this.useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
+
 					// invert v if necessary
-					if (invert) {
-						sr = 255-sr;
-						sg = 255-sg;
-						sb = 255-sb;
+					if (this.invert) {
+						sr = 255 - sr;
+						sg = 255 - sg;
+						sb = 255 - sb;
 					}
 				}
 
 				// write results
-				if (merge) {
+				if (this.merge) {
 					// merge with source
 					int transp = 255;
 					int col = pixels[offset];
 
 					int a = (col & 0xFF000000) >> 24;
-					int	r = (col & 0xFF0000) >> 16;
-					int	g = (col & 0xFF00) >> 8;
-					int	b = (col & 0xFF);
+					int r = (col & 0xFF0000) >> 16;
+					int g = (col & 0xFF00) >> 8;
+					int b = (col & 0xFF);
 
-					r = (int)((sr*r/transp));
-					g = (int)((sg*g/transp));
-					b = (int)((sb*b/transp));
-				
+					r = (sr * r / transp);
+					g = (sg * g / transp);
+					b = (sb * b / transp);
+
 					// clip colors
-					if (r < 0)
+					if (r < 0) {
 						r = 0;
-					if (r > 255)
-						r = 255; 
-					if (g < 0)
+					}
+					if (r > 255) {
+						r = 255;
+					}
+					if (g < 0) {
 						g = 0;
-					if (g > 255)
-						g = 255; 
-					if (b < 0)
+					}
+					if (g > 255) {
+						g = 255;
+					}
+					if (b < 0) {
 						b = 0;
-					if (b > 255)
+					}
+					if (b > 255) {
 						b = 255;
-					
+					}
+
 					pixels[offset] = (a << 24) | (r << 16) | (g << 8) | b;
-				} else {
+				}
+				else {
 					// write gray shades
 					pixels[offset] = (sa << 24) | (sr << 16) | (sg << 8) | sb;
 				}
@@ -241,74 +259,91 @@ public class ShapeFilter extends WholeImageFilter {
 		r4 = r3 + width;
 		r5 = r4 + width;
 
-		if (y == 0 || x == 0 || y == ymax+2 || x == xmax+2)
+		if (y == 0 || x == 0 || y == ymax + 2 || x == xmax + 2) {
 			return map[offset] = one;
+		}
 
 		v = map[r2 + 2] + one;
 		min = v;
-		
+
 		v = map[r3 + 1] + one;
-		if (v < min)
+		if (v < min) {
 			min = v;
-		
+		}
+
 		v = map[r3 + 3] + one;
-		if (v < min)
+		if (v < min) {
 			min = v;
-		
+		}
+
 		v = map[r4 + 2] + one;
-		if (v < min)
+		if (v < min) {
 			min = v;
-		
+		}
+
 		v = map[r2 + 1] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r2 + 3] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r4 + 1] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r4 + 3] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
-		
-		if (y == 1 || x == 1 || y == ymax+1 || x == xmax+1)
+		}
+
+		if (y == 1 || x == 1 || y == ymax + 1 || x == xmax + 1) {
 			return map[offset] = min;
+		}
 
 		v = map[r1 + 1] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r1 + 3] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r2 + 4] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r4 + 4] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r5 + 3] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r5 + 1] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r4] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
-			
+		}
+
 		v = map[r2] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 
 		return map[offset] = min;
 	}
@@ -326,60 +361,75 @@ public class ShapeFilter extends WholeImageFilter {
 		v = map[r2 + 2] + one;
 		min = v;
 		v = map[r3 + 1] + one;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r3 + 3] + one;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r4 + 2] + one;
-		if (v < min)
+		if (v < min) {
 			min = v;
-		
+		}
+
 		v = map[r2 + 1] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r2 + 3] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r4 + 1] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r4 + 3] + sqrt2;
-		if (v < min)
+		if (v < min) {
 			min = v;
-		
+		}
+
 		v = map[r1 + 1] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r1 + 3] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r2 + 4] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r4 + 4] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r5 + 3] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r5 + 1] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r4] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 		v = map[r2] + sqrt5;
-		if (v < min)
+		if (v < min) {
 			min = v;
+		}
 
 		return map[offset] = min;
 	}
-	
+
 	public float gddistanceMap(int[] pixels, float[] map, int width, int height) {
 		float max_iterations;
-		float []distp_cur;
-		float []distp_prev;
+		float[] distp_cur;
+		float[] distp_prev;
 		float min_prev;
 		float float_tmp;
 		int minimum;
@@ -396,20 +446,23 @@ public class ShapeFilter extends WholeImageFilter {
 
 		length = width + 1;
 		distp_prev = new float[length];
-		for (i = 0; i < length; i++)
+		for (i = 0; i < length; i++) {
 			distp_prev[i] = 0.0f;
+		}
 		distp_cur = new float[length];
-		for (i = 0; i < length; i++)
+		for (i = 0; i < length; i++) {
 			distp_cur[i] = 0.0f;
+		}
 
 		for (i = 0; i < height; i++) {
-			for (int m = 0; m < length; m++)
+			for (int m = 0; m < length; m++) {
 				distp_cur[m] = 0.0f;
+			}
 
 			for (j = 0; j < width; j++) {
-				min_prev = Math.min(distp_cur[j], distp_prev[j+1]);
+				min_prev = Math.min(distp_cur[j], distp_prev[j + 1]);
 				min_left = Math.min((width - j - 1), (height - i - 1));
-				minimum = (int)Math.min(min_left, min_prev);
+				minimum = (int) Math.min(min_left, min_prev);
 				fraction = 255;
 				int src = 0;
 
@@ -420,20 +473,21 @@ public class ShapeFilter extends WholeImageFilter {
 					end = y - k;
 
 					while (y >= end) {
-						int offset = y*width+x;
+						int offset = y * width + x;
 						int boundary = Math.min(width, height);
 						boundary = Math.min(boundary, (y - end)) + 1;
 						inc = 1 - width;
 
 						while (boundary-- != 0) {
-							src = useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
+							src = this.useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
 							if (src == 0) {
 								minimum = k;
 								y = -1;
 								break;
 							}
-							if (src < fraction)
+							if (src < fraction) {
 								fraction = src;
+							}
 							x++;
 							y--;
 							offset += inc;
@@ -445,23 +499,26 @@ public class ShapeFilter extends WholeImageFilter {
 					//	If min_left != min_prev use the previous fraction
 					//	 if it is less than the one found
 					if (min_left != minimum) {
-						prev_frac = (int)(255 * (min_prev - minimum));
-						if (prev_frac == 255)
+						prev_frac = (int) (255 * (min_prev - minimum));
+						if (prev_frac == 255) {
 							prev_frac = 0;
+						}
 						fraction = Math.min(fraction, prev_frac);
 					}
 					minimum++;
 				}
 
-				float_tmp = distp_cur[j+1] = minimum + fraction / 256.0f;
+				float_tmp = distp_cur[j + 1] = minimum + fraction / 256.0f;
 
-				if (float_tmp > max_iterations)
+				if (float_tmp > max_iterations) {
 					max_iterations = float_tmp;
+				}
 			}
 
-			int index = i*width;
-			for (int m = 1; m <= width; m++)
+			int index = i * width;
+			for (int m = 1; m <= width; m++) {
 				map[index++] = distp_cur[m];
+			}
 
 			float[] tmp = distp_prev;
 			distp_prev = distp_cur;
@@ -475,13 +532,14 @@ public class ShapeFilter extends WholeImageFilter {
 		float max = 0;
 		for (int y = 0; y < height; y++) {
 			float d = 0;
-			int offset = y*width;
+			int offset = y * width;
 			for (int x = 0; x < width; x++) {
-				int v = useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
+				int v = this.useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
 				if (v != 0) {
-					map[offset] = Math.min(d+255, v*255);
+					map[offset] = Math.min(d + 255, v * 255);
 					d += 255;
-				} else {
+				}
+				else {
 					d = 0;
 				}
 //				map[offset] = x;
@@ -493,84 +551,94 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	private void applyMap(float[] map, int[] pixels, int width, int height, float max) {
-		if (max == 0)
+		if (max == 0) {
 			max = 1;
+		}
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				int offset = x + y * width;
-				int m = (int)map[offset];
+				int m = (int) map[offset];
 				float v = 0;
 				int sa = 0, sr = 0, sg = 0, sb = 0;
 
 				if (m == 0) {
 					// default color
 					sa = sr = sg = sb = 0;
-				} else {
+				}
+				else {
 					// get V from map
-					v = ImageMath.clamp(factor * m / max, 0, 1);
-					switch (type) {
-						case CIRCLE_UP :
+					v = ImageMath.clamp(this.factor * m / max, 0, 1);
+					switch (this.type) {
+						case CIRCLE_UP:
 							v = (ImageMath.circleUp(v));
 							break;
-						case CIRCLE_DOWN :
+						case CIRCLE_DOWN:
 							v = (ImageMath.circleDown(v));
 							break;
-						case SMOOTH :
+						case SMOOTH:
 							v = (ImageMath.smoothStep(0, 1, v));
 							break;
 					}
 
-					if (colormap == null) {
-						sr = sg = sb = (int)(v*255);
-					} else {
-						int c = (colormap.getColor(v));
+					if (this.colormap == null) {
+						sr = sg = sb = (int) (v * 255);
+					}
+					else {
+						int c = (this.colormap.getColor(v));
 
 						sr = (c >> 16) & 0xFF;
 						sg = (c >> 8) & 0xFF;
 						sb = (c) & 0xFF;
 					}
-					
-					sa = useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
-					
+
+					sa = this.useAlpha ? (pixels[offset] >> 24) & 0xff : PixelUtils.brightness(pixels[offset]);
+
 					// invert v if necessary
-					if (invert) {
-						sr = 255-sr;
-						sg = 255-sg;
-						sb = 255-sb;
+					if (this.invert) {
+						sr = 255 - sr;
+						sg = 255 - sg;
+						sb = 255 - sb;
 					}
 				}
 
 				// write results
-				if (merge) {
+				if (this.merge) {
 					// merge with source
 					int transp = 255;
 					int col = pixels[offset];
 
 					int a = (col & 0xFF000000) >> 24;
-					int	r = (col & 0xFF0000) >> 16;
-					int	g = (col & 0xFF00) >> 8;
-					int	b = (col & 0xFF);
+					int r = (col & 0xFF0000) >> 16;
+					int g = (col & 0xFF00) >> 8;
+					int b = (col & 0xFF);
 
-					r = (int)((sr*r/transp));
-					g = (int)((sg*g/transp));
-					b = (int)((sb*b/transp));
-				
+					r = (sr * r / transp);
+					g = (sg * g / transp);
+					b = (sb * b / transp);
+
 					// clip colors
-					if (r < 0)
+					if (r < 0) {
 						r = 0;
-					if (r > 255)
-						r = 255; 
-					if (g < 0)
+					}
+					if (r > 255) {
+						r = 255;
+					}
+					if (g < 0) {
 						g = 0;
-					if (g > 255)
-						g = 255; 
-					if (b < 0)
+					}
+					if (g > 255) {
+						g = 255;
+					}
+					if (b < 0) {
 						b = 0;
-					if (b > 255)
+					}
+					if (b > 255) {
 						b = 255;
-					
+					}
+
 					pixels[offset] = (a << 24) | (r << 16) | (g << 8) | b;
-				} else {
+				}
+				else {
 					// write gray shades
 					pixels[offset] = (sa << 24) | (sr << 16) | (sg << 8) | sb;
 				}
@@ -578,6 +646,7 @@ public class ShapeFilter extends WholeImageFilter {
 		}
 	}
 
+	@Override
 	public String toString() {
 		return "Stylize/Shapeburst...";
 	}

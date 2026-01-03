@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -14,11 +14,11 @@ import java.util.Random;
  */
 public class FBMFilter extends PointFilter implements Cloneable {
 
-	public final static int NOISE = 0;
-	public final static int RIDGED = 1;
-	public final static int VLNOISE = 2;
-	public final static int SCNOISE = 3;
-	public final static int CELLULAR = 4;
+	public static final int NOISE = 0;
+	public static final int RIDGED = 1;
+	public static final int VLNOISE = 2;
+	public static final int SCNOISE = 3;
+	public static final int CELLULAR = 4;
 
 	private float scale = 32;
 	private float stretch = 1.0f;
@@ -52,23 +52,23 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
 
 	public void setOperation(int operation) {
 		this.operation = operation;
 	}
-	
+
 	public int getOperation() {
-		return operation;
+		return this.operation;
 	}
-	
+
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
 
 	public float getScale() {
-		return scale;
+		return this.scale;
 	}
 
 	public void setStretch(float stretch) {
@@ -76,21 +76,21 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public float getStretch() {
-		return stretch;
+		return this.stretch;
 	}
 
 	public void setAngle(float angle) {
 		this.angle = angle;
-		float cos = (float)Math.cos(this.angle);
-		float sin = (float)Math.sin(this.angle);
-		m00 = cos;
-		m01 = sin;
-		m10 = -sin;
-		m11 = cos;
+		float cos = (float) Math.cos(this.angle);
+		float sin = (float) Math.sin(this.angle);
+		this.m00 = cos;
+		this.m01 = sin;
+		this.m10 = -sin;
+		this.m11 = cos;
 	}
 
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
 
 	public void setOctaves(float octaves) {
@@ -98,7 +98,7 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public float getOctaves() {
-		return octaves;
+		return this.octaves;
 	}
 
 	public void setH(float H) {
@@ -106,7 +106,7 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public float getH() {
-		return H;
+		return this.H;
 	}
 
 	public void setLacunarity(float lacunarity) {
@@ -114,7 +114,7 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public float getLacunarity() {
-		return lacunarity;
+		return this.lacunarity;
 	}
 
 	public void setGain(float gain) {
@@ -122,7 +122,7 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public float getGain() {
-		return gain;
+		return this.gain;
 	}
 
 	public void setBias(float bias) {
@@ -130,41 +130,41 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public float getBias() {
-		return bias;
+		return this.bias;
 	}
 
 	public void setColormap(Colormap colormap) {
 		this.colormap = colormap;
 	}
-	
+
 	public Colormap getColormap() {
-		return colormap;
+		return this.colormap;
 	}
-	
+
 	public void setBasisType(int basisType) {
 		this.basisType = basisType;
 		switch (basisType) {
-		default:
-		case NOISE:
-			basis = new Noise();
-			break;
-		case RIDGED:
-			basis = new RidgedFBM();
-			break;
-		case VLNOISE:
-			basis = new VLNoise();
-			break;
-		case SCNOISE:
-			basis = new SCNoise();
-			break;
-		case CELLULAR:
-			basis = new CellularFunction2D();
-			break;
+			default:
+			case NOISE:
+				this.basis = new Noise();
+				break;
+			case RIDGED:
+				this.basis = new RidgedFBM();
+				break;
+			case VLNOISE:
+				this.basis = new VLNoise();
+				break;
+			case SCNOISE:
+				this.basis = new SCNoise();
+				break;
+			case CELLULAR:
+				this.basis = new CellularFunction2D();
+				break;
 		}
 	}
 
 	public int getBasisType() {
-		return basisType;
+		return this.basisType;
 	}
 
 	public void setBasis(Function2D basis) {
@@ -172,51 +172,56 @@ public class FBMFilter extends PointFilter implements Cloneable {
 	}
 
 	public Function2D getBasis() {
-		return basis;
+		return this.basis;
 	}
 
 	protected FBM makeFBM(float H, float lacunarity, float octaves) {
-		FBM fbm = new FBM(H, lacunarity, octaves, basis);
+		FBM fbm = new FBM(H, lacunarity, octaves, this.basis);
 		float[] minmax = Noise.findRange(fbm, null);
-		min = minmax[0];
-		max = minmax[1];
+		this.min = minmax[0];
+		this.max = minmax[1];
 		return fbm;
 	}
-	
-	public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-		fBm = makeFBM(H, lacunarity, octaves);
-		return super.filter( src, dst );
+
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		this.fBm = makeFBM(this.H, this.lacunarity, this.octaves);
+		return super.filter(src, dst);
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		float nx = m00*x + m01*y;
-		float ny = m10*x + m11*y;
-		nx /= scale;
-		ny /= scale * stretch;
-		float f = fBm.evaluate(nx, ny);
+		float nx = this.m00 * x + this.m01 * y;
+		float ny = this.m10 * x + this.m11 * y;
+		nx /= this.scale;
+		ny /= this.scale * this.stretch;
+		float f = this.fBm.evaluate(nx, ny);
 		// Normalize to 0..1
-		f = (f-min)/(max-min);
-		f = ImageMath.gain(f, gain);
-		f = ImageMath.bias(f, bias);
-		f *= amount;
+		f = (f - this.min) / (this.max - this.min);
+		f = ImageMath.gain(f, this.gain);
+		f = ImageMath.bias(f, this.bias);
+		f *= this.amount;
 		int a = rgb & 0xff000000;
 		int v;
-		if (colormap != null)
-			v = colormap.getColor(f);
+		if (this.colormap != null) {
+			v = this.colormap.getColor(f);
+		}
 		else {
-			v = PixelUtils.clamp((int)(f*255));
+			v = PixelUtils.clamp((int) (f * 255));
 			int r = v << 16;
 			int g = v << 8;
 			int b = v;
-			v = a|r|g|b;
+			v = a | r | g | b;
 		}
-		if (operation != PixelUtils.REPLACE)
-			v = PixelUtils.combinePixels(rgb, v, operation);
+		if (this.operation != PixelUtils.REPLACE) {
+			v = PixelUtils.combinePixels(rgb, v, this.operation);
+		}
 		return v;
 	}
 
+	@Override
 	public String toString() {
 		return "Texture/Fractal Brownian Motion...";
 	}
-	
+
 }

@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -18,29 +18,32 @@ public class ChromeFilter extends LightFilter {
 	}
 
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
 
 	public void setExposure(float exposure) {
 		this.exposure = exposure;
 	}
-	
+
 	public float getExposure() {
-		return exposure;
+		return this.exposure;
 	}
 
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-		setColorSource( LightFilter.COLORS_CONSTANT );
-		dst = super.filter( src, dst );
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		setColorSource(LightFilter.COLORS_CONSTANT);
+		dst = super.filter(src, dst);
 		TransferFilter tf = new TransferFilter() {
-			protected float transferFunction( float v ) {
-				v += amount * (float)Math.sin( v * 2 * Math.PI );
-				return 1 - (float)Math.exp(-v * exposure);
+			@Override
+			protected float transferFunction(float v) {
+				v += ChromeFilter.this.amount * (float) Math.sin(v * 2 * Math.PI);
+				return 1 - (float) Math.exp(-v * ChromeFilter.this.exposure);
 			}
 		};
-        return tf.filter( dst, dst );
-    }
+		return tf.filter(dst, dst);
+	}
 
+	@Override
 	public String toString() {
 		return "Effects/Chrome...";
 	}

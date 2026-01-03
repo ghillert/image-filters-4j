@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -8,31 +8,33 @@ public class GainFilter extends TransferFilter {
 
 	private float gain = 0.5f;
 	private float bias = 0.5f;
-	
-	protected float transferFunction( float f ) {
-		f = ImageMath.gain(f, gain);
-		f = ImageMath.bias(f, bias);
+
+	@Override
+	protected float transferFunction(float f) {
+		f = ImageMath.gain(f, this.gain);
+		f = ImageMath.bias(f, this.bias);
 		return f;
 	}
 
 	public void setGain(float gain) {
 		this.gain = gain;
-		initialized = false;
+		this.initialized = false;
 	}
-	
+
 	public float getGain() {
-		return gain;
+		return this.gain;
 	}
 
 	public void setBias(float bias) {
 		this.bias = bias;
-		initialized = false;
-	}
-	
-	public float getBias() {
-		return bias;
+		this.initialized = false;
 	}
 
+	public float getBias() {
+		return this.bias;
+	}
+
+	@Override
 	public String toString() {
 		return "Colors/Gain...";
 	}

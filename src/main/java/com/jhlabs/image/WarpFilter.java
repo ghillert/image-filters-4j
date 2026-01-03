@@ -38,19 +38,21 @@ public class WarpFilter extends WholeImageFilter {
 	 */
 	public WarpFilter() {
 	}
-	
+
 	/**
 	 * Create a WarpFilter with two warp grids.
+	 *
 	 * @param sourceGrid the source grid
-	 * @param destGrid the destination grid
+	 * @param destGrid   the destination grid
 	 */
 	public WarpFilter(WarpGrid sourceGrid, WarpGrid destGrid) {
 		this.sourceGrid = sourceGrid;
-		this.destGrid = destGrid;		
+		this.destGrid = destGrid;
 	}
-	
+
 	/**
 	 * Set the source warp grid.
+	 *
 	 * @param sourceGrid the source grid
 	 */
 	public void setSourceGrid(WarpGrid sourceGrid) {
@@ -59,14 +61,16 @@ public class WarpFilter extends WholeImageFilter {
 
 	/**
 	 * Get the source warp grid.
+	 *
 	 * @return the source grid
 	 */
 	public WarpGrid getSourceGrid() {
-		return sourceGrid;
+		return this.sourceGrid;
 	}
 
 	/**
 	 * Set the destination warp grid.
+	 *
 	 * @param destGrid the destination grid
 	 */
 	public void setDestGrid(WarpGrid destGrid) {
@@ -75,10 +79,11 @@ public class WarpFilter extends WholeImageFilter {
 
 	/**
 	 * Get the destination warp grid.
+	 *
 	 * @return the destination grid
 	 */
 	public WarpGrid getDestGrid() {
-		return destGrid;
+		return this.destGrid;
 	}
 
 	public void setFrames(int frames) {
@@ -86,25 +91,28 @@ public class WarpFilter extends WholeImageFilter {
 	}
 
 	public int getFrames() {
-		return frames;
+		return this.frames;
 	}
 
+	@Override
 	protected void transformSpace(Rectangle r) {
-		r.width *= frames;
+		r.width *= this.frames;
 	}
 
-	protected int[] filterPixels( int width, int height, int[] inPixels, Rectangle transformedSpace ) {
+	@Override
+	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
 		int[] outPixels = new int[width * height];
-		
-		if (frames <= 1) {
-			sourceGrid.warp(inPixels, width, height, sourceGrid, destGrid, outPixels);
+
+		if (this.frames <= 1) {
+			this.sourceGrid.warp(inPixels, width, height, this.sourceGrid, this.destGrid, outPixels);
 //			setRGB.setRGB(0, 0, width, height, outPixels);
-		} else {
-			WarpGrid newGrid = new WarpGrid(sourceGrid.rows, sourceGrid.cols, width, height);
-			for (int i = 0; i < frames; i++) {
-				float t = (float)i/(frames-1);
-				sourceGrid.lerp(t, destGrid, newGrid);
-				sourceGrid.warp(inPixels, width, height, sourceGrid, newGrid, outPixels);
+		}
+		else {
+			WarpGrid newGrid = new WarpGrid(this.sourceGrid.rows, this.sourceGrid.cols, width, height);
+			for (int i = 0; i < this.frames; i++) {
+				float t = (float) i / (this.frames - 1);
+				this.sourceGrid.lerp(t, this.destGrid, newGrid);
+				this.sourceGrid.warp(inPixels, width, height, this.sourceGrid, newGrid, outPixels);
 //				setRGB(i*width, 0, width, height, outPixels);
 			}
 		}
@@ -113,12 +121,13 @@ public class WarpFilter extends WholeImageFilter {
 
 	public int[] getPixels(Image image, int width, int height) {
 		int[] pixels = new int[width * height];
-		
+
 		pixels = new int[width * height];
 		PixelGrabber pg = new PixelGrabber(image, 0, 0, width, height, pixels, 0, width);
 		try {
 			pg.grabPixels();
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException ex) {
 			System.err.println("interrupted waiting for pixels!");
 			return null;
 		}
@@ -147,7 +156,8 @@ public class WarpFilter extends WholeImageFilter {
 			}
 		}
 	}
-	
+
+	@Override
 	public String toString() {
 		return "Distort/Mesh Warp...";
 	}

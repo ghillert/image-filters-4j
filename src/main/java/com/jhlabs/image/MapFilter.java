@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -13,13 +13,13 @@ public class MapFilter extends TransformFilter {
 
 	public MapFilter() {
 	}
-	
+
 	public void setXMapFunction(Function2D xMapFunction) {
 		this.xMapFunction = xMapFunction;
 	}
 
 	public Function2D getXMapFunction() {
-		return xMapFunction;
+		return this.xMapFunction;
 	}
 
 	public void setYMapFunction(Function2D yMapFunction) {
@@ -27,17 +27,19 @@ public class MapFilter extends TransformFilter {
 	}
 
 	public Function2D getYMapFunction() {
-		return yMapFunction;
-	}
-	
-	protected void transformInverse(int x, int y, float[] out) {
-		float xMap, yMap;
-		xMap = xMapFunction.evaluate(x, y);
-		yMap = yMapFunction.evaluate(x, y);
-		out[0] = xMap * transformedSpace.width;
-		out[1] = yMap * transformedSpace.height;
+		return this.yMapFunction;
 	}
 
+	@Override
+	protected void transformInverse(int x, int y, float[] out) {
+		float xMap, yMap;
+		xMap = this.xMapFunction.evaluate(x, y);
+		yMap = this.yMapFunction.evaluate(x, y);
+		out[0] = xMap * this.transformedSpace.width;
+		out[1] = yMap * this.transformedSpace.height;
+	}
+
+	@Override
 	public String toString() {
 		return "Distort/Map Coordinates...";
 	}

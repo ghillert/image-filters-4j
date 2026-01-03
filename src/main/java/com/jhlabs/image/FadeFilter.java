@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -19,16 +19,16 @@ public class FadeFilter extends PointFilter {
 
 	public void setAngle(float angle) {
 		this.angle = angle;
-		float cos = (float)Math.cos(angle);
-		float sin = (float)Math.sin(angle);
-		m00 = cos;
-		m01 = sin;
-		m10 = -sin;
-		m11 = cos;
+		float cos = (float) Math.cos(angle);
+		float sin = (float) Math.sin(angle);
+		this.m00 = cos;
+		this.m01 = sin;
+		this.m10 = -sin;
+		this.m11 = cos;
 	}
 
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
 
 	public void setSides(int sides) {
@@ -36,7 +36,7 @@ public class FadeFilter extends PointFilter {
 	}
 
 	public int getSides() {
-		return sides;
+		return this.sides;
 	}
 
 	public void setFadeStart(float fadeStart) {
@@ -44,7 +44,7 @@ public class FadeFilter extends PointFilter {
 	}
 
 	public float getFadeStart() {
-		return fadeStart;
+		return this.fadeStart;
 	}
 
 	public void setFadeWidth(float fadeWidth) {
@@ -52,7 +52,7 @@ public class FadeFilter extends PointFilter {
 	}
 
 	public float getFadeWidth() {
-		return fadeWidth;
+		return this.fadeWidth;
 	}
 
 	public void setInvert(boolean invert) {
@@ -60,27 +60,33 @@ public class FadeFilter extends PointFilter {
 	}
 
 	public boolean getInvert() {
-		return invert;
+		return this.invert;
 	}
 
+	@Override
 	public void setDimensions(int width, int height) {
 		this.width = width;
 		this.height = height;
 		super.setDimensions(width, height);
 	}
-	
+
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		float nx = m00*x + m01*y;
-		float ny = m10*x + m11*y;
-		if (sides == 2)
-			nx = (float)Math.sqrt(nx*nx + ny*ny);
-		else if (sides == 3)
+		float nx = this.m00 * x + this.m01 * y;
+		float ny = this.m10 * x + this.m11 * y;
+		if (this.sides == 2) {
+			nx = (float) Math.sqrt(nx * nx + ny * ny);
+		}
+		else if (this.sides == 3) {
 			nx = ImageMath.mod(nx, 16);
-		else if (sides == 4)
+		}
+		else if (this.sides == 4) {
 			nx = symmetry(nx, 16);
-		int alpha = (int)(ImageMath.smoothStep(fadeStart, fadeStart+fadeWidth, nx) * 255);
-		if (invert)
-			alpha = 255-alpha;
+		}
+		int alpha = (int) (ImageMath.smoothStep(this.fadeStart, this.fadeStart + this.fadeWidth, nx) * 255);
+		if (this.invert) {
+			alpha = 255 - alpha;
+		}
 		return (alpha << 24) | (rgb & 0x00ffffff);
 	}
 
@@ -92,9 +98,10 @@ public class FadeFilter extends PointFilter {
 			return b-x;
 		return x;
 */
-		x = ImageMath.mod(x, 2*b);
-		if (x > b)
-			return 2*b-x;
+		x = ImageMath.mod(x, 2 * b);
+		if (x > b) {
+			return 2 * b - x;
+		}
 		return x;
 	}
 	
@@ -109,6 +116,7 @@ public class FadeFilter extends PointFilter {
 	}
 */
 
+	@Override
 	public String toString() {
 		return "Fade...";
 	}

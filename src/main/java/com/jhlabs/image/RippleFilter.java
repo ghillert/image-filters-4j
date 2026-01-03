@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -10,13 +10,13 @@ import java.awt.*;
 
 /**
  * A filter which distorts an image by rippling it in the X or Y directions.
- * The amplitude and wavelength of rippling can be specified as well as whether 
+ * The amplitude and wavelength of rippling can be specified as well as whether
  * pixels going off the edges are wrapped or not.
  */
 public class RippleFilter extends TransformFilter {
 
 	static final long serialVersionUID = 5101667633854087384L;
-	
+
 	public final static int SINE = 0;
 	public final static int SAWTOOTH = 1;
 	public final static int TRIANGLE = 2;
@@ -30,13 +30,14 @@ public class RippleFilter extends TransformFilter {
 	 * Construct a RIppleFIlter
 	 */
 	public RippleFilter() {
-		xAmplitude = 5.0f;
-		yAmplitude = 0.0f;
-		xWavelength = yWavelength = 16.0f;
+		this.xAmplitude = 5.0f;
+		this.yAmplitude = 0.0f;
+		this.xWavelength = this.yWavelength = 16.0f;
 	}
 
 	/**
 	 * Set the amplitude of ripple in the X direction.
+	 *
 	 * @param xAmplitude the amplitude (in pixels).
 	 */
 	public void setXAmplitude(float xAmplitude) {
@@ -45,14 +46,16 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the amplitude of ripple in the X direction.
+	 *
 	 * @return the amplitude (in pixels).
 	 */
 	public float getXAmplitude() {
-		return xAmplitude;
+		return this.xAmplitude;
 	}
 
 	/**
 	 * Set the wavelength of ripple in the X direction.
+	 *
 	 * @param xWavelength the wavelength (in pixels).
 	 */
 	public void setXWavelength(float xWavelength) {
@@ -61,14 +64,16 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the wavelength of ripple in the X direction.
+	 *
 	 * @return the wavelength (in pixels).
 	 */
 	public float getXWavelength() {
-		return xWavelength;
+		return this.xWavelength;
 	}
 
 	/**
 	 * Set the amplitude of ripple in the Y direction.
+	 *
 	 * @param yAmplitude the amplitude (in pixels).
 	 */
 	public void setYAmplitude(float yAmplitude) {
@@ -77,14 +82,16 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the amplitude of ripple in the Y direction.
+	 *
 	 * @return the amplitude (in pixels).
 	 */
 	public float getYAmplitude() {
-		return yAmplitude;
+		return this.yAmplitude;
 	}
 
 	/**
 	 * Set the wavelength of ripple in the Y direction.
+	 *
 	 * @param yWavelength the wavelength (in pixels).
 	 */
 	public void setYWavelength(float yWavelength) {
@@ -93,10 +100,11 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the wavelength of ripple in the Y direction.
+	 *
 	 * @return the wavelength (in pixels).
 	 */
 	public float getYWavelength() {
-		return yWavelength;
+		return this.yWavelength;
 	}
 
 
@@ -105,45 +113,48 @@ public class RippleFilter extends TransformFilter {
 	}
 
 	public int getWaveType() {
-		return waveType;
+		return this.waveType;
 	}
 
+	@Override
 	protected void transformSpace(Rectangle r) {
-		if (edgeAction == ZERO) {
-			r.x -= (int)xAmplitude;
-			r.width += (int)(2*xAmplitude);
-			r.y -= (int)yAmplitude;
-			r.height += (int)(2*yAmplitude);
+		if (this.edgeAction == ZERO) {
+			r.x -= (int) this.xAmplitude;
+			r.width += (int) (2 * this.xAmplitude);
+			r.y -= (int) this.yAmplitude;
+			r.height += (int) (2 * this.yAmplitude);
 		}
 	}
 
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		float nx = (float)y / xWavelength;
-		float ny = (float)x / yWavelength;
+		float nx = (float) y / this.xWavelength;
+		float ny = (float) x / this.yWavelength;
 		float fx, fy;
-		switch (waveType) {
-		case SINE:
-		default:
-			fx = (float)Math.sin(nx);
-			fy = (float)Math.sin(ny);
-			break;
-		case SAWTOOTH:
-			fx = ImageMath.mod(nx, 1);
-			fy = ImageMath.mod(ny, 1);
-			break;
-		case TRIANGLE:
-			fx = ImageMath.triangle(nx);
-			fy = ImageMath.triangle(ny);
-			break;
-		case NOISE:
-			fx = Noise.noise1(nx);
-			fy = Noise.noise1(ny);
-			break;
+		switch (this.waveType) {
+			case SINE:
+			default:
+				fx = (float) Math.sin(nx);
+				fy = (float) Math.sin(ny);
+				break;
+			case SAWTOOTH:
+				fx = ImageMath.mod(nx, 1);
+				fy = ImageMath.mod(ny, 1);
+				break;
+			case TRIANGLE:
+				fx = ImageMath.triangle(nx);
+				fy = ImageMath.triangle(ny);
+				break;
+			case NOISE:
+				fx = Noise.noise1(nx);
+				fy = Noise.noise1(ny);
+				break;
 		}
-		out[0] = x + xAmplitude * fx;
-		out[1] = y + yAmplitude * fy;
+		out[0] = x + this.xAmplitude * fx;
+		out[1] = y + this.yAmplitude * fy;
 	}
 
+	@Override
 	public String toString() {
 		return "Distort/Ripple...";
 	}

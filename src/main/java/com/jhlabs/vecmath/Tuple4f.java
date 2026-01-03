@@ -7,24 +7,24 @@ public class Tuple4f {
 	public float x, y, z, w;
 
 	public Tuple4f() {
-		this( 0, 0, 0, 0 );
+		this(0, 0, 0, 0);
 	}
-	
-	public Tuple4f( float[] x ) {
+
+	public Tuple4f(float[] x) {
 		this.x = x[0];
 		this.y = x[1];
 		this.z = x[2];
 		this.w = x[2];
 	}
 
-	public Tuple4f( float x, float y, float z, float w ) {
+	public Tuple4f(float x, float y, float z, float w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.w = w;
 	}
 
-	public Tuple4f( Tuple4f t ) {
+	public Tuple4f(Tuple4f t) {
 		this.x = t.x;
 		this.y = t.y;
 		this.z = t.z;
@@ -32,132 +32,141 @@ public class Tuple4f {
 	}
 
 	public void absolute() {
-		x = Math.abs(x);
-		y = Math.abs(y);
-		z = Math.abs(z);
-		w = Math.abs(w);
+		this.x = Math.abs(this.x);
+		this.y = Math.abs(this.y);
+		this.z = Math.abs(this.z);
+		this.w = Math.abs(this.w);
 	}
 
-	public void absolute( Tuple4f t ) {
-		x = Math.abs(t.x);
-		y = Math.abs(t.y);
-		z = Math.abs(t.z);
-		w = Math.abs(t.w);
+	public void absolute(Tuple4f t) {
+		this.x = Math.abs(t.x);
+		this.y = Math.abs(t.y);
+		this.z = Math.abs(t.z);
+		this.w = Math.abs(t.w);
 	}
 
-	public void clamp( float min, float max ) {
-		if ( x < min )
-			x = min;
-		else if ( x > max )
-			x = max;
-		if ( y < min )
-			y = min;
-		else if ( y > max )
-			y = max;
-		if ( z < min )
-			z = min;
-		else if ( z > max )
-			z = max;
-		if ( w < min )
-			w = min;
-		else if ( w > max )
-			w = max;
+	public void clamp(float min, float max) {
+		if (this.x < min) {
+			this.x = min;
+		}
+		else if (this.x > max) {
+			this.x = max;
+		}
+		if (this.y < min) {
+			this.y = min;
+		}
+		else if (this.y > max) {
+			this.y = max;
+		}
+		if (this.z < min) {
+			this.z = min;
+		}
+		else if (this.z > max) {
+			this.z = max;
+		}
+		if (this.w < min) {
+			this.w = min;
+		}
+		else if (this.w > max) {
+			this.w = max;
+		}
 	}
 
-	public void set( float x, float y, float z, float w ) {
+	public void set(float x, float y, float z, float w) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.w = w;
 	}
 
-	public void set( float[] x ) {
+	public void set(float[] x) {
 		this.x = x[0];
 		this.y = x[1];
 		this.z = x[2];
 		this.w = x[2];
 	}
 
-	public void set( Tuple4f t ) {
-		x = t.x;
-		y = t.y;
-		z = t.z;
-		w = t.w;
+	public void set(Tuple4f t) {
+		this.x = t.x;
+		this.y = t.y;
+		this.z = t.z;
+		this.w = t.w;
 	}
 
-	public void get( Tuple4f t ) {
-		t.x = x;
-		t.y = y;
-		t.z = z;
-		t.w = w;
+	public void get(Tuple4f t) {
+		t.x = this.x;
+		t.y = this.y;
+		t.z = this.z;
+		t.w = this.w;
 	}
 
-	public void get( float[] t ) {
-		t[0] = x;
-		t[1] = y;
-		t[2] = z;
-		t[3] = w;
+	public void get(float[] t) {
+		t[0] = this.x;
+		t[1] = this.y;
+		t[2] = this.z;
+		t[3] = this.w;
 	}
 
 	public void negate() {
-		x = -x;
-		y = -y;
-		z = -z;
-		w = -w;
+		this.x = -this.x;
+		this.y = -this.y;
+		this.z = -this.z;
+		this.w = -this.w;
 	}
 
-	public void negate( Tuple4f t ) {
-		x = -t.x;
-		y = -t.y;
-		z = -t.z;
-		w = -t.w;
+	public void negate(Tuple4f t) {
+		this.x = -t.x;
+		this.y = -t.y;
+		this.z = -t.z;
+		this.w = -t.w;
 	}
 
-	public void interpolate( Tuple4f t, float alpha ) {
-		float a = 1-alpha;
-		x = a*x + alpha*t.x;
-		y = a*y + alpha*t.y;
-		z = a*z + alpha*t.z;
-		w = a*w + alpha*t.w;
+	public void interpolate(Tuple4f t, float alpha) {
+		float a = 1 - alpha;
+		this.x = a * this.x + alpha * t.x;
+		this.y = a * this.y + alpha * t.y;
+		this.z = a * this.z + alpha * t.z;
+		this.w = a * this.w + alpha * t.w;
 	}
 
-	public void scale( float s ) {
-		x *= s;
-		y *= s;
-		z *= s;
-		w *= s;
+	public void scale(float s) {
+		this.x *= s;
+		this.y *= s;
+		this.z *= s;
+		this.w *= s;
 	}
 
-	public void add( Tuple4f t ) {
-		x += t.x;
-		y += t.y;
-		z += t.z;
-		w += t.w;
+	public void add(Tuple4f t) {
+		this.x += t.x;
+		this.y += t.y;
+		this.z += t.z;
+		this.w += t.w;
 	}
 
-	public void add( Tuple4f t1, Tuple4f t2 ) {
-		x = t1.x+t2.x;
-		y = t1.y+t2.y;
-		z = t1.z+t2.z;
-		w = t1.w+t2.w;
+	public void add(Tuple4f t1, Tuple4f t2) {
+		this.x = t1.x + t2.x;
+		this.y = t1.y + t2.y;
+		this.z = t1.z + t2.z;
+		this.w = t1.w + t2.w;
 	}
 
-	public void sub( Tuple4f t ) {
-		x -= t.x;
-		y -= t.y;
-		z -= t.z;
-		w -= t.w;
+	public void sub(Tuple4f t) {
+		this.x -= t.x;
+		this.y -= t.y;
+		this.z -= t.z;
+		this.w -= t.w;
 	}
 
-	public void sub( Tuple4f t1, Tuple4f t2 ) {
-		x = t1.x-t2.x;
-		y = t1.y-t2.y;
-		z = t1.z-t2.z;
-		w = t1.w-t2.w;
+	public void sub(Tuple4f t1, Tuple4f t2) {
+		this.x = t1.x - t2.x;
+		this.y = t1.y - t2.y;
+		this.z = t1.z - t2.z;
+		this.w = t1.w - t2.w;
 	}
 
+	@Override
 	public String toString() {
-		return "["+x+", "+y+", "+z+", "+w+"]";
+		return "[" + this.x + ", " + this.y + ", " + this.z + ", " + this.w + "]";
 	}
-	
+
 }

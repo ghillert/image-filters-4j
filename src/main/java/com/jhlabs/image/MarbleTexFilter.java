@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -27,7 +27,7 @@ public class MarbleTexFilter extends PointFilter implements java.io.Serializable
 	}
 
 	public float getScale() {
-		return scale;
+		return this.scale;
 	}
 
 	public void setStretch(float stretch) {
@@ -35,21 +35,21 @@ public class MarbleTexFilter extends PointFilter implements java.io.Serializable
 	}
 
 	public float getStretch() {
-		return stretch;
+		return this.stretch;
 	}
 
 	public void setAngle(float angle) {
 		this.angle = angle;
-		float cos = (float)Math.cos(angle);
-		float sin = (float)Math.sin(angle);
-		m00 = cos;
-		m01 = sin;
-		m10 = -sin;
-		m11 = cos;
+		float cos = (float) Math.cos(angle);
+		float sin = (float) Math.sin(angle);
+		this.m00 = cos;
+		this.m01 = sin;
+		this.m10 = -sin;
+		this.m11 = cos;
 	}
 
 	public float getAngle() {
-		return angle;
+		return this.angle;
 	}
 
 	public void setTurbulence(float turbulence) {
@@ -57,7 +57,7 @@ public class MarbleTexFilter extends PointFilter implements java.io.Serializable
 	}
 
 	public float getTurbulence() {
-		return turbulence;
+		return this.turbulence;
 	}
 
 	public void setTurbulenceFactor(float turbulenceFactor) {
@@ -65,71 +65,74 @@ public class MarbleTexFilter extends PointFilter implements java.io.Serializable
 	}
 
 	public float getTurbulenceFactor() {
-		return turbulenceFactor;
+		return this.turbulenceFactor;
 	}
 
 	public void setColormap(Colormap colormap) {
 		this.colormap = colormap;
 	}
-	
+
 	public Colormap getColormap() {
-		return colormap;
+		return this.colormap;
 	}
-	
+
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		float nx = m00*x + m01*y;
-		float ny = m10*x + m11*y;
-		nx /= scale * stretch;
-		ny /= scale;
+		float nx = this.m00 * x + this.m01 * y;
+		float ny = this.m10 * x + this.m11 * y;
+		nx /= this.scale * this.stretch;
+		ny /= this.scale;
 
 		int a = rgb & 0xff000000;
-		if (colormap != null) {
+		if (this.colormap != null) {
 //			float f = Noise.turbulence2(nx, ny, turbulence);
 //			f = 3*turbulenceFactor*f+ny;
 //			f = Math.sin(f*Math.PI);
-			float chaos = turbulenceFactor*Noise.turbulence2(nx, ny, turbulence);
+			float chaos = this.turbulenceFactor * Noise.turbulence2(nx, ny, this.turbulence);
 //			float f = Math.sin(Math.sin(8.*chaos + 7*nx +3.*ny));
-			float f = 3*turbulenceFactor*chaos+ny;
-			f = (float)Math.sin(f*Math.PI);
-			float perturb = (float)Math.sin(40.*chaos);
+			float f = 3 * this.turbulenceFactor * chaos + ny;
+			f = (float) Math.sin(f * Math.PI);
+			float perturb = (float) Math.sin(40. * chaos);
 			f += .2 * perturb;
-			return colormap.getColor(f);
-		} else {
+			return this.colormap.getColor(f);
+		}
+		else {
 			float red, grn, blu;
 			float chaos, brownLayer, greenLayer;
 			float perturb, brownPerturb, greenPerturb, grnPerturb;
 			float t;
 
-			chaos = turbulenceFactor*Noise.turbulence2(nx, ny, turbulence);
-			t = (float)Math.sin(Math.sin(8.*chaos + 7*nx +3.*ny));
+			chaos = this.turbulenceFactor * Noise.turbulence2(nx, ny, this.turbulence);
+			t = (float) Math.sin(Math.sin(8. * chaos + 7 * nx + 3. * ny));
 
 			greenLayer = brownLayer = Math.abs(t);
 
-			perturb = (float)Math.sin(40.*chaos);
-			perturb = (float)Math.abs(perturb);
+			perturb = (float) Math.sin(40. * chaos);
+			perturb = Math.abs(perturb);
 
-			brownPerturb = .6f*perturb + 0.3f;
-			greenPerturb = .2f*perturb + 0.8f;
-			grnPerturb = .15f*perturb + 0.85f;
-			grn = 0.5f * (float)Math.pow(Math.abs(brownLayer), 0.3);
-			brownLayer = (float)Math.pow(0.5 * (brownLayer+1.0), 0.6) * brownPerturb;
-			greenLayer = (float)Math.pow(0.5 * (greenLayer+1.0), 0.6) * greenPerturb;
+			brownPerturb = .6f * perturb + 0.3f;
+			greenPerturb = .2f * perturb + 0.8f;
+			grnPerturb = .15f * perturb + 0.85f;
+			grn = 0.5f * (float) Math.pow(Math.abs(brownLayer), 0.3);
+			brownLayer = (float) Math.pow(0.5 * (brownLayer + 1.0), 0.6) * brownPerturb;
+			greenLayer = (float) Math.pow(0.5 * (greenLayer + 1.0), 0.6) * greenPerturb;
 
-			red = (0.5f*brownLayer + 0.35f*greenLayer)*2.0f*grn;
-			blu = (0.25f*brownLayer + 0.35f*greenLayer)*2.0f*grn;
+			red = (0.5f * brownLayer + 0.35f * greenLayer) * 2.0f * grn;
+			blu = (0.25f * brownLayer + 0.35f * greenLayer) * 2.0f * grn;
 			grn *= Math.max(brownLayer, greenLayer) * grnPerturb;
 			int r = (rgb >> 16) & 0xff;
 			int g = (rgb >> 8) & 0xff;
 			int b = rgb & 0xff;
-			r = PixelUtils.clamp((int)(r*red));
-			g = PixelUtils.clamp((int)(g*grn));
-			b = PixelUtils.clamp((int)(b*blu));
-			return (rgb & 0xff000000) | (r<<16) | (g<<8) | b;
+			r = PixelUtils.clamp((int) (r * red));
+			g = PixelUtils.clamp((int) (g * grn));
+			b = PixelUtils.clamp((int) (b * blu));
+			return (rgb & 0xff000000) | (r << 16) | (g << 8) | b;
 		}
 	}
 
+	@Override
 	public String toString() {
 		return "Texture/Marble Texture...";
 	}
-	
+
 }

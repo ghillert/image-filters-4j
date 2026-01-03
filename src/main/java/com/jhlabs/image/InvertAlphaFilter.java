@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -10,13 +10,15 @@ package com.jhlabs.image;
 public class InvertAlphaFilter extends PointFilter {
 
 	public InvertAlphaFilter() {
-		canFilterIndexColorModel = true;
+		this.canFilterIndexColorModel = true;
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
 		return rgb ^ 0xff000000;
 	}
 
+	@Override
 	public String toString() {
 		return "Alpha/Invert";
 	}

@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -8,31 +8,33 @@ public class ContrastFilter extends TransferFilter {
 
 	private float brightness = 1.0f;
 	private float contrast = 0.5f;
-	
-	protected float transferFunction( float f ) {
-		f = f*brightness;
-		f = (f-0.5f)*contrast+0.5f;
+
+	@Override
+	protected float transferFunction(float f) {
+		f = f * this.brightness;
+		f = (f - 0.5f) * this.contrast + 0.5f;
 		return f;
 	}
 
 	public void setBrightness(float brightness) {
 		this.brightness = brightness;
-		initialized = false;
+		this.initialized = false;
 	}
-	
+
 	public float getBrightness() {
-		return brightness;
+		return this.brightness;
 	}
 
 	public void setContrast(float contrast) {
 		this.contrast = contrast;
-		initialized = false;
-	}
-	
-	public float getContrast() {
-		return contrast;
+		this.initialized = false;
 	}
 
+	public float getContrast() {
+		return this.contrast;
+	}
+
+	@Override
 	public String toString() {
 		return "Colors/Contrast...";
 	}

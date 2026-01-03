@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -24,7 +24,7 @@ public class ShearFilter extends TransformFilter {
 	}
 
 	public boolean isResize() {
-		return resize;
+		return this.resize;
 	}
 
 	public void setXAngle(float xangle) {
@@ -33,7 +33,7 @@ public class ShearFilter extends TransformFilter {
 	}
 
 	public float getXAngle() {
-		return xangle;
+		return this.xangle;
 	}
 
 	public void setYAngle(float yangle) {
@@ -42,25 +42,28 @@ public class ShearFilter extends TransformFilter {
 	}
 
 	public float getYAngle() {
-		return yangle;
+		return this.yangle;
 	}
 
 	private void initialize() {
-		shx = (float)Math.sin(xangle);
-		shy = (float)Math.sin(yangle);
+		this.shx = (float) Math.sin(this.xangle);
+		this.shy = (float) Math.sin(this.yangle);
 	}
-	
+
+	@Override
 	protected void transformSpace(Rectangle r) {
-		float tangent = (float)Math.tan(xangle);
-		xoffset = -r.height * tangent;
-		if (tangent < 0.0)
+		float tangent = (float) Math.tan(this.xangle);
+		this.xoffset = -r.height * tangent;
+		if (tangent < 0.0) {
 			tangent = -tangent;
-		r.width = (int)(r.height * tangent + r.width + 0.999999f);
-		tangent = (float)Math.tan(yangle);
-		yoffset = -r.width * tangent;
-		if (tangent < 0.0)
+		}
+		r.width = (int) (r.height * tangent + r.width + 0.999999f);
+		tangent = (float) Math.tan(this.yangle);
+		this.yoffset = -r.width * tangent;
+		if (tangent < 0.0) {
 			tangent = -tangent;
-		r.height = (int)(r.width * tangent + r.height + 0.999999f);
+		}
+		r.height = (int) (r.width * tangent + r.height + 0.999999f);
 	}
 
 /*
@@ -112,12 +115,14 @@ catch (Exception e) {
 }
 	}
 */
-	
+
+	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		out[0] = x + xoffset + (y * shx);
-		out[1] = y + yoffset + (x * shy);
+		out[0] = x + this.xoffset + (y * this.shx);
+		out[1] = y + this.yoffset + (x * this.shy);
 	}
 
+	@Override
 	public String toString() {
 		return "Distort/Shear...";
 	}

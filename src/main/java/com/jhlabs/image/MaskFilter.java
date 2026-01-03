@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -18,7 +18,7 @@ public class MaskFilter extends PointFilter implements Serializable {
 	}
 
 	public MaskFilter(int mask) {
-		canFilterIndexColorModel = true;
+		this.canFilterIndexColorModel = true;
 		setMask(mask);
 	}
 
@@ -27,13 +27,15 @@ public class MaskFilter extends PointFilter implements Serializable {
 	}
 
 	public int getMask() {
-		return mask;
+		return this.mask;
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		return rgb & mask;
+		return rgb & this.mask;
 	}
 
+	@Override
 	public String toString() {
 		return "Mask";
 	}

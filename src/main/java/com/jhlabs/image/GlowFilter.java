@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * A filter which adds Gaussian blur to an image, producing a glowing effect.
+ *
  * @author Jerry Huxtable
  */
 public class GlowFilter extends GaussianFilter {
@@ -15,42 +16,44 @@ public class GlowFilter extends GaussianFilter {
 	static final long serialVersionUID = 5377089073023183684L;
 
 	private float amount = 0.5f;
-	
+
 	public GlowFilter() {
-		radius = 2;
+		this.radius = 2;
 	}
-	
-	public void setAmount( float amount ) {
+
+	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	
+
 	public float getAmount() {
-		return amount;
+		return this.amount;
 	}
-	
-    public BufferedImage filter( BufferedImage src, BufferedImage dst ) {
-        int width = src.getWidth();
-        int height = src.getHeight();
 
-        if ( dst == null )
-            dst = createCompatibleDestImage( src, null );
+	@Override
+	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
+		int width = src.getWidth();
+		int height = src.getHeight();
 
-        int[] inPixels = new int[width*height];
-        int[] outPixels = new int[width*height];
-        src.getRGB( 0, 0, width, height, inPixels, 0, width );
-
-		if ( radius > 0 ) {
-			convolveAndTranspose(kernel, inPixels, outPixels, width, height, alpha, CLAMP_EDGES);
-			convolveAndTranspose(kernel, outPixels, inPixels, height, width, alpha, CLAMP_EDGES);
+		if (dst == null) {
+			dst = createCompatibleDestImage(src, null);
 		}
 
-        src.getRGB( 0, 0, width, height, outPixels, 0, width );
+		int[] inPixels = new int[width * height];
+		int[] outPixels = new int[width * height];
+		src.getRGB(0, 0, width, height, inPixels, 0, width);
 
-		float a = 4*amount;
+		if (this.radius > 0) {
+			convolveAndTranspose(this.kernel, inPixels, outPixels, width, height, this.alpha, CLAMP_EDGES);
+			convolveAndTranspose(this.kernel, outPixels, inPixels, height, width, this.alpha, CLAMP_EDGES);
+		}
+
+		src.getRGB(0, 0, width, height, outPixels, 0, width);
+
+		float a = 4 * this.amount;
 
 		int index = 0;
-		for ( int y = 0; y < height; y++ ) {
-			for ( int x = 0; x < width; x++ ) {
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
 				int rgb1 = outPixels[index];
 				int r1 = (rgb1 >> 16) & 0xff;
 				int g1 = (rgb1 >> 8) & 0xff;
@@ -61,19 +64,20 @@ public class GlowFilter extends GaussianFilter {
 				int g2 = (rgb2 >> 8) & 0xff;
 				int b2 = rgb2 & 0xff;
 
-				r1 = PixelUtils.clamp( (int)(r1 + a * r2) );
-				g1 = PixelUtils.clamp( (int)(g1 + a * g2) );
-				b1 = PixelUtils.clamp( (int)(b1 + a * b2) );
+				r1 = PixelUtils.clamp((int) (r1 + a * r2));
+				g1 = PixelUtils.clamp((int) (g1 + a * g2));
+				b1 = PixelUtils.clamp((int) (b1 + a * b2));
 
 				inPixels[index] = (rgb1 & 0xff000000) | (r1 << 16) | (g1 << 8) | b1;
 				index++;
 			}
 		}
 
-        dst.setRGB( 0, 0, width, height, inPixels, 0, width );
-        return dst;
-    }
+		dst.setRGB(0, 0, width, height, inPixels, 0, width);
+		return dst;
+	}
 
+	@Override
 	public String toString() {
 		return "Blur/Glow...";
 	}

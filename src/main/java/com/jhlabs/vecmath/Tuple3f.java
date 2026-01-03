@@ -7,147 +7,154 @@ public class Tuple3f {
 	public float x, y, z;
 
 	public Tuple3f() {
-		this( 0, 0, 0 );
+		this(0, 0, 0);
 	}
-	
-	public Tuple3f( float[] x ) {
+
+	public Tuple3f(float[] x) {
 		this.x = x[0];
 		this.y = x[1];
 		this.z = x[2];
 	}
 
-	public Tuple3f( float x, float y, float z ) {
+	public Tuple3f(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
-	public Tuple3f( Tuple3f t ) {
+	public Tuple3f(Tuple3f t) {
 		this.x = t.x;
 		this.y = t.y;
 		this.z = t.z;
 	}
 
 	public void absolute() {
-		x = Math.abs(x);
-		y = Math.abs(y);
-		z = Math.abs(z);
+		this.x = Math.abs(this.x);
+		this.y = Math.abs(this.y);
+		this.z = Math.abs(this.z);
 	}
 
-	public void absolute( Tuple3f t ) {
-		x = Math.abs(t.x);
-		y = Math.abs(t.y);
-		z = Math.abs(t.z);
+	public void absolute(Tuple3f t) {
+		this.x = Math.abs(t.x);
+		this.y = Math.abs(t.y);
+		this.z = Math.abs(t.z);
 	}
 
-	public void clamp( float min, float max ) {
-		if ( x < min )
-			x = min;
-		else if ( x > max )
-			x = max;
-		if ( y < min )
-			y = min;
-		else if ( y > max )
-			y = max;
-		if ( z < min )
-			z = min;
-		else if ( z > max )
-			z = max;
+	public void clamp(float min, float max) {
+		if (this.x < min) {
+			this.x = min;
+		}
+		else if (this.x > max) {
+			this.x = max;
+		}
+		if (this.y < min) {
+			this.y = min;
+		}
+		else if (this.y > max) {
+			this.y = max;
+		}
+		if (this.z < min) {
+			this.z = min;
+		}
+		else if (this.z > max) {
+			this.z = max;
+		}
 	}
 
-	public void set( float x, float y, float z ) {
+	public void set(float x, float y, float z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
-	public void set( float[] x ) {
+	public void set(float[] x) {
 		this.x = x[0];
 		this.y = x[1];
 		this.z = x[2];
 	}
 
-	public void set( Tuple3f t ) {
-		x = t.x;
-		y = t.y;
-		z = t.z;
+	public void set(Tuple3f t) {
+		this.x = t.x;
+		this.y = t.y;
+		this.z = t.z;
 	}
 
-	public void get( Tuple3f t ) {
-		t.x = x;
-		t.y = y;
-		t.z = z;
+	public void get(Tuple3f t) {
+		t.x = this.x;
+		t.y = this.y;
+		t.z = this.z;
 	}
 
-	public void get( float[] t ) {
-		t[0] = x;
-		t[1] = y;
-		t[2] = z;
+	public void get(float[] t) {
+		t[0] = this.x;
+		t[1] = this.y;
+		t[2] = this.z;
 	}
 
 	public void negate() {
-		x = -x;
-		y = -y;
-		z = -z;
+		this.x = -this.x;
+		this.y = -this.y;
+		this.z = -this.z;
 	}
 
-	public void negate( Tuple3f t ) {
-		x = -t.x;
-		y = -t.y;
-		z = -t.z;
+	public void negate(Tuple3f t) {
+		this.x = -t.x;
+		this.y = -t.y;
+		this.z = -t.z;
 	}
 
-	public void interpolate( Tuple3f t, float alpha ) {
-		float a = 1-alpha;
-		x = a*x + alpha*t.x;
-		y = a*y + alpha*t.y;
-		z = a*z + alpha*t.z;
+	public void interpolate(Tuple3f t, float alpha) {
+		float a = 1 - alpha;
+		this.x = a * this.x + alpha * t.x;
+		this.y = a * this.y + alpha * t.y;
+		this.z = a * this.z + alpha * t.z;
 	}
 
-	public void scale( float s ) {
-		x *= s;
-		y *= s;
-		z *= s;
+	public void scale(float s) {
+		this.x *= s;
+		this.y *= s;
+		this.z *= s;
 	}
 
-	public void add( Tuple3f t ) {
-		x += t.x;
-		y += t.y;
-		z += t.z;
+	public void add(Tuple3f t) {
+		this.x += t.x;
+		this.y += t.y;
+		this.z += t.z;
 	}
 
-	public void add( Tuple3f t1, Tuple3f t2 ) {
-		x = t1.x+t2.x;
-		y = t1.y+t2.y;
-		z = t1.z+t2.z;
+	public void add(Tuple3f t1, Tuple3f t2) {
+		this.x = t1.x + t2.x;
+		this.y = t1.y + t2.y;
+		this.z = t1.z + t2.z;
 	}
 
-	public void sub( Tuple3f t ) {
-		x -= t.x;
-		y -= t.y;
-		z -= t.z;
+	public void sub(Tuple3f t) {
+		this.x -= t.x;
+		this.y -= t.y;
+		this.z -= t.z;
 	}
 
-	public void sub( Tuple3f t1, Tuple3f t2 ) {
-		x = t1.x-t2.x;
-		y = t1.y-t2.y;
-		z = t1.z-t2.z;
+	public void sub(Tuple3f t1, Tuple3f t2) {
+		this.x = t1.x - t2.x;
+		this.y = t1.y - t2.y;
+		this.z = t1.z - t2.z;
 	}
 
-	public void scaleAdd( float s, Tuple3f t ) {
-		x += s*t.x;
-		y += s*t.y;
-		z += s*t.z;
+	public void scaleAdd(float s, Tuple3f t) {
+		this.x += s * t.x;
+		this.y += s * t.y;
+		this.z += s * t.z;
 	}
-	
-	public void scaleAdd( float s, Tuple3f t1, Tuple3f t2 ) {
-		x = s*t1.x + t2.x;
-		y = s*t1.y + t2.y;
-		z = s*t1.z + t2.z;
+
+	public void scaleAdd(float s, Tuple3f t1, Tuple3f t2) {
+		this.x = s * t1.x + t2.x;
+		this.y = s * t1.y + t2.y;
+		this.z = s * t1.z + t2.z;
 	}
-	
+
+	@Override
 	public String toString() {
-		return "["+x+", "+y+", "+z+"]";
+		return "[" + this.x + ", " + this.y + ", " + this.z + "]";
 	}
-	
+
 }

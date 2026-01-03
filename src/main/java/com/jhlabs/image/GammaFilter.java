@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -9,7 +9,9 @@ package com.jhlabs.image;
  */
 public class GammaFilter extends TransferFilter {
 
-	private float rGamma, gGamma, bGamma;
+	private float rGamma;
+	private float gGamma;
+	private float bGamma;
 
 	public GammaFilter() {
 		this(1.0f);
@@ -27,44 +29,52 @@ public class GammaFilter extends TransferFilter {
 		this.rGamma = rGamma;
 		this.gGamma = gGamma;
 		this.bGamma = bGamma;
-		initialized = false;
+		this.initialized = false;
 	}
 
 	public void setGamma(float gamma) {
 		setGamma(gamma, gamma, gamma);
 	}
-	
+
 	public float getGamma() {
-		return rGamma;
+		return this.rGamma;
 	}
-	
+
+	@Override
 	protected void initialize() {
-		rTable = makeTable(rGamma);
+		this.rTable = makeTable(this.rGamma);
 
-		if (gGamma == rGamma)
-			gTable = rTable;
-		else
-			gTable = makeTable(gGamma);
+		if (this.gGamma == this.rGamma) {
+			this.gTable = this.rTable;
+		}
+		else {
+			this.gTable = makeTable(this.gGamma);
+		}
 
-		if (bGamma == rGamma)
-			bTable = rTable;
-		else if (bGamma == gGamma)
-			bTable = gTable;
-		else
-			bTable = makeTable(bGamma);
+		if (this.bGamma == this.rGamma) {
+			this.bTable = this.rTable;
+		}
+		else if (this.bGamma == this.gGamma) {
+			this.bTable = this.gTable;
+		}
+		else {
+			this.bTable = makeTable(this.bGamma);
+		}
 	}
 
 	protected int[] makeTable(float gamma) {
 		int[] table = new int[256];
 		for (int i = 0; i < 256; i++) {
-			int v = (int) ((255.0 * Math.pow(i/255.0, 1.0 / gamma)) + 0.5);
-			if (v > 255)
+			int v = (int) ((255.0 * Math.pow(i / 255.0, 1.0 / gamma)) + 0.5);
+			if (v > 255) {
 				v = 255;
+			}
 			table[i] = v;
 		}
 		return table;
 	}
 
+	@Override
 	public String toString() {
 		return "Colors/Gamma...";
 	}

@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -9,10 +9,12 @@ package com.jhlabs.image;
  */
 public class SolarizeFilter extends TransferFilter {
 
-	protected float transferFunction( float v ) {
-		return v > 0.5f ? 2*(v-0.5f) : 2*(0.5f-v);
+	@Override
+	protected float transferFunction(float v) {
+		return v > 0.5f ? 2 * (v - 0.5f) : 2 * (0.5f - v);
 	}
 
+	@Override
 	public String toString() {
 		return "Colors/Solarize";
 	}

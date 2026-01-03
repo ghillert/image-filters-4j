@@ -1,6 +1,6 @@
 /*
-** Copyright 2005 Huxtable.com. All rights reserved.
-*/
+ ** Copyright 2005 Huxtable.com. All rights reserved.
+ */
 
 package com.jhlabs.image;
 
@@ -10,18 +10,20 @@ package com.jhlabs.image;
  */
 public class MapColorsFilter extends PointFilter {
 
-	private int oldColor;
-	private int newColor;
-	
+	private final int oldColor;
+	private final int newColor;
+
 	public MapColorsFilter(int oldColor, int newColor) {
-		canFilterIndexColorModel = true;
+		this.canFilterIndexColorModel = true;
 		this.oldColor = oldColor;
 		this.newColor = newColor;
 	}
 
+	@Override
 	public int filterRGB(int x, int y, int rgb) {
-		if (rgb == oldColor)
-			return newColor;
+		if (rgb == this.oldColor) {
+			return this.newColor;
+		}
 		return rgb;
 	}
 }
