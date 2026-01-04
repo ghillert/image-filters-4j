@@ -4,12 +4,12 @@
 
 package com.jhlabs.math;
 
-import com.jhlabs.image.ImageMath;
-import com.jhlabs.image.PixelUtils;
-
 import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.awt.image.PixelGrabber;
+
+import com.jhlabs.image.ImageMath;
+import com.jhlabs.image.PixelUtils;
 
 public class ImageFunction2D implements Function2D {
 

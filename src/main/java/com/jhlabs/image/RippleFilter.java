@@ -17,13 +17,15 @@ public class RippleFilter extends TransformFilter {
 
 	static final long serialVersionUID = 5101667633854087384L;
 
-	public final static int SINE = 0;
-	public final static int SAWTOOTH = 1;
-	public final static int TRIANGLE = 2;
-	public final static int NOISE = 3;
+	public static final int SINE = 0;
+	public static final int SAWTOOTH = 1;
+	public static final int TRIANGLE = 2;
+	public static final int NOISE = 3;
 
-	public float xAmplitude, yAmplitude;
-	public float xWavelength, yWavelength;
+	public float xAmplitude;
+	public float yAmplitude;
+	public float xWavelength;
+	public float yWavelength;
 	private int waveType;
 
 	/**
@@ -37,7 +39,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Set the amplitude of ripple in the X direction.
-	 *
 	 * @param xAmplitude the amplitude (in pixels).
 	 */
 	public void setXAmplitude(float xAmplitude) {
@@ -46,7 +47,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the amplitude of ripple in the X direction.
-	 *
 	 * @return the amplitude (in pixels).
 	 */
 	public float getXAmplitude() {
@@ -55,7 +55,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Set the wavelength of ripple in the X direction.
-	 *
 	 * @param xWavelength the wavelength (in pixels).
 	 */
 	public void setXWavelength(float xWavelength) {
@@ -64,7 +63,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the wavelength of ripple in the X direction.
-	 *
 	 * @return the wavelength (in pixels).
 	 */
 	public float getXWavelength() {
@@ -73,7 +71,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Set the amplitude of ripple in the Y direction.
-	 *
 	 * @param yAmplitude the amplitude (in pixels).
 	 */
 	public void setYAmplitude(float yAmplitude) {
@@ -82,7 +79,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the amplitude of ripple in the Y direction.
-	 *
 	 * @return the amplitude (in pixels).
 	 */
 	public float getYAmplitude() {
@@ -91,7 +87,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Set the wavelength of ripple in the Y direction.
-	 *
 	 * @param yWavelength the wavelength (in pixels).
 	 */
 	public void setYWavelength(float yWavelength) {
@@ -100,7 +95,6 @@ public class RippleFilter extends TransformFilter {
 
 	/**
 	 * Get the wavelength of ripple in the Y direction.
-	 *
 	 * @return the wavelength (in pixels).
 	 */
 	public float getYWavelength() {
@@ -130,7 +124,8 @@ public class RippleFilter extends TransformFilter {
 	protected void transformInverse(int x, int y, float[] out) {
 		float nx = (float) y / this.xWavelength;
 		float ny = (float) x / this.yWavelength;
-		float fx, fy;
+		float fx;
+		float fy;
 		switch (this.waveType) {
 			case SINE:
 			default:

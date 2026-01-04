@@ -19,7 +19,6 @@ public class GrayscaleColormap implements Colormap, java.io.Serializable {
 
 	/**
 	 * Convert a value in the range 0..1 to an RGB color.
-	 *
 	 * @param v a value in the range 0..1
 	 * @return an RGB color
 	 */

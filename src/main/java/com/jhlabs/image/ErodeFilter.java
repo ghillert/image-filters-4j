@@ -22,7 +22,6 @@ public class ErodeFilter extends BinaryFilter {
 
 	/**
 	 * Set the threshold - the number of neighbouring pixels for dilation to occur.
-	 *
 	 * @param threshold the new threshold
 	 */
 	public void setThreshold(int threshold) {
@@ -31,7 +30,6 @@ public class ErodeFilter extends BinaryFilter {
 
 	/**
 	 * Return the threshold - the number of neighbouring pixels for dilation to occur.
-	 *
 	 * @return the current threshold
 	 */
 	public int getThreshold() {

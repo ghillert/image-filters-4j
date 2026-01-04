@@ -110,7 +110,6 @@ public class BrushedMetalFilter implements BufferedImageOp {
 
 	/**
 	 * Return a mod b. This differs from the % operator with respect to negative numbers.
-	 *
 	 * @param a the dividend
 	 * @param b the divisor
 	 * @return a mod b

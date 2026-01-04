@@ -15,10 +15,10 @@ import java.awt.Rectangle;
 
 public class ShapeFilter extends WholeImageFilter {
 
-	public final static int LINEAR = 0;
-	public final static int CIRCLE_UP = 1;
-	public final static int CIRCLE_DOWN = 2;
-	public final static int SMOOTH = 3;
+	public static final int LINEAR = 0;
+	public static final int CIRCLE_UP = 1;
+	public static final int CIRCLE_DOWN = 2;
+	public static final int SMOOTH = 3;
 
 	private float factor = 1.0f;
 	protected Colormap colormap;
@@ -27,9 +27,9 @@ public class ShapeFilter extends WholeImageFilter {
 	private boolean merge = false;
 	private int type;
 
-	private final static int one = 41;
-	private final static int sqrt2 = (int) (41 * Math.sqrt(2));
-	private final static int sqrt5 = (int) (41 * Math.sqrt(5));
+	private static final int one = 41;
+	private static final int sqrt2 = (int) (41 * Math.sqrt(2));
+	private static final int sqrt5 = (int) (41 * Math.sqrt(5));
 
 	public ShapeFilter() {
 		this.colormap = new LinearColormap();
@@ -160,7 +160,10 @@ public class ShapeFilter extends WholeImageFilter {
 				int offset = x + y * width;
 				int m = map[offset];
 				float v = 0;
-				int sa = 0, sr = 0, sg = 0, sb = 0;
+				int sa = 0;
+				int sr = 0;
+				int sg = 0;
+				int sb = 0;
 
 				if (m == 0) {
 					// default color
@@ -250,8 +253,13 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	private int setEdgeValue(int x, int y, int[] map, int width, int offset, int xmax, int ymax) {
-		int min, v;
-		int r1, r2, r3, r4, r5;
+		int min;
+		int v;
+		int r1;
+		int r2;
+		int r3;
+		int r4;
+		int r5;
 
 		r1 = offset - width - width - 2;
 		r2 = r1 + width;
@@ -349,8 +357,13 @@ public class ShapeFilter extends WholeImageFilter {
 	}
 
 	private int setValue(int[] map, int width, int offset) {
-		int min, v;
-		int r1, r2, r3, r4, r5;
+		int min;
+		int v;
+		int r1;
+		int r2;
+		int r3;
+		int r4;
+		int r5;
 
 		r1 = offset - width - width - 2;
 		r2 = r1 + width;
@@ -435,10 +448,13 @@ public class ShapeFilter extends WholeImageFilter {
 		int minimum;
 		int min_left;
 		int length;
-		int i, j, k;
+		int i;
+		int j;
+		int k;
 		int fraction;
 		int prev_frac;
-		int x, y;
+		int x;
+		int y;
 		int end;
 		int inc;
 
@@ -559,7 +575,10 @@ public class ShapeFilter extends WholeImageFilter {
 				int offset = x + y * width;
 				int m = (int) map[offset];
 				float v = 0;
-				int sa = 0, sr = 0, sg = 0, sb = 0;
+				int sa = 0;
+				int sr = 0;
+				int sg = 0;
+				int sb = 0;
 
 				if (m == 0) {
 					// default color

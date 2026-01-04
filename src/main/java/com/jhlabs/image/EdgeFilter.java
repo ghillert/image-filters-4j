@@ -89,9 +89,15 @@ public class EdgeFilter extends WholeImageFilter {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				int r = 0, g = 0, b = 0;
-				int rh = 0, gh = 0, bh = 0;
-				int rv = 0, gv = 0, bv = 0;
+				int r = 0;
+				int g = 0;
+				int b = 0;
+				int rh = 0;
+				int gh = 0;
+				int bh = 0;
+				int rv = 0;
+				int gv = 0;
+				int bv = 0;
 				int a = inPixels[y * width + x] & 0xff000000;
 
 				for (int row = -1; row <= 1; row++) {

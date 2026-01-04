@@ -18,7 +18,10 @@ public class Spectrum {
 	 */
 	public static int wavelengthToRGB(float wavelength) {
 		float gamma = 0.80f;
-		float r, g, b, factor;
+		float r;
+		float g;
+		float b;
+		float factor;
 
 		int w = (int) wavelength;
 		if (w < 380) {

@@ -70,7 +70,8 @@ public class TileImageFilter extends AbstractBufferedImageOp implements java.io.
 	}
 
 	private int[][] symmetryMatrix = null;
-	private int symmetryRows = 2, symmetryCols = 2;
+	private int symmetryRows = 2;
+	private int symmetryCols = 2;
 
 	public void setSymmetryMatrix(int[][] symmetryMatrix) {
 		this.symmetryMatrix = symmetryMatrix;

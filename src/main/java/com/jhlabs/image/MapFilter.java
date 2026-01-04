@@ -44,7 +44,8 @@ public class MapFilter extends TransformFilter {
 
 	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		float xMap, yMap;
+		float xMap;
+		float yMap;
 		xMap = this.xMapFunction.evaluate(x, y);
 		yMap = this.yMapFunction.evaluate(x, y);
 		out[0] = xMap * this.transformedSpace.width;

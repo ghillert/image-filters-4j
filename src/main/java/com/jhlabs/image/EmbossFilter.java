@@ -16,7 +16,8 @@ public class EmbossFilter extends WholeImageFilter {
 
 	private static final float pixelScale = 255.9f;
 
-	private float azimuth = 135.0f * ImageMath.PI / 180.0f, elevation = 30.0f * ImageMath.PI / 180f;
+	private float azimuth = 135.0f * ImageMath.PI / 180.0f;
+	private float elevation = 30.0f * ImageMath.PI / 180f;
 	private boolean emboss = false;
 	private float width45 = 3.0f;
 
@@ -61,7 +62,8 @@ public class EmbossFilter extends WholeImageFilter {
 		int[] outPixels = new int[width * height];
 
 		int[] bumpPixels;
-		int bumpMapWidth, bumpMapHeight;
+		int bumpMapWidth;
+		int bumpMapHeight;
 
 		bumpMapWidth = width;
 		bumpMapHeight = height;
@@ -70,8 +72,17 @@ public class EmbossFilter extends WholeImageFilter {
 			bumpPixels[i] = PixelUtils.brightness(inPixels[i]);
 		}
 
-		int Nx, Ny, Nz, Lx, Ly, Lz, Nz2, NzLz, NdotL;
-		int shade, background;
+		int Nx;
+		int Ny;
+		int Nz;
+		int Lx;
+		int Ly;
+		int Lz;
+		int Nz2;
+		int NzLz;
+		int NdotL;
+		int shade;
+		int background;
 
 		Lx = (int) (Math.cos(this.azimuth) * Math.cos(this.elevation) * pixelScale);
 		Ly = (int) (Math.sin(this.azimuth) * Math.cos(this.elevation) * pixelScale);

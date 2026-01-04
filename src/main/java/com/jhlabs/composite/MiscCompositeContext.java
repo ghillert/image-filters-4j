@@ -53,11 +53,14 @@ public class MiscCompositeContext implements CompositeContext {
 
 	@Override
 	public void compose(Raster src, Raster dstIn, WritableRaster dstOut) {
-		float a = 0, ac = 0;
+		float a = 0;
+		float ac = 0;
 		float alpha = this.alpha;
 		int t;
 
-		float[] sHsv = null, diHsv = null, doHsv = null;
+		float[] sHsv = null;
+		float[] diHsv = null;
+		float[] doHsv = null;
 		switch (this.rule) {
 			case MiscComposite.HUE:
 			case MiscComposite.SATURATION:

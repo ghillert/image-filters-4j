@@ -34,7 +34,6 @@ public class TwirlFilter extends TransformFilter {
 
 	/**
 	 * Set the angle of twirl in radians. 0 means no distortion.
-	 *
 	 * @param angle the angle of twirl. This is the angle by which pixels at the nearest edge of the image will move.
 	 */
 	public void setAngle(float angle) {
@@ -43,7 +42,6 @@ public class TwirlFilter extends TransformFilter {
 
 	/**
 	 * Get the angle of twist.
-	 *
 	 * @return the angle in radians.
 	 */
 	public float getAngle() {

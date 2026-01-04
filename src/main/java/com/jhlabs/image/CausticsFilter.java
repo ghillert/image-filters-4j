@@ -4,10 +4,10 @@
 
 package com.jhlabs.image;
 
-import com.jhlabs.math.Noise;
-
 import java.awt.Rectangle;
 import java.util.Random;
+
+import com.jhlabs.math.Noise;
 
 /**
  * A filter which simulates underwater caustics. This can be animated to get a bottom-of-the-swimming-pool effect.
@@ -27,7 +27,8 @@ public class CausticsFilter extends WholeImageFilter {
 	private int samples = 2;
 	private int bgColor = 0xff799fff;
 
-	private float s, c;
+	private float s;
+	private float c;
 
 	public CausticsFilter() {
 	}
@@ -131,7 +132,8 @@ public class CausticsFilter extends WholeImageFilter {
 					float sy = y + random.nextFloat();
 					float nx = sx * rs;
 					float ny = sy * rs;
-					float xDisplacement, yDisplacement;
+					float xDisplacement;
+					float yDisplacement;
 					float focus = 0.1f + this.amount;
 					xDisplacement = evaluate(nx - d, ny) - evaluate(nx + d, ny);
 					yDisplacement = evaluate(nx, ny + d) - evaluate(nx, ny - d);

@@ -124,7 +124,10 @@ public class VariableBlurFilter extends AbstractBufferedImageOp {
 				}
 
 				int divisor = 2 * ra + 1;
-				int ta = 0, tr = 0, tg = 0, tb = 0;
+				int ta = 0;
+				int tr = 0;
+				int tg = 0;
+				int tb = 0;
 				int i1 = x + ra;
 				if (i1 > widthMinus1) {
 					int f = i1 - widthMinus1;

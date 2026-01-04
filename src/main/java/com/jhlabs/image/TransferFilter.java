@@ -8,7 +8,9 @@ import java.awt.image.BufferedImage;
 
 public abstract class TransferFilter extends PointFilter {
 
-	protected int[] rTable, gTable, bTable;
+	protected int[] rTable;
+	protected int[] gTable;
+	protected int[] bTable;
 	protected boolean initialized = false;
 
 	public TransferFilter() {

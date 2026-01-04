@@ -25,7 +25,8 @@ public class WarpGrid implements java.io.Serializable {
 
 	public float[] xGrid = null;
 	public float[] yGrid = null;
-	public int rows, cols;
+	public int rows;
+	public int cols;
 
 	public WarpGrid(int rows, int cols, int w, int h) {
 		this.rows = rows;
@@ -61,8 +62,10 @@ public class WarpGrid implements java.io.Serializable {
 
 	public void warp(int[] inPixels, int cols, int rows, WarpGrid sourceGrid, WarpGrid destGrid, int[] outPixels) {
 		try {
-			int x, y;
-			int u, v;
+			int x;
+			int y;
+			int u;
+			int v;
 			int[] intermediate;
 			WarpGrid splines;
 
@@ -172,8 +175,10 @@ public class WarpGrid implements java.io.Serializable {
 
 	protected void interpolate(float[] xKnots, float[] yKnots, int offset, float[] splineY, int splineOffset, int splineLength) {
 		int index = offset;
-		float leftX, rightX;
-		float leftY, rightY;
+		float leftX;
+		float rightX;
+		float leftY;
+		float rightY;
 
 		leftX = xKnots[index];
 		leftY = yKnots[index];

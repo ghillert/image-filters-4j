@@ -4,12 +4,12 @@
 
 package com.jhlabs.image;
 
-import com.jhlabs.math.FFT;
-
 import java.awt.image.BufferedImage;
 
+import com.jhlabs.math.FFT;
+
 /**
- * A filter which use FFTs to simulate lens blur on an image
+ * A filter which use FFTs to simulate lens blur on an image.
  *
  * @author Jerry Huxtable
  * @author Gunnar Hillert
@@ -24,7 +24,6 @@ public class LensBlurFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Set the radius of the kernel, and hence the amount of blur.
-	 *
 	 * @param radius the radius of the blur in pixels.
 	 */
 	public void setRadius(float radius) {
@@ -33,7 +32,6 @@ public class LensBlurFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Get the radius of the kernel.
-	 *
 	 * @return the radius
 	 */
 	public float getRadius() {
@@ -69,8 +67,10 @@ public class LensBlurFilter extends AbstractBufferedImageOp {
 	public BufferedImage filter(BufferedImage src, BufferedImage dst) {
 		int width = src.getWidth();
 		int height = src.getHeight();
-		int rows = 1, cols = 1;
-		int log2rows = 0, log2cols = 0;
+		int rows = 1;
+		int cols = 1;
+		int log2rows = 0;
+		int log2cols = 0;
 		int iradius = (int) Math.ceil(this.radius);
 		int tileWidth = 128;
 		int tileHeight = tileWidth;
@@ -97,7 +97,7 @@ public class LensBlurFilter extends AbstractBufferedImageOp {
 		int h = rows;
 
 		tileWidth = w;
-		tileHeight = h;//FIXME-tileWidth, w, and cols are always all the same
+		tileHeight = h; //FIXME-tileWidth, w, and cols are always all the same
 
 		FFT fft = new FFT(Math.max(log2rows, log2cols));
 
@@ -155,8 +155,12 @@ public class LensBlurFilter extends AbstractBufferedImageOp {
 //                System.out.println("Tile: "+tileX+" "+tileY+" "+tileWidth+" "+tileHeight);
 
 				// Clip the tile to the image bounds
-				int tx = tileX, ty = tileY, tw = tileWidth, th = tileHeight;
-				int fx = 0, fy = 0;
+				int tx = tileX;
+				int ty = tileY;
+				int tw = tileWidth;
+				int th = tileHeight;
+				int fx = 0;
+				int fy = 0;
 				if (tx < 0) {
 					tw += tx;
 					fx -= tx;

@@ -16,7 +16,8 @@ import com.jhlabs.math.Noise;
  */
 public class MarbleFilter extends TransformFilter {
 
-	public float[] sinTable, cosTable;
+	public float[] sinTable;
+	public float[] cosTable;
 	public float xScale = 4;
 	public float yScale = 4;
 	public float amount = 1;

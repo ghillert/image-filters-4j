@@ -8,7 +8,9 @@ public class RGBAdjustFilter extends PointFilter implements java.io.Serializable
 
 	static final long serialVersionUID = 3509907597266563800L;
 
-	public float rFactor, gFactor, bFactor;
+	public float rFactor;
+	public float gFactor;
+	public float bFactor;
 
 	public RGBAdjustFilter() {
 		this(0, 0, 0);

@@ -20,7 +20,8 @@ public class FlareFilter extends PointFilter {
 	private float ringAmount = 0.2f;
 	private float rayAmount = 0.1f;
 	private int color = 0xffffffff;
-	private int width, height;
+	private int width;
+	private int height;
 	private int centreX;
 	private int centreY;
 	private float ringWidth = 1.6f;

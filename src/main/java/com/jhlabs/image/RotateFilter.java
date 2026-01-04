@@ -12,7 +12,8 @@ public class RotateFilter extends TransformFilter {
 	static final long serialVersionUID = 1166374736665848180L;
 
 	private float angle;
-	private float cos, sin;
+	private float cos;
+	private float sin;
 	private boolean resize = true;
 
 	public RotateFilter() {

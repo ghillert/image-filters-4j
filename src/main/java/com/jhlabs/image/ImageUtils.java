@@ -29,8 +29,8 @@ import java.awt.image.WritableRaster;
  */
 public abstract class ImageUtils {
 
-	public final static int SELECTED = 0xff000000;
-	public final static int UNSELECTED = 0x00000000;
+	public static final int SELECTED = 0xff000000;
+	public static final int UNSELECTED = 0x00000000;
 
 	public static BufferedImage backgroundImage = null;
 
@@ -111,7 +111,10 @@ public abstract class ImageUtils {
 	public static Rectangle getSelectedBounds(BufferedImage p) {
 		int width = p.getWidth();
 		int height = p.getHeight();
-		int maxX = 0, maxY = 0, minX = width, minY = height;
+		int maxX = 0;
+		int maxY = 0;
+		int minX = width;
+		int minY = height;
 		boolean anySelected = false;
 		int y1;
 

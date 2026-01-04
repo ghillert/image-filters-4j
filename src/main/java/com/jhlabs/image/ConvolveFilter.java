@@ -145,7 +145,7 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 	}
 
 	/**
-	 * Convolve with a 2D kernel
+	 * Convolve with a 2D kernel.
 	 */
 	public static void convolveHV(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha, int edgeAction) {
 		int index = 0;
@@ -223,7 +223,10 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 		for (int y = 0; y < height; y++) {
 			int ioffset = y * width;
 			for (int x = 0; x < width; x++) {
-				float r = 0, g = 0, b = 0, a = 0;
+				float r = 0;
+				float g = 0;
+				float b = 0;
+				float a = 0;
 				int moffset = cols2;
 				for (int col = -cols2; col <= cols2; col++) {
 					float f = matrix[moffset + col];
@@ -273,7 +276,10 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				float r = 0, g = 0, b = 0, a = 0;
+				float r = 0;
+				float g = 0;
+				float b = 0;
+				float a = 0;
 
 				for (int row = -rows2; row <= rows2; row++) {
 					int iy = y + row;

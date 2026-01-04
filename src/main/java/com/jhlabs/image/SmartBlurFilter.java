@@ -47,7 +47,10 @@ public class SmartBlurFilter extends AbstractBufferedImageOp {
 			int ioffset = y * width;
 			int outIndex = y;
 			for (int x = 0; x < width; x++) {
-				float r = 0, g = 0, b = 0, a = 0;
+				float r = 0;
+				float g = 0;
+				float b = 0;
+				float a = 0;
 				int moffset = cols2;
 
 				int rgb1 = inPixels[ioffset + x];
@@ -55,7 +58,10 @@ public class SmartBlurFilter extends AbstractBufferedImageOp {
 				int r1 = (rgb1 >> 16) & 0xff;
 				int g1 = (rgb1 >> 8) & 0xff;
 				int b1 = rgb1 & 0xff;
-				float af = 0, rf = 0, gf = 0, bf = 0;
+				float af = 0;
+				float rf = 0;
+				float gf = 0;
+				float bf = 0;
 				for (int col = -cols2; col <= cols2; col++) {
 					float f = matrix[moffset + col];
 

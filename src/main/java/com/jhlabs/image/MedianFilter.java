@@ -18,7 +18,8 @@ public class MedianFilter extends WholeImageFilter {
 	}
 
 	private int median(int[] array) {
-		int max, maxIndex;
+		int max;
+		int maxIndex;
 
 		for (int i = 0; i < 4; i++) {
 			max = 0;
@@ -41,7 +42,9 @@ public class MedianFilter extends WholeImageFilter {
 	}
 
 	private int rgbMedian(int[] r, int[] g, int[] b) {
-		int sum, index = 0, min = Integer.MAX_VALUE;
+		int sum;
+		int index = 0;
+		int min = Integer.MAX_VALUE;
 
 		for (int i = 0; i < 9; i++) {
 			sum = 0;

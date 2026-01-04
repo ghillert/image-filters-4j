@@ -36,8 +36,7 @@ public class LinearColormap implements Colormap, java.io.Serializable {
 	}
 
 	/**
-	 * Set the first color
-	 *
+	 * Set the first color.
 	 * @param color1 the color corresponding to value 0 in the colormap
 	 */
 	public void setColor1(int color1) {
@@ -46,7 +45,6 @@ public class LinearColormap implements Colormap, java.io.Serializable {
 
 	/**
 	 * Get the first color.
-	 *
 	 * @return the color corresponding to value 0 in the colormap
 	 */
 	public int getColor1() {
@@ -54,7 +52,7 @@ public class LinearColormap implements Colormap, java.io.Serializable {
 	}
 
 	/**
-	 * Set the second color
+	 * Set the second color.
 	 * @param color2 the color corresponding to value 1 in the colormap
 	 */
 	public void setColor2(int color2) {

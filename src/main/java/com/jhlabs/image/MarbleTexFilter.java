@@ -120,9 +120,16 @@ public class MarbleTexFilter extends PointFilter implements java.io.Serializable
 			return this.colormap.getColor(f);
 		}
 		else {
-			float red, grn, blu;
-			float chaos, brownLayer, greenLayer;
-			float perturb, brownPerturb, greenPerturb, grnPerturb;
+			float red;
+			float grn;
+			float blu;
+			float chaos;
+			float brownLayer;
+			float greenLayer;
+			float perturb;
+			float brownPerturb;
+			float greenPerturb;
+			float grnPerturb;
 			float t;
 
 			chaos = this.turbulenceFactor * Noise.turbulence2(nx, ny, this.turbulence);

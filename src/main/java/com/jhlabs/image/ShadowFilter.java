@@ -52,7 +52,6 @@ public class ShadowFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Set the radius of the kernel, and hence the amount of blur. The bigger the radius, the longer this filter will take.
-	 *
 	 * @param radius the radius of the blur in pixels.
 	 */
 	public void setRadius(float radius) {
@@ -61,7 +60,6 @@ public class ShadowFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Get the radius of the kernel.
-	 *
 	 * @return the radius
 	 */
 	public float getRadius() {
@@ -128,7 +126,7 @@ public class ShadowFilter extends AbstractBufferedImageOp {
 		float shadowG = ((this.shadowColor >> 8) & 0xff) / 255f;
 		float shadowB = (this.shadowColor & 0xff) / 255f;
 
-		// Make a black mask from the image's alpha channel 
+		// Make a black mask from the image's alpha channel
 		float[][] extractAlpha = {
 				{0, 0, 0, shadowR},
 				{0, 0, 0, shadowG},

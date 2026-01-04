@@ -18,45 +18,9 @@ import java.util.Vector;
 public class OctTreeQuantizer implements Quantizer {
 
 	/**
-	 * The greatest depth the tree is allowed to reach
+	 * The greatest depth the tree is allowed to reach.
 	 */
-	final static int MAX_LEVEL = 5;
-
-	/**
-	 * An Octtree node.
-	 */
-	class OctTreeNode {
-		int children;
-		int level;
-		OctTreeNode parent;
-		OctTreeNode[] leaf = new OctTreeNode[8];
-		boolean isLeaf;
-		int count;
-		int totalRed;
-		int totalGreen;
-		int totalBlue;
-		int index;
-
-		/**
-		 * A debugging method which prints the tree out.
-		 */
-		public void list(PrintStream s, int level) {
-			for (int i = 0; i < level; i++) {
-				System.out.print(' ');
-			}
-			if (this.count == 0) {
-				System.out.println(this.index + ": count=" + this.count);
-			}
-			else {
-				System.out.println(this.index + ": count=" + this.count + " red=" + (this.totalRed / this.count) + " green=" + (this.totalGreen / this.count) + " blue=" + (this.totalBlue / this.count));
-			}
-			for (int i = 0; i < 8; i++) {
-				if (this.leaf[i] != null) {
-					this.leaf[i].list(s, level + 2);
-				}
-			}
-		}
-	}
+	static final int MAX_LEVEL = 5;
 
 	private int nodes = 0;
 	private final OctTreeNode root;
@@ -76,7 +40,6 @@ public class OctTreeQuantizer implements Quantizer {
 
 	/**
 	 * Initialize the quantizer. This should be called before adding any pixels.
-	 *
 	 * @param numColors the number of colors we're quantizing to.
 	 */
 	@Override
@@ -87,7 +50,6 @@ public class OctTreeQuantizer implements Quantizer {
 
 	/**
 	 * Add pixels to the quantizer.
-	 *
 	 * @param pixels the array of ARGB pixels
 	 * @param offset the offset into the array
 	 * @param count  the count of pixels
@@ -289,5 +251,40 @@ public class OctTreeQuantizer implements Quantizer {
 		return index;
 	}
 
+	/**
+	 * An Octtree node.
+	 */
+	class OctTreeNode {
+		int children;
+		int level;
+		OctTreeNode parent;
+		OctTreeNode[] leaf = new OctTreeNode[8];
+		boolean isLeaf;
+		int count;
+		int totalRed;
+		int totalGreen;
+		int totalBlue;
+		int index;
+
+		/**
+		 * A debugging method which prints the tree out.
+		 */
+		private void list(PrintStream s, int level) {
+			for (int i = 0; i < level; i++) {
+				System.out.print(' ');
+			}
+			if (this.count == 0) {
+				System.out.println(this.index + ": count=" + this.count);
+			}
+			else {
+				System.out.println(this.index + ": count=" + this.count + " red=" + (this.totalRed / this.count) + " green=" + (this.totalGreen / this.count) + " blue=" + (this.totalBlue / this.count));
+			}
+			for (int i = 0; i < 8; i++) {
+				if (this.leaf[i] != null) {
+					this.leaf[i].list(s, level + 2);
+				}
+			}
+		}
+	}
 }
 

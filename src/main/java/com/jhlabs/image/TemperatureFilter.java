@@ -10,7 +10,9 @@ public class TemperatureFilter extends PointFilter {
 
 	private float temperature = 6650f;
 
-	private float rFactor, gFactor, bFactor;
+	private float rFactor;
+	private float gFactor;
+	private float bFactor;
 
 	public TemperatureFilter() {
 		this.canFilterIndexColorModel = true;
@@ -142,7 +144,9 @@ public class TemperatureFilter extends PointFilter {
 		float g = (rgb >> 8) & 0xff;
 		float b = rgb & 0xff;
 
-		int start, end, m;
+		int start;
+		int end;
+		int m;
 		float rb;
 
 		rb = r / b;

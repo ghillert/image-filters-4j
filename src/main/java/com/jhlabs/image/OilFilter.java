@@ -99,7 +99,9 @@ public class OilFilter extends WholeImageFilter {
 					}
 				}
 
-				int r = 0, g = 0, b = 0;
+				int r = 0;
+				int g = 0;
+				int b = 0;
 				for (int i = 1; i < this.levels; i++) {
 					if (rHistogram[i] > rHistogram[r]) {
 						r = i;

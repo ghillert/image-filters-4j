@@ -7,7 +7,7 @@ package com.jhlabs.math;
 import java.util.Random;
 
 /**
- * Perlin Noise functions
+ * Perlin Noise functions.
  */
 public class Noise implements Function1D, Function2D, Function3D {
 
@@ -30,7 +30,6 @@ public class Noise implements Function1D, Function2D, Function3D {
 
 	/**
 	 * Compute turbulence using Perlin noise.
-	 *
 	 * @param x       the x value
 	 * @param y       the y value
 	 * @param octaves number of octaves of turbulence
@@ -47,7 +46,6 @@ public class Noise implements Function1D, Function2D, Function3D {
 
 	/**
 	 * Compute turbulence using Perlin noise.
-	 *
 	 * @param x       the x value
 	 * @param y       the y value
 	 * @param octaves number of octaves of turbulence
@@ -62,9 +60,9 @@ public class Noise implements Function1D, Function2D, Function3D {
 		return t;
 	}
 
-	private final static int B = 0x100;
-	private final static int BM = 0xff;
-	private final static int N = 0x1000;
+	private static final int B = 0x100;
+	private static final int BM = 0xff;
+	private static final int N = 0x1000;
 
 	static int[] p = new int[B + B + 2];
 	static float[][] g3 = new float[B + B + 2][3];
@@ -78,13 +76,18 @@ public class Noise implements Function1D, Function2D, Function3D {
 
 	/**
 	 * Compute 1-dimensional Perlin noise.
-	 *
 	 * @param x the x value
 	 * @return noise value at x in the range -1..1
 	 */
 	public static float noise1(float x) {
-		int bx0, bx1;
-		float rx0, rx1, sx, t, u, v;
+		int bx0;
+		int bx1;
+		float rx0;
+		float rx1;
+		float sx;
+		float t;
+		float u;
+		float v;
 
 		if (start) {
 			start = false;
@@ -106,13 +109,19 @@ public class Noise implements Function1D, Function2D, Function3D {
 
 	/**
 	 * Compute 2-dimensional Perlin noise.
-	 *
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 * @return noise value at (x,y)
 	 */
 	public static float noise2(float x, float y) {
-		int bx0, bx1, by0, by1, b00, b10, b01, b11;
+		int bx0;
+		int bx1;
+		int by0;
+		int by1;
+		int b00;
+		int b10;
+		int b01;
+		int b11;
 		float rx0;
 		float rx1;
 		float ry0;
@@ -125,7 +134,8 @@ public class Noise implements Function1D, Function2D, Function3D {
 		float t;
 		float u;
 		float v;
-		int i, j;
+		int i;
+		int j;
 
 		if (start) {
 			start = false;
@@ -172,14 +182,22 @@ public class Noise implements Function1D, Function2D, Function3D {
 
 	/**
 	 * Compute 3-dimensional Perlin noise.
-	 *
 	 * @param x the x coordinate
 	 * @param y the y coordinate
 	 * @param y the y coordinate
 	 * @return noise value at (x,y,z)
 	 */
 	public static float noise3(float x, float y, float z) {
-		int bx0, bx1, by0, by1, bz0, bz1, b00, b10, b01, b11;
+		int bx0;
+		int bx1;
+		int by0;
+		int by1;
+		int bz0;
+		int bz1;
+		int b00;
+		int b10;
+		int b01;
+		int b11;
 		float rx0;
 		float rx1;
 		float ry0;
@@ -196,7 +214,8 @@ public class Noise implements Function1D, Function2D, Function3D {
 		float t;
 		float u;
 		float v;
-		int i, j;
+		int i;
+		int j;
 
 		if (start) {
 			start = false;
@@ -286,7 +305,9 @@ public class Noise implements Function1D, Function2D, Function3D {
 	}
 
 	private static void init() {
-		int i, j, k;
+		int i;
+		int j;
+		int k;
 
 		for (i = 0; i < B; i++) {
 			p[i] = i;
@@ -331,7 +352,8 @@ public class Noise implements Function1D, Function2D, Function3D {
 		if (minmax == null) {
 			minmax = new float[2];
 		}
-		float min = 0, max = 0;
+		float min = 0;
+		float max = 0;
 		// Some random numbers here...
 		for (float x = -100; x < 100; x += 1.27139) {
 			float n = f.evaluate(x);
@@ -352,7 +374,8 @@ public class Noise implements Function1D, Function2D, Function3D {
 		if (minmax == null) {
 			minmax = new float[2];
 		}
-		float min = 0, max = 0;
+		float min = 0;
+		float max = 0;
 		// Some random numbers here...
 		for (float y = -100; y < 100; y += 10.35173) {
 			for (float x = -100; x < 100; x += 10.77139) {

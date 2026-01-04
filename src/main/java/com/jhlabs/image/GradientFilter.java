@@ -31,7 +31,8 @@ public class GradientFilter extends AbstractBufferedImageOp {
 	private float angle = 0;
 	private int color1 = 0xff000000;
 	private int color2 = 0xffffffff;
-	private Point p1 = new Point(0, 0), p2 = new Point(64, 64);
+	private Point p1 = new Point(0, 0);
+	private Point p2 = new Point(64, 64);
 	private boolean repeat = false;
 	private float x1;
 	private float y1;
@@ -122,8 +123,12 @@ public class GradientFilter extends AbstractBufferedImageOp {
 			dst = createCompatibleDestImage(src, null);
 		}
 
-		int rgb1, rgb2;
-		float x1, y1, x2, y2;
+		int rgb1;
+		int rgb2;
+		float x1;
+		float y1;
+		float x2;
+		float y2;
 		x1 = this.p1.x;
 		x2 = this.p2.x;
 

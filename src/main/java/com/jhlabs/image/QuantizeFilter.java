@@ -23,7 +23,7 @@ public class QuantizeFilter extends WholeImageFilter implements java.io.Serializ
 	/**
 	 * Floyd-Steinberg dithering matrix.
 	 */
-	protected final static int[] matrix = {
+	protected static final int[] matrix = {
 			0, 0, 0,
 			0, 0, 7,
 			3, 5, 1,
@@ -36,7 +36,6 @@ public class QuantizeFilter extends WholeImageFilter implements java.io.Serializ
 
 	/**
 	 * Set the number of colors to quantize to.
-	 *
 	 * @param numColors the number of colors. The default is 256.
 	 */
 	public void setNumColors(int numColors) {
@@ -45,7 +44,6 @@ public class QuantizeFilter extends WholeImageFilter implements java.io.Serializ
 
 	/**
 	 * Get the number of colors to quantize to.
-	 *
 	 * @return the number of colors.
 	 */
 	public int getNumColors() {
@@ -54,7 +52,6 @@ public class QuantizeFilter extends WholeImageFilter implements java.io.Serializ
 
 	/**
 	 * Set whether to use dithering or not. If not, the image is posterized.
-	 *
 	 * @param dither true to use dithering
 	 */
 	public void setDither(boolean dither) {
@@ -62,8 +59,7 @@ public class QuantizeFilter extends WholeImageFilter implements java.io.Serializ
 	}
 
 	/**
-	 * Return the dithering setting
-	 *
+	 * Return the dithering setting.
 	 * @return the current setting
 	 */
 	public boolean getDither() {
@@ -72,7 +68,6 @@ public class QuantizeFilter extends WholeImageFilter implements java.io.Serializ
 
 	/**
 	 * Set whether to use a serpentine pattern for return or not. This can reduce 'avalanche' artifacts in the output.
-	 *
 	 * @param serpentine true to use serpentine pattern
 	 */
 	public void setSerpentine(boolean serpentine) {
@@ -80,8 +75,7 @@ public class QuantizeFilter extends WholeImageFilter implements java.io.Serializ
 	}
 
 	/**
-	 * Return the serpentine setting
-	 *
+	 * Return the serpentine setting.
 	 * @return the current setting
 	 */
 	public boolean getSerpentine() {

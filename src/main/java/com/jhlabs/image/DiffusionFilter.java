@@ -36,7 +36,6 @@ public class DiffusionFilter extends WholeImageFilter {
 
 	/**
 	 * Set whether to use a serpentine pattern for return or not. This can reduce 'avalanche' artifacts in the output.
-	 *
 	 * @param serpentine true to use serpentine pattern
 	 */
 	public void setSerpentine(boolean serpentine) {
@@ -45,7 +44,6 @@ public class DiffusionFilter extends WholeImageFilter {
 
 	/**
 	 * Return the serpentine setting.
-	 *
 	 * @return the current setting
 	 */
 	public boolean getSerpentine() {

@@ -20,10 +20,19 @@ public class SCNoise implements Function1D, Function2D, Function3D {
 
 	@Override
 	public float evaluate(float x, float y) {
-		int i, j, k, h, n;
-		int ix, iy;
+		int i;
+		int j;
+		int k;
+		int h;
+		int n;
+		int ix;
+		int iy;
 		float sum = 0;
-		float fx, fy, dx, dy, distsq;
+		float fx;
+		float fy;
+		float dx;
+		float dy;
+		float distsq;
 
 		if (impulseTab == null) {
 			impulseTab = impulseTabInit(665);
@@ -57,10 +66,22 @@ public class SCNoise implements Function1D, Function2D, Function3D {
 
 	@Override
 	public float evaluate(float x, float y, float z) {
-		int i, j, k, h, n;
-		int ix, iy, iz;
+		int i;
+		int j;
+		int k;
+		int h;
+		int n;
+		int ix;
+		int iy;
+		int iz;
 		float sum = 0;
-		float fx, fy, fz, dx, dy, dz, distsq;
+		float fx;
+		float fy;
+		float fz;
+		float dx;
+		float dy;
+		float dz;
+		float distsq;
 
 		if (impulseTab == null) {
 			impulseTab = impulseTabInit(665);
@@ -116,9 +137,9 @@ public class SCNoise implements Function1D, Function2D, Function3D {
 			137, 214, 145, 93, 92, 100, 245, 0, 216, 186, 60, 83, 105, 97, 204, 52
 	};
 
-	private final static int TABSIZE = 256;
-	private final static int TABMASK = (TABSIZE - 1);
-	private final static int NIMPULSES = 3;
+	private static final int TABSIZE = 256;
+	private static final int TABMASK = (TABSIZE - 1);
+	private static final int NIMPULSES = 3;
 
 	private static float[] impulseTab;
 
@@ -130,8 +151,8 @@ public class SCNoise implements Function1D, Function2D, Function3D {
 		return ix;
 	}
 
-	private final static int SAMPRATE = 100;  /* table entries per unit distance */
-	private final static int NENTRIES = (4 * SAMPRATE + 1);
+	private static final int SAMPRATE = 100;  /* table entries per unit distance */
+	private static final int NENTRIES = (4 * SAMPRATE + 1);
 	private static float[] table;
 
 	public float catrom2(float d) {

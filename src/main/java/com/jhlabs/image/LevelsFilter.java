@@ -59,7 +59,8 @@ public class LevelsFilter extends WholeImageFilter {
 	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
 		Histogram histogram = new Histogram(inPixels, width, height, 0, width);
 
-		int i, j;
+		int i;
+		int j;
 
 		if (histogram.getNumSamples() > 0) {
 			float scale = 255.0f / histogram.getNumSamples();

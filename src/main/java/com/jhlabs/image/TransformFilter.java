@@ -12,9 +12,9 @@ import java.awt.Rectangle;
  */
 public abstract class TransformFilter extends WholeImageFilter {
 
-	public final static int ZERO = 0;
-	public final static int CLAMP = 1;
-	public final static int WRAP = 2;
+	public static final int ZERO = 0;
+	public static final int CLAMP = 1;
+	public static final int WRAP = 2;
 
 	protected int edgeAction = ZERO;
 
@@ -38,7 +38,10 @@ public abstract class TransformFilter extends WholeImageFilter {
 		int srcHeight = height;
 		int outWidth = transformedSpace.width;
 		int outHeight = transformedSpace.height;
-		int outX, outY, srcX, srcY;
+		int outX;
+		int outY;
+		int srcX;
+		int srcY;
 		int index = 0;
 		int[] outPixels = new int[outWidth * outHeight];
 

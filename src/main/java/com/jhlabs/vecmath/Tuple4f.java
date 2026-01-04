@@ -4,7 +4,10 @@ package com.jhlabs.vecmath;
  * Vector math package, converted to look similar to javax.vecmath.
  */
 public class Tuple4f {
-	public float x, y, z, w;
+	public float x;
+	public float y;
+	public float z;
+	public float w;
 
 	public Tuple4f() {
 		this(0, 0, 0, 0);

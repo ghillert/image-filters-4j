@@ -53,7 +53,6 @@ public class WarpFilter extends WholeImageFilter {
 
 	/**
 	 * Set the source warp grid.
-	 *
 	 * @param sourceGrid the source grid
 	 */
 	public void setSourceGrid(WarpGrid sourceGrid) {
@@ -62,7 +61,6 @@ public class WarpFilter extends WholeImageFilter {
 
 	/**
 	 * Get the source warp grid.
-	 *
 	 * @return the source grid
 	 */
 	public WarpGrid getSourceGrid() {
@@ -71,7 +69,6 @@ public class WarpFilter extends WholeImageFilter {
 
 	/**
 	 * Set the destination warp grid.
-	 *
 	 * @param destGrid the destination grid
 	 */
 	public void setDestGrid(WarpGrid destGrid) {
@@ -80,7 +77,6 @@ public class WarpFilter extends WholeImageFilter {
 
 	/**
 	 * Get the destination warp grid.
-	 *
 	 * @return the destination grid
 	 */
 	public WarpGrid getDestGrid() {

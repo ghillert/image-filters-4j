@@ -12,10 +12,10 @@ public class SmearFilter extends WholeImageFilter implements java.io.Serializabl
 
 	static final long serialVersionUID = 6491871753122667752L;
 
-	public final static int CROSSES = 0;
-	public final static int LINES = 1;
-	public final static int CIRCLES = 2;
-	public final static int SQUARES = 3;
+	public static final int CROSSES = 0;
+	public static final int LINES = 1;
+	public static final int CIRCLES = 2;
+	public static final int SQUARES = 3;
 
 	private final Colormap colormap = new LinearColormap();
 	private float angle = 0;
@@ -161,7 +161,13 @@ public class SmearFilter extends WholeImageFilter implements java.io.Serializabl
 					int y0 = sy - dy;
 					int x1 = sx + dx;
 					int y1 = sy + dy;
-					int x, y, d, incrE, incrNE, ddx, ddy;
+					int x;
+					int y;
+					int d;
+					int incrE;
+					int incrNE;
+					int ddx;
+					int ddy;
 
 					if (x1 < x0) {
 						ddx = -1;
@@ -254,51 +260,51 @@ public class SmearFilter extends WholeImageFilter implements java.io.Serializabl
 					}
 				}
 		}
-/*
-		//Sketch
-		int Low = 0, High = 255;
-		int i1 = height;
-		int j1 = width;
-		int aan[][] = new int[i1][j1];
-		float aaf[][] = new float[i1][j1];
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				int rgb = inPixels[y*width+x];
-				int r = (rgb >> 16) & 0xff;
-				int g = (rgb >> 8) & 0xff;
-				int b = rgb & 0xff;
-				aan[y][x] = r + g + b;
-			}
-		}
-		for (int y = 0; y < i1; y++) {
-			for (int x = 0; x < j1; x++) {
-				int j2 = (aan[(y - 1 + i1) % i1][(x + 1 + j1) % j1] + aan[y][(x + 1 + j1) % j1] * 2 + aan[(y + 1 + i1) % i1][(x + 1 + j1) % j1] - aan[(y - 1 + i1) % i1][(x - 1 + j1) % j1] - aan[y][(x - 1 + j1) % j1] * 2 - aan[(y + 1 + i1) % i1][(x - 1 + j1) % j1]) / 8;
-				int k2 = (aan[(y + 1 + i1) % i1][(x - 1 + j1) % j1] + aan[(y + 1 + i1) % i1][x] * 2 + aan[(y + 1 + i1) % i1][(x + 1 + j1) % j1] - aan[(y - 1 + i1) % i1][(x - 1 + j1) % j1] - aan[(y - 1 + i1) % i1][x] * 2 - aan[(y - 1 + i1) % i1][(x + 1 + j1) % j1]) / 8;
-				aaf[y][x] = -((float)Math.sqrt(Math.sqrt((float)(j2 * j2 + k2 * k2))));
-			}
-		}
-		float f1 = aaf[0][0];
-		float f2 = aaf[0][0];
-		for (int y = 0; y < i1; y++) {
-			for (int x = 0; x < j1; x++) {
-				if (aaf[y][x] < f1)
-					f1 = aaf[y][x];
-				if (aaf[y][x] > f2)
-					f2 = aaf[y][x];
-			}
-		}
-		for (int y = 0; y < i1; y++) {
-			for (int x = 0; x < j1; x++) {
-				int a = outPixels[y*width+x] & 0xff000000;
-				if (x == 0 || x == j1 - 1 || y == 0 || y == i1 - 1)
-					outPixels[y*width+x] = a | 0xffffff;
-				else {
-					int j4 = Low + (int)((aaf[y][x] - f1) * (High - Low) / (f2 - f1));
-					outPixels[y*width+x] = a | (j4 << 16) | (j4 << 8) | j4;
+		/*
+				//Sketch
+				int Low = 0, High = 255;
+				int i1 = height;
+				int j1 = width;
+				int aan[][] = new int[i1][j1];
+				float aaf[][] = new float[i1][j1];
+				for (int y = 0; y < height; y++) {
+					for (int x = 0; x < width; x++) {
+						int rgb = inPixels[y*width+x];
+						int r = (rgb >> 16) & 0xff;
+						int g = (rgb >> 8) & 0xff;
+						int b = rgb & 0xff;
+						aan[y][x] = r + g + b;
+					}
 				}
-			}
-		}
-*/
+				for (int y = 0; y < i1; y++) {
+					for (int x = 0; x < j1; x++) {
+						int j2 = (aan[(y - 1 + i1) % i1][(x + 1 + j1) % j1] + aan[y][(x + 1 + j1) % j1] * 2 + aan[(y + 1 + i1) % i1][(x + 1 + j1) % j1] - aan[(y - 1 + i1) % i1][(x - 1 + j1) % j1] - aan[y][(x - 1 + j1) % j1] * 2 - aan[(y + 1 + i1) % i1][(x - 1 + j1) % j1]) / 8;
+						int k2 = (aan[(y + 1 + i1) % i1][(x - 1 + j1) % j1] + aan[(y + 1 + i1) % i1][x] * 2 + aan[(y + 1 + i1) % i1][(x + 1 + j1) % j1] - aan[(y - 1 + i1) % i1][(x - 1 + j1) % j1] - aan[(y - 1 + i1) % i1][x] * 2 - aan[(y - 1 + i1) % i1][(x + 1 + j1) % j1]) / 8;
+						aaf[y][x] = -((float)Math.sqrt(Math.sqrt((float)(j2 * j2 + k2 * k2))));
+					}
+				}
+				float f1 = aaf[0][0];
+				float f2 = aaf[0][0];
+				for (int y = 0; y < i1; y++) {
+					for (int x = 0; x < j1; x++) {
+						if (aaf[y][x] < f1)
+							f1 = aaf[y][x];
+						if (aaf[y][x] > f2)
+							f2 = aaf[y][x];
+					}
+				}
+				for (int y = 0; y < i1; y++) {
+					for (int x = 0; x < j1; x++) {
+						int a = outPixels[y*width+x] & 0xff000000;
+						if (x == 0 || x == j1 - 1 || y == 0 || y == i1 - 1)
+							outPixels[y*width+x] = a | 0xffffff;
+						else {
+							int j4 = Low + (int)((aaf[y][x] - f1) * (High - Low) / (f2 - f1));
+							outPixels[y*width+x] = a | (j4 << 16) | (j4 << 8) | j4;
+						}
+					}
+				}
+		*/
 
 		return outPixels;
 	}

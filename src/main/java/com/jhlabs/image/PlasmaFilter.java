@@ -109,10 +109,16 @@ public class PlasmaFilter extends WholeImageFilter implements java.io.Serializab
 	}
 
 	private boolean doPixel(int x1, int y1, int x2, int y2, int[] pixels, int stride, int depth, int scale) {
-		int mx, my;
+		int mx;
+		int my;
 
 		if (depth == 0) {
-			int ml, mr, mt, mb, mm, t;
+			int ml;
+			int mr;
+			int mt;
+			int mb;
+			int mm;
+			int t;
 
 			int tl = getPixel(x1, y1, pixels, stride);
 			int bl = getPixel(x1, y2, pixels, stride);

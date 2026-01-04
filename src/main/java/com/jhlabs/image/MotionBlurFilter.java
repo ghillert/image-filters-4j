@@ -16,9 +16,9 @@ import java.awt.image.BufferedImage;
  */
 public class MotionBlurFilter extends AbstractBufferedImageOp {
 
-	public final static int LINEAR = 0;
-	public final static int RADIAL = 1;
-	public final static int ZOOM = 2;
+	public static final int LINEAR = 0;
+	public static final int RADIAL = 1;
+	public static final int ZOOM = 2;
 
 	private float angle = 0.0f;
 	private final float falloff = 1.0f;
@@ -101,10 +101,14 @@ public class MotionBlurFilter extends AbstractBufferedImageOp {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				int a = 0, r = 0, g = 0, b = 0;
+				int a = 0;
+				int r = 0;
+				int g = 0;
+				int b = 0;
 				int count = 0;
 				for (int i = 0; i < repetitions; i++) {
-					int newX = x, newY = y;
+					int newX = x;
+					int newY = y;
 					float f = (float) i / repetitions;
 
 					p.x = x;

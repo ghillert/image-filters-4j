@@ -25,8 +25,10 @@ public class OffsetFilter extends TransformFilter implements java.io.Serializabl
 
 	static final long serialVersionUID = 8123120922961090736L;
 
-	private int width, height;
-	private int xOffset, yOffset;
+	private int width;
+	private int height;
+	private int xOffset;
+	private int yOffset;
 	private boolean wrap;
 
 	public OffsetFilter() {

@@ -6,14 +6,14 @@ package com.jhlabs.math;
 
 public class MathFunction1D implements Function1D {
 
-	public final static int SIN = 1;
-	public final static int COS = 2;
-	public final static int TAN = 3;
-	public final static int SQRT = 4;
-	public final static int ASIN = -1;
-	public final static int ACOS = -2;
-	public final static int ATAN = -3;
-	public final static int SQR = -4;
+	public static final int SIN = 1;
+	public static final int COS = 2;
+	public static final int TAN = 3;
+	public static final int SQRT = 4;
+	public static final int ASIN = -1;
+	public static final int ACOS = -2;
+	public static final int ATAN = -3;
+	public static final int SQR = -4;
 
 	private final int operation;
 

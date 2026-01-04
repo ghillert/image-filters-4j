@@ -58,7 +58,8 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 	private Function2D bumpFunction;
 	private Image environmentMap;
 	private int[] envPixels;
-	private int envWidth = 1, envHeight = 1;
+	private int envWidth = 1;
+	private int envHeight = 1;
 	private final Vector3f l;
 	private final Vector3f v;
 	private final Vector3f n;
@@ -331,9 +332,9 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 						setFromRGB(diffuseColor, this.material.diffuseColor);
 					}
 					if (reflectivity != 0 && this.environmentMap != null) {
-						//FIXME-too much normalizing going on here
+						// FIXME-too much normalizing going on here
 						this.tmpv2.set(viewpoint);
-						this.tmpv2.z = 100.0f;//FIXME
+						this.tmpv2.z = 100.0f; //FIXME
 						this.tmpv2.sub(position);
 						this.tmpv2.normalize();
 						this.tmpv.set(normal);
@@ -344,7 +345,7 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 						this.tmpv.sub(this.v);
 
 						this.tmpv.normalize();
-						setFromRGB(envColor, getEnvironmentMap(this.tmpv, inPixels, width, height));//FIXME-interpolate()
+						setFromRGB(envColor, getEnvironmentMap(this.tmpv, inPixels, width, height)); //FIXME-interpolate()
 						diffuseColor.x = reflectivity * envColor.x + areflectivity * diffuseColor.x;
 						diffuseColor.y = reflectivity * envColor.y + areflectivity * diffuseColor.y;
 						diffuseColor.z = reflectivity * envColor.z + areflectivity * diffuseColor.z;
@@ -440,7 +441,8 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 		if (this.environmentMap != null) {
 			float angle = (float) Math.acos(-normal.y);
 
-			float x, y;
+			float x;
+			float y;
 			y = angle / ImageMath.PI;
 
 			if (y == 0.0f || y == 1.0f) {
@@ -568,7 +570,7 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 					float y2 = dy * dy;
 					distance = (b2 - (b2 * x2) / a2) - y2;
 					float radius = (float) Math.sqrt(x2 + y2);
-					distance = 0.5f * distance / ((a + b) / 2);//FIXME
+					distance = 0.5f * distance / ((a + b) / 2); // FIXME
 					if (radius != 0) {
 						normal.x = dx / radius;
 						normal.y = dy / radius;
@@ -621,16 +623,16 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 			normal.z = dx;
 			normal.x *= dz;
 			normal.y *= dz;
-/*
-			if (dz == 0)
-				normal.z = 1e10;
-			else {
-				float f = dz/(1.0/margin);
-				normal.x /= f;
-				normal.y /= f;
-				normal.z *= f;
-			}
-*/
+			/*
+						if (dz == 0)
+							normal.z = 1e10;
+						else {
+							float f = dz/(1.0/margin);
+							normal.x /= f;
+							normal.y /= f;
+							normal.z *= f;
+						}
+			*/
 
 			normal.normalize();
 		}
@@ -710,7 +712,8 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 		float azimuth;
 		float elevation;
 		float focus = 0.5f;
-		float centreX = 0.5f, centreY = 0.5f;
+		float centreX = 0.5f;
+		float centreY = 0.5f;
 		float coneAngle = ImageMath.PI / 6;
 		float cosConeAngle;
 		float distance = 100.0f;

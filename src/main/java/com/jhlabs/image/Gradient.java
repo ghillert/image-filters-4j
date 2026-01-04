@@ -289,7 +289,7 @@ public class Gradient extends ArrayColormap implements Cloneable, Serializable {
 							float h = ImageMath.lerp(t, hsb1[0], hsb2[0]) % (ImageMath.TWO_PI);
 							float s = ImageMath.lerp(t, hsb1[1], hsb2[1]);
 							float b = ImageMath.lerp(t, hsb1[2], hsb2[2]);
-							this.map[j] = 0xff000000 | Color.HSBtoRGB(h, s, b);//FIXME-alpha
+							this.map[j] = 0xff000000 | Color.HSBtoRGB(h, s, b); //FIXME-alpha
 							break;
 					}
 //					}

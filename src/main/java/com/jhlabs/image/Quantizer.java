@@ -15,14 +15,12 @@ package com.jhlabs.image;
 public interface Quantizer {
 	/**
 	 * Initialize the quantizer. This should be called before adding any pixels.
-	 *
 	 * @param numColors the number of colors we're quantizing to.
 	 */
 	void setup(int numColors);
 
 	/**
 	 * Add pixels to the quantizer.
-	 *
 	 * @param pixels the array of ARGB pixels
 	 * @param offset the offset into the array
 	 * @param count  the count of pixels

@@ -33,7 +33,6 @@ public class OpacityFilter extends PointFilter implements java.io.Serializable {
 
 	/**
 	 * Set the opacity.
-	 *
 	 * @param opacity the opacity (alpha) in the range 0..255
 	 */
 	public void setOpacity(int opacity) {
@@ -43,7 +42,6 @@ public class OpacityFilter extends PointFilter implements java.io.Serializable {
 
 	/**
 	 * Get the opacity setting.
-	 *
 	 * @return the opacity
 	 */
 	public int getOpacity() {

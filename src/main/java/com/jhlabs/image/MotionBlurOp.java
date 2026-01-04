@@ -22,7 +22,8 @@ import java.awt.image.BufferedImage;
  * @author Gunnar Hillert
  */
 public class MotionBlurOp extends AbstractBufferedImageOp {
-	private float centreX = 0.5f, centreY = 0.5f;
+	private float centreX = 0.5f;
+	private float centreY = 0.5f;
 	private float distance;
 	private float angle;
 	private float rotation;

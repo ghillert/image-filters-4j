@@ -15,8 +15,10 @@ public class SparkleFilter extends PointFilter implements java.io.Serializable {
 	private int amount = 50;
 	private int color = 0xffffffff;
 	private int randomness = 25;
-	private int width, height;
-	private int centreX, centreY;
+	private int width;
+	private int height;
+	private int centreX;
+	private int centreY;
 	private final long seed = 371;
 	private float[] rayLengths;
 	private final Random randomNumbers = new Random();

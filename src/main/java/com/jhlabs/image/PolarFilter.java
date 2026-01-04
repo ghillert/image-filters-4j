@@ -33,13 +33,15 @@ import java.awt.Rectangle;
  */
 public class PolarFilter extends TransformFilter {
 
-	public final static int RECT_TO_POLAR = 0;
-	public final static int POLAR_TO_RECT = 1;
-	public final static int INVERT_IN_CIRCLE = 2;
+	public static final int RECT_TO_POLAR = 0;
+	public static final int POLAR_TO_RECT = 1;
+	public static final int INVERT_IN_CIRCLE = 2;
 
 	private int type;
-	private float width, height;
-	private float centreX, centreY;
+	private float width;
+	private float height;
+	private float centreX;
+	private float centreY;
 	private float radius;
 
 	public PolarFilter() {
@@ -75,8 +77,11 @@ public class PolarFilter extends TransformFilter {
 
 	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		float theta, t;
-		float m, xmax, ymax;
+		float theta;
+		float t;
+		float m;
+		float xmax;
+		float ymax;
 		float r = 0;
 
 		switch (this.type) {

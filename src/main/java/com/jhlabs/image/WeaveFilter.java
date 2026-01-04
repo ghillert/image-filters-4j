@@ -118,9 +118,12 @@ public class WeaveFilter extends PointFilter implements java.io.Serializable {
 		int iy = (int) (y / (this.yWidth + this.yGap));
 		boolean inX = nx < this.xWidth;
 		boolean inY = ny < this.yWidth;
-		float dX, dY;
-		float cX, cY;
-		int lrgbX, lrgbY;
+		float dX;
+		float dY;
+		float cX;
+		float cY;
+		int lrgbX;
+		int lrgbY;
 
 		if (this.roundThreads) {
 			dX = Math.abs(this.xWidth / 2 - nx) / this.xWidth / 2;

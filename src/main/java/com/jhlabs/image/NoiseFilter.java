@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class NoiseFilter extends PointFilter {
 
-	public final static int GAUSSIAN = 0;
-	public final static int UNIFORM = 1;
+	public static final int GAUSSIAN = 0;
+	public static final int UNIFORM = 1;
 
 	private int amount = 25;
 	private int distribution = UNIFORM;
