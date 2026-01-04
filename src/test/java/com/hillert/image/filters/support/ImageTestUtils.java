@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2025 Gunnar Hillert
+ * Copyright (c) 2026 Gunnar Hillert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +22,24 @@
  * SOFTWARE.
  *
  */
-package com.hillert.imageFilters.examples;
+package com.hillert.image.filters.support;
 
-import javax.imageio.ImageIO;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
 /**
+ * Utility class for image-related test operations such as loading images from resources.
+ *
  * @author Gunnar Hillert
  */
 public final class ImageTestUtils {
@@ -55,5 +65,31 @@ public final class ImageTestUtils {
 		catch (IOException ex) {
 			throw new IllegalStateException("Unable to read image at " + resourcePath, ex);
 		}
+	}
+
+	/**
+	 * Displays two images side by side in a Swing UI with a specified title.
+	 * @param originalImage the original image to display
+	 * @param filteredImage the filtered image to display
+	 * @param title the title for the Swing UI window
+	 */
+	public static void showSwingUI(
+			BufferedImage originalImage,
+			BufferedImage filteredImage,
+			String title) {
+
+		SwingUtilities.invokeLater(() -> {
+			final JPanel panel = new JPanel(new GridLayout(1, 2, 16, 0));
+			panel.add(new JLabel(new ImageIcon(originalImage)));
+			panel.add(new JLabel(new ImageIcon(filteredImage)));
+
+			final JFrame frame = new JFrame(title);
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setLayout(new BorderLayout());
+			frame.add(panel, BorderLayout.CENTER);
+			frame.pack();
+			frame.setLocationRelativeTo(null);
+			frame.setVisible(true);
+		});
 	}
 }

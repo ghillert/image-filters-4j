@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2025 Gunnar Hillert
+ * Copyright (c) 2026 Gunnar Hillert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,13 @@
  * SOFTWARE.
  *
  */
-package com.hillert.imageFilters.examples;
+package com.hillert.image.filters;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 
+import com.hillert.image.filters.support.ImageTestUtils;
 import com.jhlabs.image.SepiaFilter;
 import org.junit.jupiter.api.Test;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Gunnar Hillert
  */
-final class SepiaFilterExamplesTests {
+final class SepiaFilterTests {
 
 	private final SepiaFilter filter = new SepiaFilter();
 
@@ -54,7 +48,7 @@ final class SepiaFilterExamplesTests {
 	@Test
 	void appliesSepiaToneToSampleImage() {
 		final BufferedImage original = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
-		final BufferedImage result = filter.filter(original, null);
+		final BufferedImage result = this.filter.filter(original, null);
 
 		assertThat(result.getWidth()).isEqualTo(original.getWidth());
 		assertThat(result.getHeight()).isEqualTo(original.getHeight());
@@ -101,21 +95,9 @@ final class SepiaFilterExamplesTests {
 	 * @param args command-line arguments (not used in this program)
 	 */
 	public static void main(final String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			final BufferedImage original = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
-			final BufferedImage grayscaleImage = new SepiaFilter().filter(original, null);
-
-			final JPanel panel = new JPanel(new GridLayout(1, 2, 16, 0));
-			panel.add(new JLabel(new ImageIcon(original)));
-			panel.add(new JLabel(new ImageIcon(grayscaleImage)));
-
-			final JFrame frame = new JFrame("Sepia Filter Preview");
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setLayout(new BorderLayout());
-			frame.add(panel, BorderLayout.CENTER);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-		});
+			final BufferedImage originalImage = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
+			final BufferedImage sepiaFilterImage = new SepiaFilter().filter(originalImage, null);
+			ImageTestUtils.showSwingUI(
+					originalImage, sepiaFilterImage, "Sepia Filter Preview");
 	}
 }

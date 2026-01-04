@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2025 Gunnar Hillert
+ * Copyright (c) 2026 Gunnar Hillert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,24 +22,17 @@
  * SOFTWARE.
  *
  */
-package com.hillert.imageFilters.examples;
+package com.hillert.image.filters;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 
+import com.hillert.image.filters.support.ImageTestUtils;
 import org.junit.jupiter.api.Test;
 
 import com.jhlabs.image.GaussianFilter;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 /**
  * A set of test cases for validating the functionality of the {@link GaussianFilter} class.
@@ -60,7 +53,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Gunnar Hillert
  */
-final class GaussianFilterExamplesTests {
+final class GaussianFilterTests {
 
 	/**
 	 * Verifies that applying the {@link GaussianFilter} to a BufferedImage with a solid color
@@ -86,28 +79,17 @@ final class GaussianFilterExamplesTests {
 	}
 
 	/**
-	 * Entry point for the program, which demonstrates the application of a Gaussian blur
-	 * filter on an image and displays the original and processed images side by side.
-	 *
+	 * Entry point for the program, which demonstrates the application of a {@link GaussianFilter} on an image and
+	 * displays the original and processed images side by side.
 	 * @param args command-line arguments (not used in this program)
 	 */
 	public static void main(final String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			final BufferedImage original = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
-			final BufferedImage blurred = new GaussianFilter(5.0f).filter(original, null);
-
-			final JPanel panel = new JPanel(new GridLayout(1, 2, 16, 0));
-			panel.add(new JLabel(new ImageIcon(original)));
-			panel.add(new JLabel(new ImageIcon(blurred)));
-
-			final JFrame frame = new JFrame("Gaussian Filter Preview");
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setLayout(new BorderLayout());
-			frame.add(panel, BorderLayout.CENTER);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-		});
+		final BufferedImage originalImage = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
+		final GaussianFilter gaussianFilter = new GaussianFilter();
+		gaussianFilter.setRadius(10.0f);
+		final BufferedImage gaussianFilterImage = gaussianFilter.filter(originalImage, null);
+		ImageTestUtils.showSwingUI(
+				originalImage, gaussianFilterImage, "Gaussian Filter Preview");
 	}
 }
 

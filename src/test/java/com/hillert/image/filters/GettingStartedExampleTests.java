@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2025 Gunnar Hillert
+ * Copyright (c) 2026 Gunnar Hillert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
  * SOFTWARE.
  *
  */
-package com.hillert.imageFilters.examples;
+package com.hillert.image.filters;
 
 import com.jhlabs.image.GrayscaleFilter;
 import org.junit.jupiter.api.Test;

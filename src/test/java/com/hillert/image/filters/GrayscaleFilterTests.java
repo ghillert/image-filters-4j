@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2025 Gunnar Hillert
+ * Copyright (c) 2026 Gunnar Hillert
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,19 +22,17 @@
  * SOFTWARE.
  *
  */
-package com.hillert.imageFilters.examples;
+package com.hillert.image.filters;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
+import com.hillert.image.filters.support.ImageTestUtils;
+import com.jhlabs.image.GrayscaleFilter;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
-import com.jhlabs.image.GaussianFilter;
-import org.junit.jupiter.api.Test;
-
-import com.jhlabs.image.GrayscaleFilter;
-
-import javax.swing.*;
 
 /**
  * Integration-style tests that verify the {@link GrayscaleFilter} accurately
@@ -43,7 +41,7 @@ import javax.swing.*;
  *
  * @author Gunnar Hillert
  */
-final class GrayscaleFilterExamplesTests {
+final class GrayscaleFilterTests {
 
 	private final GrayscaleFilter filter = new GrayscaleFilter();
 
@@ -57,7 +55,7 @@ final class GrayscaleFilterExamplesTests {
 		final int original = new Color(40, 100, 200, 255).getRGB();
 		source.setRGB(0, 0, original);
 
-		final int converted = filter.filter(source, null).getRGB(0, 0);
+		final int converted = this.filter.filter(source, null).getRGB(0, 0);
 		final int expectedLuma = computeExpectedLuma(original);
 
 		assertThat(extractRed(converted)).isEqualTo(expectedLuma);
@@ -75,7 +73,7 @@ final class GrayscaleFilterExamplesTests {
 		final int original = new Color(60, 80, 90, 0x55).getRGB();
 		source.setRGB(0, 0, original);
 
-		final int converted = filter.filter(source, null).getRGB(0, 0);
+		final int converted = this.filter.filter(source, null).getRGB(0, 0);
 
 		assertThat(extractAlpha(converted)).isEqualTo(0x55);
 	}
@@ -90,7 +88,7 @@ final class GrayscaleFilterExamplesTests {
 		final int gray = new Color(120, 120, 120, 255).getRGB();
 		fillImage(source, gray);
 
-		final BufferedImage result = filter.filter(source, null);
+		final BufferedImage result = this.filter.filter(source, null);
 
 		for (int y = 0; y < source.getHeight(); y++) {
 			for (int x = 0; x < source.getWidth(); x++) {
@@ -131,27 +129,15 @@ final class GrayscaleFilterExamplesTests {
 	}
 
 	/**
-	 * Entry point for the program, which demonstrates the application of a Gaussian blur
-	 * filter on an image and displays the original and processed images side by side.
+	 * Entry point for the program, which demonstrates the application of a {@link GrayscaleFilter}
+	 * on an image and displays the original and processed images side by side.
 	 *
 	 * @param args command-line arguments (not used in this program)
 	 */
 	public static void main(final String[] args) {
-		SwingUtilities.invokeLater(() -> {
-			final BufferedImage original = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
-			final BufferedImage grayscaleImage = new GrayscaleFilter().filter(original, null);
-
-			final JPanel panel = new JPanel(new GridLayout(1, 2, 16, 0));
-			panel.add(new JLabel(new ImageIcon(original)));
-			panel.add(new JLabel(new ImageIcon(grayscaleImage)));
-
-			final JFrame frame = new JFrame("Grayscale Filter Preview");
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setLayout(new BorderLayout());
-			frame.add(panel, BorderLayout.CENTER);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-		});
+		final BufferedImage originalImage = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
+		final BufferedImage grayscaleFilterImage = new GrayscaleFilter().filter(originalImage, null);
+		ImageTestUtils.showSwingUI(
+				originalImage, grayscaleFilterImage, "Grayscale Filter Preview");
 	}
 }
