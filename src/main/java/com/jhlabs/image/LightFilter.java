@@ -19,6 +19,23 @@ interface ElevationMap {
 	int getHeightAt(int x, int y);
 }
 
+/**
+ * The LightFilter class provides a filter for simulating advanced lighting effects such as bump mapping,
+ * shading, and reflection using various lighting models and sources. This class is a part of the image
+ * processing library and extends the {@link WholeImageFilter} base class, enabling image-wide filter operations.
+ * <p>
+ * The filter allows configuration of bump mapping, material properties, lighting sources, and environment
+ * maps. It supports a range of lighting calculations, including diffuse and specular shading, with the
+ * ability to handle multiple light sources.
+ * <p>
+ * Features include:
+ * - Support for different bump mapping methods, including using images or predefined functions.
+ * - Control over lighting parameters such as view distance and material properties.
+ * - Integration of an environment map for reflection and advanced shading.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class LightFilter extends WholeImageFilter implements Serializable {
 
 	public static final int COLORS_FROM_IMAGE = 0;

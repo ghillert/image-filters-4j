@@ -12,6 +12,7 @@ import java.awt.image.Kernel;
  * which simply creates a kernel with a Gaussian distribution for blurring.
  *
  * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class GaussianFilter extends ConvolveFilter {
 

@@ -4,6 +4,12 @@
 
 package com.jhlabs.image;
 
+/**
+ * A filter that applies an oval shape to an image, setting pixels outside the oval to transparent.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class OvalFilter extends PointFilter {
 
 	private float centreX = 0;

@@ -6,6 +6,31 @@ package com.jhlabs.image;
 
 import java.awt.*;
 
+/**
+ * A filter that applies polar transformations to an image. This can transform
+ * Cartesian coordinates to polar coordinates, polar coordinates back to Cartesian,
+ * or perform a radial inversion effect within a circle.
+ * <p>
+ * The following types of transformations are supported:
+ * <ul>
+ * <li>RECT_TO_POLAR: Converts Cartesian coordinates to polar coordinates.
+ * <li>POLAR_TO_RECT: Converts polar coordinates to Cartesian coordinates.
+ * <li>INVERT_IN_CIRCLE: Inverts the image inside a circular region.
+ * </ul>
+ * <p>
+ * The filter modifies pixel mappings based on the selected transformation type.
+ * <p>
+ * Transformations can be customized using methods to set the transformation type.
+ * Edge cases outside the defined image space are handled by the edgeAction property
+ * inherited from the superclass. The default behavior is to clamp pixel values to
+ * maintain image boundaries.
+ * <p>
+ * The center of transformation is calculated based on the dimensions of the image,
+ * and the radius is derived as the maximum of the half-width or half-height of the image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class PolarFilter extends TransformFilter {
 
 	public final static int RECT_TO_POLAR = 0;

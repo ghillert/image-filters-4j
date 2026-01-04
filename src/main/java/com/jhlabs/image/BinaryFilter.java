@@ -7,6 +7,12 @@ package com.jhlabs.image;
 import com.jhlabs.math.BinaryFunction;
 import com.jhlabs.math.BlackFunction;
 
+/**
+ * A base class for filters which convert an image to black and white.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public abstract class BinaryFilter extends WholeImageFilter {
 
 	protected int newColor = 0xff000000;

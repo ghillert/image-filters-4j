@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
  * A filter which adds Gaussian blur to an image, producing a glowing effect.
  *
  * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class GlowFilter extends GaussianFilter {
 

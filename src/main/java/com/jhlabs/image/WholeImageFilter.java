@@ -4,7 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
@@ -12,6 +12,9 @@ import java.awt.image.WritableRaster;
 /**
  * A filter which acts as a superclass for filters which need to have the whole image in memory
  * to do their stuff.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public abstract class WholeImageFilter extends AbstractBufferedImageOp implements java.io.Serializable {
 
@@ -19,7 +22,7 @@ public abstract class WholeImageFilter extends AbstractBufferedImageOp implement
 	protected Rectangle originalSpace;
 
 	/**
-	 * Construct a WholeImageFilter
+	 * Construct a WholeImageFilter.
 	 */
 	public WholeImageFilter() {
 	}

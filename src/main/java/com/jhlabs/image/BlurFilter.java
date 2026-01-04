@@ -6,6 +6,7 @@ package com.jhlabs.image;
 
 /**
  * A simple blur filter. You should probably use BoxBlurFilter instead.
+ *
  * @author Jerry Huxtable
  * @author Gunnar Hillert
  */

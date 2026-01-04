@@ -7,15 +7,15 @@ package com.jhlabs.math;
 import com.jhlabs.image.ImageMath;
 import com.jhlabs.image.PixelUtils;
 
-import java.awt.*;
+import java.awt.Image;
 import java.awt.image.ImageObserver;
 import java.awt.image.PixelGrabber;
 
 public class ImageFunction2D implements Function2D {
 
-	public final static int ZERO = 0;
-	public final static int CLAMP = 1;
-	public final static int WRAP = 2;
+	public static final int ZERO = 0;
+	public static final int CLAMP = 1;
+	public static final int WRAP = 2;
 
 	protected int[] pixels;
 	protected int width;

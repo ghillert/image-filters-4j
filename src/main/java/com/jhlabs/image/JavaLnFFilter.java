@@ -5,7 +5,10 @@
 package com.jhlabs.image;
 
 /**
- * A filter which produces  the stipple effect for Swing icons specified in the Java Look and Feel Guidelines.
+ * A filter which produces the stipple effect for Swing icons specified in the Java Look and Feel Guidelines.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class JavaLnFFilter extends PointFilter {
 

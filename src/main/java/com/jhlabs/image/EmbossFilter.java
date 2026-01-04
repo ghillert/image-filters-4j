@@ -4,14 +4,17 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 /**
  * A class to emboss an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class EmbossFilter extends WholeImageFilter {
 
-	private final static float pixelScale = 255.9f;
+	private static final float pixelScale = 255.9f;
 
 	private float azimuth = 135.0f * ImageMath.PI / 180.0f, elevation = 30.0f * ImageMath.PI / 180f;
 	private boolean emboss = false;

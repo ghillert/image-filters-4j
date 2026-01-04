@@ -103,7 +103,7 @@ public class BorderFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Get the bottom border.
-	 * @return
+	 * @return the bottom border
 	 */
 	public int getBottomBorder() {
 		return this.bottomBorder;

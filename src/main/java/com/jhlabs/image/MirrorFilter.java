@@ -7,6 +7,17 @@ package com.jhlabs.image;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * The {@code MirrorFilter} class is a graphical image filter that creates a mirror effect
+ * on an input image. The mirror effect can be customized by adjusting several properties
+ * such as the reflection opacity, rotation, gap, and angle of the mirrored section.
+ * <p>
+ * This class extends {@code AbstractBufferedImageOp}, which provides convenience implementations
+ * for some common BufferedImageOp methods.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class MirrorFilter extends AbstractBufferedImageOp {
 	private float opacity = 1.0f;
 	private float centreY = 0.5f;

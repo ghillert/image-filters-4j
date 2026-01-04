@@ -4,10 +4,29 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.awt.image.PixelGrabber;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 
+/**
+ * Utility class for performing common image operations.
+ * This class provides methods for tasks such as image creation,
+ * image cloning, subimage extraction, and drawing utility methods.
+ * All methods in this class are static.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public abstract class ImageUtils {
 
 	public final static int SELECTED = 0xff000000;

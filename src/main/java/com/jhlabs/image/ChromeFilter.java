@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * A filter which simulates chrome.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class ChromeFilter extends LightFilter {
 	private float amount = 0.5f;

@@ -6,6 +6,21 @@ package com.jhlabs.image;
 
 import java.awt.*;
 
+/**
+ * The MaximumFilter class is used to apply a maximum filter effect to an image.
+ * This filter processes each pixel of an image by comparing its value to those
+ * of its neighboring pixels within a 3x3 grid and retains the maximum value
+ * among them. It can be used to amplify bright regions in images or reduce
+ * noise.
+ * <p>
+ * The filter operation is implemented in the {@code filterPixels} method, which
+ * manipulates the image data at the pixel level.
+ * <p>
+ * This class extends {@code WholeImageFilter}, meaning it requires the entire
+ * image to be in memory for processing.
+ *
+ ElevationMap
+ */
 public class MaximumFilter extends WholeImageFilter {
 
 	public MaximumFilter() {

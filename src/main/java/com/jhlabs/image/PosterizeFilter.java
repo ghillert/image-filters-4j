@@ -4,6 +4,21 @@
 
 package com.jhlabs.image;
 
+/**
+ * The PosterizeFilter class is a type of image filter that reduces the number of
+ * distinct colors in an image by dividing the color range of each channel into
+ * a specified number of levels. This process is commonly referred to as posterization.
+ * <p>
+ * The filter works by mapping input pixel values to specific levels, effectively
+ * grouping nearby color values together to create a simplified and stylized output.
+ * The number of levels is configurable through the setNumLevels method.
+ * <p>
+ * Extends the {@link PointFilter} class to provide functionality for applying the
+ * filter on a per-pixel basis.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class PosterizeFilter extends PointFilter implements java.io.Serializable {
 
 	private int numLevels;

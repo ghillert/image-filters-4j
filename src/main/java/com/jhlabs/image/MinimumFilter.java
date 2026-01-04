@@ -6,6 +6,18 @@ package com.jhlabs.image;
 
 import java.awt.*;
 
+/**
+ * The MinimumFilter class applies a minimum value filter to an image. This filter processes each
+ * pixel in the image by replacing it with the minimum value of its neighboring pixels
+ * (including itself) within a 3x3 grid. The filter is designed to reduce intensity
+ * values in the image, effectively darkening regions or removing higher intensity noise.
+ * <p>
+ * This class extends the {@link WholeImageFilter}, which provides the necessary framework to
+ * process an entire image by keeping all pixels in memory.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class MinimumFilter extends WholeImageFilter {
 
 	static final long serialVersionUID = 1925266438370819998L;

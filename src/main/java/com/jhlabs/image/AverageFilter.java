@@ -8,6 +8,7 @@ package com.jhlabs.image;
  * A filter which averages the 3x3 neighbourhood of each pixel, providing a simple blur.
  *
  * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class AverageFilter extends ConvolveFilter {
 

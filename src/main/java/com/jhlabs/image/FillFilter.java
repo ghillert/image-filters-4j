@@ -7,6 +7,9 @@ package com.jhlabs.image;
 /**
  * A filter which fills an image with a given color. Normally you would just call Graphics.fillRect but it can sometimes be useful
  * to go via a filter to fit in with an existing API.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class FillFilter extends PointFilter {
 

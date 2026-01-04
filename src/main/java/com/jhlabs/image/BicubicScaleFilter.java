@@ -11,6 +11,7 @@ import java.awt.image.ColorModel;
 
 /**
  * Scales an image using bi-cubic interpolation, which can't be done with AffineTransformOp.
+ *
  * @author Jerry Huxtable
  * @author Gunnar Hillert
  */

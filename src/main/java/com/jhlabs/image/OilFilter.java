@@ -6,6 +6,30 @@ package com.jhlabs.image;
 
 import java.awt.*;
 
+/**
+ * The OilFilter class provides an implementation of an oil-painting
+ * effect for image processing. It extends the {@code WholeImageFilter}
+ * class, applying a stylized and blurred appearance to an image
+ * by aggregating pixel intensity levels within a specified range.
+ * The filter simulates the effect of traditional oil painting by
+ * segmenting the image into regions with averaged color values.
+ * <p>
+ * This filter offers adjustable parameters such as range and levels.
+ * <ul>
+ * <li>The range defines the area surrounding each pixel for computing
+ *     its new value, controlling the extent of the filter's impact.</li>
+ * <li>The levels determine the number of intensity steps in the
+ *     final image, affecting the color granularity.</li>
+ * </ul>
+ *
+ * The filter modifies the whole image by iterating over its
+ * pixels, calculating local histograms for RGB color channels
+ * based on a neighborhood, and replacing each pixel's value
+ * with a predominant aggregated intensity.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class OilFilter extends WholeImageFilter {
 
 	static final long serialVersionUID = 1722613531684653826L;

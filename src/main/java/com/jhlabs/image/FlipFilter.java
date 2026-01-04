@@ -10,6 +10,9 @@ import java.awt.image.WritableRaster;
 
 /**
  * A filter which flips images or rotates by multiples of 90 degrees.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class FlipFilter extends AbstractBufferedImageOp {
 

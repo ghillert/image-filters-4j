@@ -15,6 +15,9 @@ import java.util.Random;
 
 /**
  * A filter which produces an image simulating brushed metal.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class BrushedMetalFilter implements BufferedImageOp {
 

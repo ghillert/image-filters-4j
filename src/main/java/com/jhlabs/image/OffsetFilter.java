@@ -6,6 +6,21 @@ package com.jhlabs.image;
 
 import java.awt.*;
 
+/**
+ * A filter that applies an offset transformation to an image, shifting the pixels by a specified
+ * horizontal and vertical offset. The offset wraps around the image boundaries unless disabled.
+ * This filter is commonly used for creating effects like tiling or mimicking pixel scrolling.
+ * <p>
+ * The class extends the abstract {@code TransformFilter} and implements the necessary
+ * inverse transformation logic. The transformation is applied pixel-by-pixel based on the
+ * offsets and wrapping behavior.
+ * <p>
+ * The filter works by modifying the position of each pixel in the source image based on the
+ * specified offsets, while considering the dimensions of the input image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class OffsetFilter extends TransformFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 8123120922961090736L;

@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * A filter which 'grays out' an image by averaging each pixel with white.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class GrayFilter extends PointFilter {
 

@@ -6,6 +6,23 @@ package com.jhlabs.image;
 
 import java.awt.*;
 
+/**
+ * The LifeFilter class is a specialized implementation of the {@link BinaryFilter} that applies
+ * a processing algorithm inspired by Conway's Game of Life rules. This filter operates
+ * on a black-and-white image, treating 'black' pixels as alive and 'white' pixels as dead.
+ * The algorithm determines the next state of each pixel based on the number of black
+ * neighboring pixels.
+ * <p>
+ * Key features of this filter:
+ * <ul>
+ * <li>Visualization of cell behavior in a black-and-white paradigm.
+ * <li>Determines pixel state transitions based on the Game of Life rules.
+ * <li>Processes the image iteratively.
+ * </ul>
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class LifeFilter extends BinaryFilter {
 
 	public LifeFilter() {

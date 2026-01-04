@@ -6,6 +6,18 @@ package com.jhlabs.image;
 
 import com.jhlabs.math.Function2D;
 
+/**
+ * The MapFilter class is used to distort image coordinates by mapping them through
+ * specified two-dimensional functions. It extends the {@link TransformFilter} class and
+ * allows custom transformations of the x and y coordinates of an image pixel.
+ * <p>
+ * The two-dimensional mapping functions for x and y coordinates are provided as
+ * instances of the {@code Function2D} interface, which must implement a method
+ * to evaluate the mapping based on input coordinates.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class MapFilter extends TransformFilter {
 
 	private Function2D xMapFunction;

@@ -8,6 +8,9 @@ import java.awt.*;
 
 /**
  * A filter which performs a 3x3 median operation. Useful for removing dust and noise.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class MedianFilter extends WholeImageFilter {
 

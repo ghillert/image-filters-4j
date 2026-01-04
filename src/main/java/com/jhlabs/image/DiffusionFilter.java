@@ -9,10 +9,13 @@ import java.awt.Rectangle;
 
 /**
  * A filter which uses Floyd-Steinberg error diffusion dithering to halftone an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class DiffusionFilter extends WholeImageFilter {
 
-	protected final static int[] diffusionMatrix = {
+	protected static final int[] diffusionMatrix = {
 			0, 0, 0,
 			0, 0, 7,
 			3, 5, 1,

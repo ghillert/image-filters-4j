@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 /**
  * A filter which performs a box blur on an image. The horizontal and vertical blurs can be specified separately
  * and a number of iterations can be given which allows an approximation to Gaussian blur.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class BoxBlurFilter extends AbstractBufferedImageOp {
 

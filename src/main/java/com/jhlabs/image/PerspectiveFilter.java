@@ -6,6 +6,12 @@ package com.jhlabs.image;
 
 import java.awt.*;
 
+/**
+ * A filter which applies a perspective transform to an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class PerspectiveFilter extends TransformFilter {
 
 	private float x0, y0, x1, y1, x2, y2, x3, y3;

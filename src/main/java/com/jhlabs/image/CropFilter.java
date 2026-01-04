@@ -11,6 +11,9 @@ import java.awt.image.ColorModel;
 
 /**
  * A filter which crops an image to a given rectangle.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class CropFilter extends AbstractBufferedImageOp {
 

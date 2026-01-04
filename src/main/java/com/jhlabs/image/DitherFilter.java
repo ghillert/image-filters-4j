@@ -4,6 +4,17 @@
 
 package com.jhlabs.image;
 
+/**
+ * The DitherFilter class applies dithering to an image using a specified dithering matrix.
+ * It is a subclass of {@link PointFilter} and can process pixel data to achieve color reduction
+ * and effects based on dithering techniques.
+ *
+ * This class supports standard dithering matrices such as ordered dithering, clustered
+ * dithering, and halftone dithering, and provides flexibility for custom matrices.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class DitherFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 2408287445119636967L;
@@ -123,7 +134,9 @@ public class DitherFilter extends PointFilter implements java.io.Serializable {
 			62, 55, 47, 37, 36, 46, 54, 61, 65, 72, 80, 90, 91, 81, 73, 66};
 
 	public int[] matrix;
-	public int rows, cols, levels;
+	public int rows;
+	public int cols;
+	public int levels;
 	protected int[] mod;
 	protected int[] div;
 	protected int[] map;

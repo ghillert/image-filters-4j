@@ -4,13 +4,22 @@
 
 package com.jhlabs.image;
 
-import com.jhlabs.math.*;
-
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import com.jhlabs.math.CellularFunction2D;
+import com.jhlabs.math.FBM;
+import com.jhlabs.math.Function2D;
+import com.jhlabs.math.Noise;
+import com.jhlabs.math.RidgedFBM;
+import com.jhlabs.math.SCNoise;
+import com.jhlabs.math.VLNoise;
+
 /**
  * A filter which produces textures from fractal Brownian motion.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class FBMFilter extends PointFilter implements Cloneable {
 

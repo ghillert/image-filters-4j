@@ -6,6 +6,29 @@ package com.jhlabs.image;
 
 import com.jhlabs.math.Noise;
 
+/**
+ * The MarbleTexFilter class is a texture generation filter that produces a marble-like effect
+ * on an image using techniques such as noise-based turbulence and sinusoidal perturbations.
+ * It extends the PointFilter class, making it capable of processing individual pixel values.
+ * The filter supports configurable properties such as scale, stretch, angle, turbulence,
+ * and color mapping, allowing for significant customization of the resulting texture.
+ * <p>
+ * The filter can operate in two primary modes:
+ * 1. When a Colormap is set, the filter generates colors based on the color mapping provided.
+ * 2. When no Colormap is specified, it uses a default set of layered effects to determine
+ *    the texture's appearance.
+ * <p>
+ * Key adjustable parameters:
+ * - Scale: Adjusts the scale of the texture.
+ * - Stretch: Configures the horizontal stretching of the texture.
+ * - Angle: Sets the rotation angle of the texture grid.
+ * - Turbulence: Modifies the intensity of noise-driven turbulence.
+ * - Turbulence Factor: Scales the amount of turbulence applied to the texture.
+ * - Colormap: Defines the mapping of values to colors for the output texture.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class MarbleTexFilter extends PointFilter implements java.io.Serializable {
 
 	private float scale = 32;

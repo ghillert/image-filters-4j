@@ -4,10 +4,13 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 /**
  * This filter tries to apply the Swing "flush 3D" effect to the black lines in an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class Flush3DFilter extends WholeImageFilter {
 

@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * An image histogram.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class Histogram {
 

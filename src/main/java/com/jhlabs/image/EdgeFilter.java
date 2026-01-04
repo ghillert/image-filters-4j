@@ -4,10 +4,14 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+
+import java.awt.Rectangle;
 
 /**
  * An edge-detection filter.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class EdgeFilter extends WholeImageFilter {
 

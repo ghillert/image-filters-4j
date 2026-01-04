@@ -4,7 +4,8 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -15,6 +16,7 @@ import java.awt.image.Kernel;
  * A filter which applies a convolution kernel to an image.
  *
  * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class ConvolveFilter extends AbstractBufferedImageOp {
 
@@ -58,7 +60,7 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 	/**
 	 * Construct a filter with the given 3x3 kernel.
 	 *
-	 * @param matrix an array of 9 floats containing the kernel
+	 * @param kernel the convolution kernel
 	 */
 	public ConvolveFilter(Kernel kernel) {
 		this.kernel = kernel;
@@ -155,7 +157,10 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
-				float r = 0, g = 0, b = 0, a = 0;
+				float r = 0;
+				float g = 0;
+				float b = 0;
+				float a = 0;
 
 				for (int row = -rows2; row <= rows2; row++) {
 					int iy = y + row;
@@ -207,7 +212,7 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 	}
 
 	/**
-	 * Convolve with a kernel consisting of one row
+	 * Convolve with a kernel consisting of one row.
 	 */
 	public static void convolveH(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha, int edgeAction) {
 		int index = 0;
@@ -258,7 +263,7 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 	}
 
 	/**
-	 * Convolve with a kernel consisting of one column
+	 * Convolve with a kernel consisting of one column.
 	 */
 	public static void convolveV(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha, int edgeAction) {
 		int index = 0;

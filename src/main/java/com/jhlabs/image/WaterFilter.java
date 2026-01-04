@@ -6,10 +6,23 @@ package com.jhlabs.image;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.io.Serial;
 
+/**
+ * The {@code WaterFilter} class is a filter that simulates a water ripple effect
+ * on an image. It extends the {@code TransformFilter} class and provides options
+ * to configure the wavelength, amplitude, phase, and center of the water ripples.
+ * <p>
+ * This filter creates a visual effect of water waves by distorting the image
+ * based on the specified parameters.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class WaterFilter extends TransformFilter {
 
-	static final long serialVersionUID = 8789236343162990941L;
+	@Serial
+	private static final long serialVersionUID = 8789236343162990941L;
 
 	private float wavelength = 16;
 	private float amplitude = 10;

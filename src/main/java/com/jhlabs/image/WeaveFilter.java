@@ -4,6 +4,20 @@
 
 package com.jhlabs.image;
 
+/**
+ * The {@code WeaveFilter} class is a filter that applies a woven texture effect
+ * to an image. It extends the {@code PointFilter} class and provides options
+ * to configure the width, gap, colors, and other properties of the woven
+ * threads.
+ * <p>
+ * This filter simulates the effect of horizontal and vertical threads crossing
+ * over each other, creating a woven pattern. It supports various configuration
+ * options, such as rounding thread edges, shading crossings, and using custom
+ * colors or image colors for the threads.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class WeaveFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 4847932412277504482L;

@@ -10,6 +10,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * A filter which use FFTs to simulate lens blur on an image
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class LensBlurFilter extends AbstractBufferedImageOp {
 

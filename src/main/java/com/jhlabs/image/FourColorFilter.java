@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * A filter which draws a gradient interpolated between four colors defined at the corners of the image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class FourColorFilter extends PointFilter {
 

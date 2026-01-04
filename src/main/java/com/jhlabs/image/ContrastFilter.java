@@ -4,6 +4,12 @@
 
 package com.jhlabs.image;
 
+/**
+ * A filter which adjusts the contrast of an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class ContrastFilter extends TransferFilter {
 
 	private float brightness = 1.0f;

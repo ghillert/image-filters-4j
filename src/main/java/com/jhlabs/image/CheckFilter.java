@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * A Filter to draw grids and check patterns.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class CheckFilter extends PointFilter {
 

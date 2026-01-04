@@ -11,6 +11,9 @@ import java.util.Random;
 
 /**
  * A filter which simulates underwater caustics. This can be animated to get a bottom-of-the-swimming-pool effect.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class CausticsFilter extends WholeImageFilter {
 

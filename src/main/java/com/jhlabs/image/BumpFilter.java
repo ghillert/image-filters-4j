@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * A simple embossing filter.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class BumpFilter extends ConvolveFilter {
 

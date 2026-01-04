@@ -8,6 +8,9 @@ import java.util.Random;
 
 /**
  * A filter which adds random noise into an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class NoiseFilter extends PointFilter {
 

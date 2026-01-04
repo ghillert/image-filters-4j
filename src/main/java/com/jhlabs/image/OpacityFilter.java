@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * Sets the opacity (alpha) of every pixel in an image to a constant value.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class OpacityFilter extends PointFilter implements java.io.Serializable {
 

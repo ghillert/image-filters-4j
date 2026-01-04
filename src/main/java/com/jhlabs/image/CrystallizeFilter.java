@@ -4,6 +4,12 @@
 
 package com.jhlabs.image;
 
+/**
+ * A filter which simulates crystallized patterns.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class CrystallizeFilter extends CellularFilter {
 
 	private float edgeThickness = 0.4f;

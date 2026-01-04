@@ -8,6 +8,9 @@ package com.jhlabs.image;
  * The interface for an image quantizer. The addColor method is called (repeatedly
  * if necessary) with all the image pixels. A color table can then be returned by
  * calling the buildColorTable method.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public interface Quantizer {
 	/**

@@ -6,11 +6,18 @@ package com.jhlabs.image;
 
 /**
  * A filter which allows the red, grren and blue channels of an image to be mixed into each other.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class ChannelMixFilter extends PointFilter {
 
-	public int blueGreen, redBlue, greenRed;
-	public int intoR, intoG, intoB;
+	public int blueGreen;
+	public int redBlue;
+	public int greenRed;
+	public int intoR;
+	public int intoG;
+	public int intoB;
 
 	public ChannelMixFilter() {
 		this.canFilterIndexColorModel = true;

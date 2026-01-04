@@ -9,13 +9,18 @@ import java.awt.image.BufferedImage;
 /**
  * A filter which simulates the appearance of looking through glass. A separate grayscale displacement image is provided and
  * pixels in the source image are displaced according to the gradient of the displacement map.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class DisplaceFilter extends TransformFilter {
 
 	private float amount = 1;
 	private BufferedImage displacementMap = null;
-	private int[] xmap, ymap;
-	private int dw, dh;
+	private int[] xmap;
+	private int[] ymap;
+	private int dw;
+	private int dh;
 
 	public DisplaceFilter() {
 	}
@@ -85,7 +90,8 @@ public class DisplaceFilter extends TransformFilter {
 
 	@Override
 	protected void transformInverse(int x, int y, float[] out) {
-		float xDisplacement, yDisplacement;
+		float xDisplacement;
+		float yDisplacement;
 		float nx = x;
 		float ny = y;
 		int i = (y % this.dh) * this.dw + x % this.dw;

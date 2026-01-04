@@ -4,10 +4,13 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 /**
  * A filter to perform auto-equalization on an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class EqualizeFilter extends WholeImageFilter implements java.io.Serializable {
 
@@ -20,7 +23,8 @@ public class EqualizeFilter extends WholeImageFilter implements java.io.Serializ
 	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
 		Histogram histogram = new Histogram(inPixels, width, height, 0, width);
 
-		int i, j;
+		int i;
+		int j;
 
 		if (histogram.getNumSamples() > 0) {
 			float scale = 255.0f / histogram.getNumSamples();

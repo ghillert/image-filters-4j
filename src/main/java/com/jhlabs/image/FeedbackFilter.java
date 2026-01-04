@@ -4,12 +4,25 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * The FeedbackFilter class is an image processing filter that creates a feedback effect
+ * by iteratively transforming and blending the input image with itself. The filter leverages
+ * zoom, rotation, translation, and other parameters to achieve various feedback-like visual effects.
+ * <p>
+ * This class extends {@link AbstractBufferedImageOp}, providing methods to process {@link BufferedImage} inputs
+ * conveniently and create compatible destination images.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class FeedbackFilter extends AbstractBufferedImageOp {
-	private float centreX = 0.5f, centreY = 0.5f;
+	private float centreX = 0.5f;
+	private float centreY = 0.5f;
 	private float distance;
 	private float angle;
 	private float rotation;

@@ -7,6 +7,9 @@ package com.jhlabs.image;
 /**
  * A filter which replaces one color by another in an image. This is frankly, not often useful, but has its occasional
  * uses when dealing with GIF transparency and the like.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class MapColorsFilter extends PointFilter {
 

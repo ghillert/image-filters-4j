@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * A filter for changing the gamma of an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class GammaFilter extends TransferFilter {
 

@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * A grayscale colormap. Black is 0, white is 1.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class GrayscaleColormap implements Colormap, java.io.Serializable {
 

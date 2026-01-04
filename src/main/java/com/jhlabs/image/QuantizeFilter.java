@@ -14,6 +14,9 @@ import java.awt.*;
  * methods such as median cut. Note: at present, the filter produces an image which
  * uses the RGB color model (because the application it was written for required it).
  * I hope to extend it to produce an IndexColorModel by request.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class QuantizeFilter extends WholeImageFilter implements java.io.Serializable {
 

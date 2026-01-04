@@ -6,13 +6,16 @@ package com.jhlabs.image;
 
 /**
  * A class containing static math methods useful for image processing.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class ImageMath {
 
-	public final static float PI = (float) Math.PI;
-	public final static float HALF_PI = (float) Math.PI / 2.0f;
-	public final static float QUARTER_PI = (float) Math.PI / 4.0f;
-	public final static float TWO_PI = (float) Math.PI * 2.0f;
+	public static final float PI = (float) Math.PI;
+	public static final float HALF_PI = (float) Math.PI / 2.0f;
+	public static final float QUARTER_PI = (float) Math.PI / 4.0f;
+	public static final float TWO_PI = (float) Math.PI * 2.0f;
 
 	/**
 	 * Apply a bias to a number in the unit interval, moving numbers towards 0 or 1

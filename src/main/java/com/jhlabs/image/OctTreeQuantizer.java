@@ -11,6 +11,9 @@ import java.util.Vector;
  * An image Quantizer based on the Octree algorithm. This is a very basic implementation
  * at present and could be much improved by picking the nodes to reduce more carefully
  * (i.e. not completely at random) when I get the time.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class OctTreeQuantizer implements Quantizer {
 

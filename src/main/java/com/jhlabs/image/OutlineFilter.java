@@ -8,6 +8,9 @@ import java.awt.*;
 
 /**
  * Given a binary image, this filter converts it to its outline, replacing all interior pixels with the 'new' color.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class OutlineFilter extends BinaryFilter {
 

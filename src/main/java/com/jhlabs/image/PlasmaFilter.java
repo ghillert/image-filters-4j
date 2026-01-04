@@ -8,6 +8,21 @@ import java.awt.*;
 import java.util.Date;
 import java.util.Random;
 
+/**
+ * A filter that generates a plasma texture effect on an image.
+ * The filter uses a random displacement method to create a colorful, turbulent plasma-like visual effect.
+ * Extends the {@link WholeImageFilter} class to operate on the entire image and implements the {@link java.io.Serializable} interface.
+ * <p>
+ * The following key features are available:
+ * <ul>
+ * <li>Turbulence: Controls the intensity of randomness in the plasma effect.
+ * <li>Scaling: Specifies the scaling factor for the displacement effect.
+ * <li>Custom Colormap: Allows specifying a colormap to define the color scheme for the plasma effect.
+ * <li>Use of Image Colors: Optionally use the original image colors as a base for the plasma generation.
+ * </ul>
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class PlasmaFilter extends WholeImageFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 6491871753122667752L;

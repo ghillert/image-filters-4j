@@ -8,6 +8,9 @@ import java.io.Serializable;
 
 /**
  * Applies a bit mask to each ARGB pixel of an image. You can use this for, say, masking out the red channel.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class MaskFilter extends PointFilter implements Serializable {
 

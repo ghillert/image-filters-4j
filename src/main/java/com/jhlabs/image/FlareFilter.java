@@ -8,6 +8,9 @@ import com.jhlabs.math.Noise;
 
 /**
  * An experimental filter for rendering lens flares.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class FlareFilter extends PointFilter {
 
@@ -18,7 +21,8 @@ public class FlareFilter extends PointFilter {
 	private float rayAmount = 0.1f;
 	private int color = 0xffffffff;
 	private int width, height;
-	private int centreX, centreY;
+	private int centreX;
+	private int centreY;
 	private float ringWidth = 1.6f;
 
 	private final float linear = 0.03f;

@@ -8,6 +8,17 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
+/**
+ * The MotionBlurOp class applies a motion blur effect to a given image.
+ * The blur effect is adjustable based on parameters such as distance, angle, rotation,
+ * zoom, and center of transformation.
+ * <p>
+ * This class extends {@link AbstractBufferedImageOp} and overrides the filter method to
+ * implement the motion blur effect using a series of transformations.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class MotionBlurOp extends AbstractBufferedImageOp {
 	private float centreX = 0.5f, centreY = 0.5f;
 	private float distance;

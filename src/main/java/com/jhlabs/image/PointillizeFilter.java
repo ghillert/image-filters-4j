@@ -4,6 +4,15 @@
 
 package com.jhlabs.image;
 
+/**
+ * The PointillizeFilter class applies a pointillism effect to an image by simulating
+ * a stippling technique where colors are applied as small dots. This filter defines
+ * various properties for controlling the appearance of the pointillism effect,
+ * including edge thickness, edge fading, edge coloring, and fuzziness.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class PointillizeFilter extends CellularFilter {
 
 	private float edgeThickness = 0.4f;

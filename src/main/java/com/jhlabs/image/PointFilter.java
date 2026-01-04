@@ -9,6 +9,9 @@ import java.awt.image.WritableRaster;
 
 /**
  * An abstract superclass for point filters. The interface is the same as the old RGBImageFilter.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public abstract class PointFilter extends AbstractBufferedImageOp {
 

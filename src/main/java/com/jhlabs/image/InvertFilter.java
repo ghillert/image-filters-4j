@@ -6,6 +6,9 @@ package com.jhlabs.image;
 
 /**
  * A filter which inverts the RGB channels of an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class InvertFilter extends PointFilter {
 

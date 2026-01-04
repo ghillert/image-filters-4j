@@ -10,6 +10,9 @@ import java.util.Random;
 /**
  * Some more useful math functions for image processing.
  * These are becoming obsolete as we move to Java2D. Use MiscComposite instead.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class PixelUtils {
 

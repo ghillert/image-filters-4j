@@ -4,9 +4,17 @@
 
 package com.jhlabs.image;
 
+/**
+ * FadeFilter is a subclass of PointFilter that applies a fading effect to an image based on specified parameters.
+ * The filter adjusts the alpha channel of each pixel to create a fade effect, which can be customized with various properties.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class FadeFilter extends PointFilter {
 
-	private int width, height;
+	private int width;
+	private int height;
 	private float angle = 0.0f;
 	private float fadeStart = 1.0f;
 	private float fadeWidth = 10.0f;

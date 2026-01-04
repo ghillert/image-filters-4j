@@ -4,12 +4,15 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 /**
- * A filter which draws a coloured gradient. This is largely superceded by GradientPaint in Java1.2, but does provide a few
+ * A filter which draws a coloured gradient. This is largely superseded by GradientPaint in Java1.2, but does provide a few
  * more gradient options.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class GradientFilter extends AbstractBufferedImageOp {
 

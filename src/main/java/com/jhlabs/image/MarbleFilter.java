@@ -10,6 +10,9 @@ import java.awt.*;
 
 /**
  * This filter applies a marbling effect to an image, displacing pixels by random amounts.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class MarbleFilter extends TransformFilter {
 

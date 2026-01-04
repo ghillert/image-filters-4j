@@ -8,6 +8,18 @@ import java.awt.*;
 import java.util.Date;
 import java.util.Random;
 
+/**
+ * The QuiltFilter class is a WholeImageFilter implementation used to generate chaotic quilt-like textures.
+ * It processes an entire image based on parametric mathematical functions and uses a specified colormap
+ * to map the generated values into colors, creating visually intriguing textures.
+ * <p>
+ * This filter is capable of producing rich patterns through iterative mathematical calculations involving
+ * sine, cosine, and random perturbation. The generation of the patterns is highly configurable through
+ * adjustable parameters.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class QuiltFilter extends WholeImageFilter implements java.io.Serializable {
 
 	private final Random randomGenerator;

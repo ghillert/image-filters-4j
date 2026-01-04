@@ -10,6 +10,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * A filter which produces motion blur the slow, but higher-quality way.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class MotionBlurFilter extends AbstractBufferedImageOp {
 

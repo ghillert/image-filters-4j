@@ -30,12 +30,6 @@ public class CellularFunction2D implements Function2D {
 		return this.coefficients[c];
 	}
 
-	class Point {
-		int index;
-		float x, y;
-		float distance;
-	}
-
 	private float checkCube(float x, float y, int cubeX, int cubeY, Point[] results) {
 		this.random.setSeed(571L * cubeX + 23L * cubeY);
 		int numPoints = 3 + this.random.nextInt() % 4;
@@ -130,4 +124,10 @@ public class CellularFunction2D implements Function2D {
 		return t;
 	}
 
+	static class Point {
+		int index;
+		float x;
+		float y;
+		float distance;
+	}
 }

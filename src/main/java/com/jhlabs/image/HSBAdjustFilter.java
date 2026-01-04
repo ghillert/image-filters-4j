@@ -4,8 +4,14 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * A filter which adjusts the hue, saturation and brightness of an image.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class HSBAdjustFilter extends PointFilter {
 
 	public float hFactor, sFactor, bFactor;

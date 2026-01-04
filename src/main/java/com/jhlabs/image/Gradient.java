@@ -12,13 +12,14 @@ import java.io.Serializable;
  * of knots with a minimum of four. The first and last knots give the tangent at the end
  * of the spline, and colours are interpolated from the second to the second-last knots.
  * Each knot can be given a type of interpolation. These are:
- * <UL>
- * <LI>LINEAR - linear interpolation to next knot
- * <LI>SPLINE - spline interpolation to next knot
- * <LI>CONSTANT - no interpolation - the colour is constant to the next knot
- * <LI>HUE_CW - interpolation of hue clockwise to next knot
- * <LI>HUE_CCW - interpolation of hue counter-clockwise to next knot
- * </UL>
+ * <ul>
+ * <li>LINEAR - linear interpolation to next knot
+ * <li>SPLINE - spline interpolation to next knot
+ * <li>CONSTANT - no interpolation - the colour is constant to the next knot
+ * <li>HUE_CW - interpolation of hue clockwise to next knot
+ * <li>HUE_CCW - interpolation of hue counter-clockwise to next knot
+ * </ul>
+ *
  * @author Jerry Huxtable
  * @author Gunnar Hillert
  */
