@@ -4,9 +4,9 @@
 
 package com.jhlabs.image;
 
-import com.jhlabs.math.Noise;
+import java.awt.Rectangle;
 
-import java.awt.*;
+import com.jhlabs.math.Noise;
 
 /**
  * This filter applies a marbling effect to an image, displacing pixels by random amounts.

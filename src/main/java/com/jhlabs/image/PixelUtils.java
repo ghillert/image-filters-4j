@@ -4,7 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 /**

@@ -4,7 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 /**
  * The LifeFilter class is a specialized implementation of the {@link BinaryFilter} that applies

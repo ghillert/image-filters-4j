@@ -4,7 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 /**
  * The OilFilter class provides an implementation of an oil-painting

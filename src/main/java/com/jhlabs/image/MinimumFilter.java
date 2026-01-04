@@ -4,7 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 
 /**
  * The MinimumFilter class applies a minimum value filter to an image. This filter processes each

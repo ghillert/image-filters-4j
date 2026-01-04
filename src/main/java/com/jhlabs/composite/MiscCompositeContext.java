@@ -4,7 +4,8 @@
 
 package com.jhlabs.composite;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.CompositeContext;
 import java.awt.color.ColorSpace;
 import java.awt.image.ColorModel;
 import java.awt.image.Raster;

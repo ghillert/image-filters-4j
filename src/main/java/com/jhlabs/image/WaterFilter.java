@@ -4,7 +4,7 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.io.Serial;
 

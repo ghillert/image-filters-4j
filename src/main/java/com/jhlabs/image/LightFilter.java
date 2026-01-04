@@ -4,16 +4,18 @@
 
 package com.jhlabs.image;
 
-import com.jhlabs.math.Function2D;
-import com.jhlabs.math.ImageFunction2D;
-import com.jhlabs.vecmath.Color4f;
-import com.jhlabs.vecmath.Vector3f;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.Kernel;
 import java.io.Serializable;
 import java.util.Vector;
+
+import com.jhlabs.math.Function2D;
+import com.jhlabs.math.ImageFunction2D;
+import com.jhlabs.vecmath.Color4f;
+import com.jhlabs.vecmath.Vector3f;
 
 interface ElevationMap {
 	int getHeightAt(int x, int y);

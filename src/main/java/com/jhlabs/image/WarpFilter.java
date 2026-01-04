@@ -14,7 +14,8 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.awt.image.PixelGrabber;
 

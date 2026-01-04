@@ -4,7 +4,10 @@
 
 package com.jhlabs.composite;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Composite;
+import java.awt.CompositeContext;
+import java.awt.RenderingHints;
 import java.awt.image.ColorModel;
 
 /**

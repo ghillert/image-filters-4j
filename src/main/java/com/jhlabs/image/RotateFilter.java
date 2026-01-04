@@ -4,7 +4,8 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 public class RotateFilter extends TransformFilter {
 

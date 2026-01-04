@@ -4,7 +4,11 @@
 
 package com.jhlabs.image;
 
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.image.BufferedImage;
 
 /**
