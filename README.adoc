@@ -1,6 +1,8 @@
 = image-filters-4j
 
 image:https://github.com/ghillert/image-filters-4j/actions/workflows/maven.yml/badge.svg?branch=main[Java CI with Maven, link="https://github.com/ghillert/image-filters-4j/actions/workflows/maven.yml"]
+image:https://img.shields.io/maven-central/v/com.hillert/image-filters-4j[Maven Central Version]
+image:https://img.shields.io/github/license/ghillert/image-filters-4j[GitHub License]
 
 Image Processing Filters for Java
 
@@ -9,8 +11,6 @@ I did not see any Mavenized version of Jerry Huxtable's *Java Image Processing C
 This repo contains all classes as available via the download at:
 
 http://www.jhlabs.com/ip/filters/download.html
-
-The goal is to have the filters available via the Maven Central repository eventually.
 
 == Getting Started
 
