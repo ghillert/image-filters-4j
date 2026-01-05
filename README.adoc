@@ -1,3 +1,6 @@
+:main-release-version: 1.0.0-M1
+:main-snapshot-version: 1.0.0-SNAPSHOT
+
 = image-filters-4j
 
 image:https://github.com/ghillert/image-filters-4j/actions/workflows/maven.yml/badge.svg?branch=main[Java CI with Maven, link="https://github.com/ghillert/image-filters-4j/actions/workflows/maven.yml"]
@@ -17,6 +20,58 @@ http://www.jhlabs.com/ip/filters/download.html
 === Maven
 
 To use the filters in your Maven project, add the following dependency to your `pom.xml`:
+
+[source,xml,subs="verbatim,quotes,attributes"]
+----
+<dependency>
+    <groupId>com.hillert</groupId>
+    <artifactId>image-filters-4j</artifactId>
+    <version>{main-release-version}</version>
+</dependency>
+----
+
+If you are using Gradle, add the following to your `build.gradle`:
+
+[source,groovy,subs="attributes"]
+----
+implementation 'com.hillert:image-filters-4j:{main-release-version}'
+----
+
+==== Using Snapshot Versions
+
+Currently, snapshot releases are available via the following Maven repository:
+
+[source,xml]
+----
+<repository>
+  <id>snapshots-repo</id>
+  <url>https://central.sonatype.com/repository/maven-snapshots</url>
+  <releases>
+    <enabled>false</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
+----
+
+To use snapshot versions, add the following dependency to your `pom.xml`:
+
+[source,xml,subs="verbatim,quotes,attributes"]
+----
+<dependency>
+    <groupId>com.hillert</groupId>
+    <artifactId>image-filters-4j</artifactId>
+    <version>{main-snapshot-version}</version>
+</dependency>
+----
+
+For Gradle, add the following to your `build.gradle`:
+
+[source,groovy,subs="attributes"]
+----
+implementation 'com.hillert:image-filters-4j:{main-snapshot-version}'
+----
 
 === Usage
 
@@ -47,24 +102,6 @@ To use the filters in your Maven project, add the following dependency to your `
     catch (IOException ex) {
         throw new IllegalStateException("Unable to write image to " + outputPath, ex);
     }
-----
-
-== Maven Dependencies
-
-Currently, snapshot releases are available via the following Maven repository:
-
-[source,xml]
-----
-<repository>
-  <id>snapshots-repo</id>
-  <url>https://central.sonatype.com/repository/maven-snapshots</url>
-  <releases>
-    <enabled>false</enabled>
-  </releases>
-  <snapshots>
-    <enabled>true</enabled>
-  </snapshots>
-</repository>
 ----
 
 == List of Filters
