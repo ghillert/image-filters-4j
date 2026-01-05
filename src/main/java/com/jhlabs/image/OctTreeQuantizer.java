@@ -211,6 +211,8 @@ public class OctTreeQuantizer implements Quantizer {
 
 	/**
 	 * A quick way to use the quantizer. Just create a table the right size and pass in the pixels.
+	 * @param inPixels the array of ARGB pixels
+	 * @param table the pre-allocated color table to populate with quantized colors
 	 */
 	public void buildColorTable(int[] inPixels, int[] table) {
 		int count = inPixels.length;
@@ -268,6 +270,8 @@ public class OctTreeQuantizer implements Quantizer {
 
 		/**
 		 * A debugging method which prints the tree out.
+		 * @param s the stream to print to
+		 * @param level the current level of recursion
 		 */
 		private void list(PrintStream s, int level) {
 			for (int i = 0; i < level; i++) {

@@ -108,7 +108,6 @@ public class WeaveFilter extends PointFilter implements java.io.Serializable {
 		return this.shadeCrossings;
 	}
 
-	@SuppressWarnings("Checkstyle:NestedIfDepth")
 	@Override
 	public int filterRGB(int x, int y, int rgb) {
 		x += this.xWidth + this.xGap / 2;

@@ -12,12 +12,12 @@ package com.jhlabs.image;
  */
 public class ChannelMixFilter extends PointFilter {
 
-	public int blueGreen;
-	public int redBlue;
-	public int greenRed;
-	public int intoR;
-	public int intoG;
-	public int intoB;
+	private int blueGreen;
+	private int redBlue;
+	private int greenRed;
+	private int intoR;
+	private int intoG;
+	private int intoB;
 
 	public ChannelMixFilter() {
 		this.canFilterIndexColorModel = true;

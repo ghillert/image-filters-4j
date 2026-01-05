@@ -22,12 +22,12 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	protected float scale = 32;
 	protected float stretch = 1.0f;
 	protected float angle = 0.0f;
-	public float amount = 1.0f;
-	public float turbulence = 1.0f;
-	public float gain = 0.5f;
-	public float bias = 0.5f;
-	public float distancePower = 2;
-	public boolean useColor = false;
+	protected float amount = 1.0f;
+	protected float turbulence = 1.0f;
+	protected float gain = 0.5f;
+	protected float bias = 0.5f;
+	protected float distancePower = 2;
+	protected boolean useColor = false;
 	protected Colormap colormap = new Gradient();
 	protected float[] coefficients = {1, 0, 0, 0};
 	protected float angleCoefficient;
@@ -39,15 +39,44 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	protected Point[] results = null;
 	protected float randomness = 0;
 	protected int gridType = HEXAGONAL;
+
 	private float min;
 	private float max;
 	private static byte[] probabilities;
 	private float gradientCoefficient;
 
+	/**
+	 * A predefined constant used within the CellularFilter class to represent
+	 * the "RANDOM" grid type configuration. This value is used to indicate that
+	 * the cellular filtering should employ a random grid structure for its computations.
+	 */
 	public static final int RANDOM = 0;
+
+	/**
+	 * A predefined constant used within the CellularFilter class to represent
+	 * the "SQUARE" grid type configuration. This value is used to indicate that
+	 * the cellular filtering should employ a square grid structure for its computations.
+	 */
 	public static final int SQUARE = 1;
+
+	/**
+	 * A predefined constant used within the CellularFilter class to represent
+	 * the "HEXAGONAL" grid type configuration. This value is used to indicate that
+	 * the cellular filtering should employ a hexagonal grid structure for its computations.
+	 */
 	public static final int HEXAGONAL = 2;
+
+	/**
+	 * Represents the octagonal grid type in the CellularFilter. This grid type
+	 * dictates the arrangement of cells in an octagonal pattern, influencing
+	 * how the filter processes and generates texture effects.
+	 */
 	public static final int OCTAGONAL = 3;
+
+	/**
+	 * Represents a constant value used to specify a triangular grid type in the CellularFilter.
+	 * This value determines the arrangement of grid cells as triangular shapes.
+	 */
 	public static final int TRIANGULAR = 4;
 
 	/**
@@ -587,6 +616,10 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 		return "Texture/Cellular...";
 	}
 
+	/**
+	 * Represents a point in a coordinate space with additional attributes commonly used in
+	 * cellular filtering operations.
+	 */
 	public class Point {
 		public int index;
 		public float x;

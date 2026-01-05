@@ -51,6 +51,7 @@ public class Noise implements Function1D, Function2D, Function3D {
 	 * Compute turbulence using Perlin noise.
 	 * @param x       the x value
 	 * @param y       the y value
+	 * @param z       the z value
 	 * @param octaves number of octaves of turbulence
 	 * @return turbulence value at (x,y)
 	 */
@@ -187,7 +188,7 @@ public class Noise implements Function1D, Function2D, Function3D {
 	 * Compute 3-dimensional Perlin noise.
 	 * @param x the x coordinate
 	 * @param y the y coordinate
-	 * @param y the y coordinate
+	 * @param z the z coordinate
 	 * @return noise value at (x,y,z)
 	 */
 	public static float noise3(float x, float y, float z) {
@@ -351,6 +352,9 @@ public class Noise implements Function1D, Function2D, Function3D {
 	 * Returns the minimum and maximum of a number of random values
 	 * of the given function. This is useful for making some stab at
 	 * normalising the function.
+	 * @param f the function to evaluate
+	 * @param minmax an array of length 2. On return, minmax[0] and minmax[1] will be set to the minimum and maximum values of the function.
+	 * @return an array containing the minimum and maximum values
 	 */
 	public static float[] findRange(Function1D f, float[] minmax) {
 		if (minmax == null) {
@@ -373,6 +377,9 @@ public class Noise implements Function1D, Function2D, Function3D {
 	 * Returns the minimum and maximum of a number of random values
 	 * of the given function. This is useful for making some stab at
 	 * normalising the function.
+	 * @param f the function to evaluate
+	 * @param minmax an array of length 2. On return, minmax[0] and minmax[1] will be set to the minimum and maximum values of the function.
+	 * @return an array containing the minimum and maximum values
 	 */
 	public static float[] findRange(Function2D f, float[] minmax) {
 		if (minmax == null) {

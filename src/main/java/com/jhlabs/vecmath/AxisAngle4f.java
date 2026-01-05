@@ -72,6 +72,22 @@ public class AxisAngle4f {
 		t[3] = this.angle;
 	}
 
+	public float getX() {
+		return this.x;
+	}
+
+	public float getY() {
+		return this.y;
+	}
+
+	public float getZ() {
+		return this.z;
+	}
+
+	public float getAngle() {
+		return this.angle;
+	}
+
 	@Override
 	public String toString() {
 		return "[" + this.x + ", " + this.y + ", " + this.z + ", " + this.angle + "]";

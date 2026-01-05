@@ -199,10 +199,10 @@ public class Matrix4f {
 	}
 
 	public void set(AxisAngle4f a) {
-		float halfTheta = a.angle * 0.5f;
+		float halfTheta = a.getAngle() * 0.5f;
 		float cosHalfTheta = (float) Math.cos(halfTheta);
 		float sinHalfTheta = (float) Math.sin(halfTheta);
-		set(new Quat4f(a.x * sinHalfTheta, a.y * sinHalfTheta, a.z * sinHalfTheta, cosHalfTheta));
+		set(new Quat4f(a.getX() * sinHalfTheta, a.getY() * sinHalfTheta, a.getZ() * sinHalfTheta, cosHalfTheta));
 	}
 
 	public void set(Quat4f q) {

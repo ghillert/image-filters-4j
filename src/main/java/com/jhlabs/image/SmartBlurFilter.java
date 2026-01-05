@@ -36,6 +36,12 @@ public class SmartBlurFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Convolve with a kernel consisting of one row.
+	 * @param kernel the convolution kernel
+	 * @param inPixels the input pixel array
+	 * @param outPixels the output pixel array
+	 * @param width the width of the image
+	 * @param height the height of the image
+	 * @param alpha whether to process the alpha channel
 	 */
 	public void thresholdBlur(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha) {
 		int index = 0;

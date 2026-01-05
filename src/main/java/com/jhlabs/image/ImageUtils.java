@@ -170,6 +170,9 @@ public abstract class ImageUtils {
 	/**
 	 * Compose src onto dst using the alpha of sel to interpolate between the two.
 	 * I can't think of a way to do this using AlphaComposite.
+	 * @param src the source raster
+	 * @param dst the destination raster
+	 * @param sel the selection raster
 	 */
 	public static void composeThroughMask(Raster src, WritableRaster dst, Raster sel) {
 		int x = src.getMinX();

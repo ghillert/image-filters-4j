@@ -228,6 +228,12 @@ public class BrushedMetalFilter implements BufferedImageOp {
 	/**
 	 * A convenience method for setting ARGB pixels in an image. This tries to avoid the performance
 	 * penalty of BufferedImage.setRGB unmanaging the image.
+	 * @param image the image to modify
+	 * @param x the x coordinate of the upper left corner
+	 * @param y the y coordinate of the upper left corner
+	 * @param width the width of the rectangle to modify
+	 * @param height the height of the rectangle to modify
+	 * @param pixels the array of ARGB pixels to set
 	 */
 	public void setRGB(BufferedImage image, int x, int y, int width, int height, int[] pixels) {
 		int type = image.getType();

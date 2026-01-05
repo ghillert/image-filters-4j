@@ -41,12 +41,12 @@ public class Quat4f extends Tuple4f {
 	}
 
 	public void set(AxisAngle4f a) {
-		float halfTheta = a.angle * 0.5f;
+		float halfTheta = a.getAngle() * 0.5f;
 		float cosHalfTheta = (float) Math.cos(halfTheta);
 		float sinHalfTheta = (float) Math.sin(halfTheta);
-		this.x = a.x * sinHalfTheta;
-		this.y = a.y * sinHalfTheta;
-		this.z = a.z * sinHalfTheta;
+		this.x = a.getX() * sinHalfTheta;
+		this.y = a.getY() * sinHalfTheta;
+		this.z = a.getZ() * sinHalfTheta;
 		this.w = cosHalfTheta;
 	}
 

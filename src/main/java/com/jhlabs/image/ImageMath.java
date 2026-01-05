@@ -268,7 +268,7 @@ public class ImageMath {
 	 * Bilinear interpolation of ARGB values.
 	 * @param x   the X interpolation parameter 0..1
 	 * @param y   the y interpolation parameter 0..1
-	 * @param rgb array of four ARGB values in the order NW, NE, SW, SE
+	 * @param p   array of four ARGB values in the order NW, NE, SW, SE
 	 * @return the interpolated value
 	 */
 	public static int bilinearInterpolate(float x, float y, int[] p) {
@@ -315,7 +315,7 @@ public class ImageMath {
 
 	/**
 	 * Return the NTSC gray level of an RGB value.
-	 * @param rgb1 the input pixel
+	 * @param rgb the RGB value
 	 * @return the gray level (0-255)
 	 */
 	public static int brightnessNTSC(int rgb) {

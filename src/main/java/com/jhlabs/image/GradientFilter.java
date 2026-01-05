@@ -300,13 +300,13 @@ public class GradientFilter extends AbstractBufferedImageOp {
 		int off = 0;
 		float angle0 = (float) Math.atan2(this.p2.x - this.p1.x, this.p2.y - this.p1.y);
 		for (int x = 0; x < w; x++) {
-			float angle = (float) (Math.atan2(x - this.p1.x, y - this.p1.y) - angle0) / (ImageMath.TWO_PI);
-			angle += 1.0f;
-			angle %= 1.0f;
+			float localAngle = (float) (Math.atan2(x - this.p1.x, y - this.p1.y) - angle0) / (ImageMath.TWO_PI);
+			localAngle += 1.0f;
+			localAngle %= 1.0f;
 			if (this.type == BICONICAL) {
-				angle = ImageMath.triangle(angle);
+				localAngle = ImageMath.triangle(localAngle);
 			}
-			int rgb = this.colormap.getColor(map(angle));
+			int rgb = this.colormap.getColor(map(localAngle));
 			pixels[off] = PixelUtils.combinePixels(rgb, pixels[off], this.paintMode);
 			off++;
 		}

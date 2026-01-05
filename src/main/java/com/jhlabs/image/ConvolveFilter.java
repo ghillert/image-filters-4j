@@ -146,6 +146,13 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Convolve with a 2D kernel.
+	 * @param kernel the convolution kernel
+	 * @param inPixels the input pixel array
+	 * @param outPixels the output pixel array
+	 * @param width the width of the image
+	 * @param height the height of the image
+	 * @param alpha whether to process the alpha channel
+	 * @param edgeAction the edge action to use
 	 */
 	public static void convolveHV(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha, int edgeAction) {
 		int index = 0;
@@ -213,6 +220,13 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Convolve with a kernel consisting of one row.
+	 * @param kernel the convolution kernel
+	 * @param inPixels the input pixel array
+	 * @param outPixels the output pixel array
+	 * @param width the width of the image
+	 * @param height the height of the image
+	 * @param alpha whether to process the alpha channel
+	 * @param edgeAction the edge action to use
 	 */
 	public static void convolveH(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha, int edgeAction) {
 		int index = 0;
@@ -267,6 +281,13 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Convolve with a kernel consisting of one column.
+	 * @param kernel the convolution kernel
+	 * @param inPixels the input pixel array
+	 * @param outPixels the output pixel array
+	 * @param width the width of the image
+	 * @param height the height of the image
+	 * @param alpha whether to process the alpha channel
+	 * @param edgeAction the edge action to use
 	 */
 	public static void convolveV(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha, int edgeAction) {
 		int index = 0;
