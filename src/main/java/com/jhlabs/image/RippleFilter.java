@@ -12,6 +12,9 @@ import com.jhlabs.math.Noise;
  * A filter which distorts an image by rippling it in the X or Y directions.
  * The amplitude and wavelength of rippling can be specified as well as whether
  * pixels going off the edges are wrapped or not.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class RippleFilter extends TransformFilter {
 
@@ -29,7 +32,7 @@ public class RippleFilter extends TransformFilter {
 	private int waveType;
 
 	/**
-	 * Construct a RIppleFIlter
+	 * Construct a RIppleFIlter.
 	 */
 	public RippleFilter() {
 		this.xAmplitude = 5.0f;

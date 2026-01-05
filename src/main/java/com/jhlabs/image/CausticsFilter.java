@@ -19,11 +19,11 @@ public class CausticsFilter extends WholeImageFilter {
 
 	private float scale = 32;
 	private final float angle = 0.0f;
-	public int brightness = 10;
-	public float amount = 1.0f;
-	public float turbulence = 1.0f;
-	public float dispersion = 0.0f;
-	public float time = 0.0f;
+	private int brightness = 10;
+	private float amount = 1.0f;
+	private float turbulence = 1.0f;
+	private float dispersion = 0.0f;
+	private float time = 0.0f;
 	private int samples = 2;
 	private int bgColor = 0xff799fff;
 
@@ -281,7 +281,7 @@ public class CausticsFilter extends WholeImageFilter {
 	protected float evaluate(float x, float y) {
 		float xt = this.s * x + this.c * this.time;
 		float tt = this.c * x - this.c * this.time;
-		float f = this.turbulence == 0.0 ? Noise.noise3(xt, y, tt) : turbulence2(xt, y, tt, this.turbulence);
+		float f = (this.turbulence == 0.0) ? Noise.noise3(xt, y, tt) : turbulence2(xt, y, tt, this.turbulence);
 		return f;
 	}
 

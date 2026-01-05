@@ -11,6 +11,9 @@ import java.awt.geom.Point2D;
  * A Filter which distorts an image by twisting it from the centre out.
  * The twisting is centred at the centre of the image and extends out to the smallest of
  * the width and height. Pixels outside this radius are unaffected.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class TwirlFilter extends TransformFilter {
 

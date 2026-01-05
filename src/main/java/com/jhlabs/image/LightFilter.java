@@ -17,10 +17,6 @@ import com.jhlabs.math.ImageFunction2D;
 import com.jhlabs.vecmath.Color4f;
 import com.jhlabs.vecmath.Vector3f;
 
-interface ElevationMap {
-	int getHeightAt(int x, int y);
-}
-
 /**
  * The LightFilter class provides a filter for simulating advanced lighting effects such as bump mapping,
  * shading, and reflection using various lighting models and sources. This class is a part of the image
@@ -47,6 +43,11 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 	public static final int BUMPS_FROM_IMAGE_ALPHA = 1;
 	public static final int BUMPS_FROM_MAP = 2;
 	public static final int BUMPS_FROM_BEVEL = 3;
+
+	public static final int AMBIENT = 0;
+	public static final int DISTANT = 1;
+	public static final int POINT = 2;
+	public static final int SPOT = 3;
 
 	private float bumpHeight;
 	private float bumpSoftness;
@@ -474,8 +475,8 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 			float xWeight = x - ix;
 			float yWeight = y - iy;
 			int i = this.envWidth * iy + ix;
-			int dx = ix == this.envWidth - 1 ? 0 : 1;
-			int dy = iy == this.envHeight - 1 ? 0 : this.envWidth;
+			int dx = (ix == (this.envWidth - 1)) ? 0 : 1;
+			int dy = (iy == (this.envHeight - 1)) ? 0 : this.envWidth;
 			this.rgb[0] = this.envPixels[i];
 			this.rgb[1] = this.envPixels[i + dx];
 			this.rgb[2] = this.envPixels[i + dy];
@@ -483,6 +484,11 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 			return ImageMath.bilinearInterpolate(xWeight, yWeight, this.rgb);
 		}
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Stylize/Light Effects...";
 	}
 
 	public class NormalEvaluator {
@@ -659,17 +665,11 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 				case SMOOTH_PULSE:
 					return ImageMath.smoothPulse(0.0f, 0.1f, 0.5f, 1.0f, x);
 				case THING:
-					return (float) (x < 0.2 ? Math.sin(x / 0.2 * Math.PI / 2) : 0.5 + 0.5 * Math.sin(1 + x / 0.6 * Math.PI / 2));
+					return (float) ((x < 0.2) ? Math.sin(x / 0.2 * Math.PI / 2) : (0.5 + (0.5 * Math.sin(1 + x / 0.6 * Math.PI / 2))));
 			}
 			return x;
 		}
 	}
-
-	@Override
-	public String toString() {
-		return "Stylize/Light Effects...";
-	}
-
 
 	public static class Material {
 		int diffuseColor;
@@ -699,11 +699,6 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 		}
 
 	}
-
-	public static final int AMBIENT = 0;
-	public static final int DISTANT = 1;
-	public static final int POINT = 2;
-	public static final int SPOT = 3;
 
 	public static class Light implements Cloneable {
 

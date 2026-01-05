@@ -6,11 +6,14 @@ package com.jhlabs.image;
 
 /**
  * A colormap with the colors of the spectrum.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class SpectrumColormap implements Colormap, java.io.Serializable {
 
 	/**
-	 * Construct a spcetrum color map
+	 * Construct a spectrum color map.
 	 */
 	public SpectrumColormap() {
 	}

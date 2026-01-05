@@ -2,6 +2,9 @@ package com.jhlabs.vecmath;
 
 /**
  * Vector math package, converted to look similar to javax.vecmath.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class Vector3f extends Tuple3f {
 

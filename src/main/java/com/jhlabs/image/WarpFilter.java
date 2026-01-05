@@ -25,6 +25,9 @@ import java.awt.image.PixelGrabber;
  * one for the destination image. The image will be warped so that
  * a point in the source grid moves to its counterpart in the destination
  * grid.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class WarpFilter extends WholeImageFilter {
 

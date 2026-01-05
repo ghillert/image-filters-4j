@@ -76,7 +76,7 @@ public abstract class ImageUtils {
 			Graphics bg = backgroundImage.createGraphics();
 			for (int by = 0; by < 64; by += 8) {
 				for (int bx = 0; bx < 64; bx += 8) {
-					bg.setColor(((bx ^ by) & 8) != 0 ? Color.lightGray : Color.white);
+					bg.setColor((((bx ^ by) & 8) != 0) ? Color.lightGray : Color.white);
 					bg.fillRect(bx, by, 8, 8);
 				}
 			}

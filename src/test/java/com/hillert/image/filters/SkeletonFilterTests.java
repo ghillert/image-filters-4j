@@ -24,20 +24,16 @@
  */
 package com.hillert.image.filters;
 
+import java.awt.image.BufferedImage;
+
 import com.hillert.image.filters.support.ImageTestUtils;
 import com.jhlabs.image.GaussianFilter;
 import com.jhlabs.image.SkeletonFilter;
-import org.junit.jupiter.api.Test;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Gunnar Hillert
  */
-final class SkeletonFilterTests {
+public class SkeletonFilterTests {
 
 	/**
 	 * Entry point for the program, which demonstrates the application of a {@link GaussianFilter} on an image and

@@ -10,7 +10,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 
 /**
- * Scales an image using the area-averaging algorithm, which can't be done with AffineTransformOp.
+ * Scales an image using the area-averaging algorithm, which can't be done with {@link java.awt.image.AffineTransformOp}.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class ScaleFilter extends AbstractBufferedImageOp {
 

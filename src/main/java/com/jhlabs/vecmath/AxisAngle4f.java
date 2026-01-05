@@ -7,10 +7,10 @@ package com.jhlabs.vecmath;
  * @author Gunnar Hillert
  */
 public class AxisAngle4f {
-	public float x;
-	public float y;
-	public float z;
-	public float angle;
+	private float x;
+	private float y;
+	private float z;
+	private float angle;
 
 	public AxisAngle4f() {
 		this(0, 0, 0, 0);

@@ -216,7 +216,7 @@ public class ImageMath {
 	 */
 	public static float triangle(float x) {
 		float r = mod(x, 1.0f);
-		return 2.0f * (r < 0.5 ? r : 1 - r);
+		return 2.0f * ((r < 0.5) ? r : (1 - r));
 	}
 
 	/**

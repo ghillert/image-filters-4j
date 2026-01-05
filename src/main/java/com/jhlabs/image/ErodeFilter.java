@@ -36,6 +36,7 @@ public class ErodeFilter extends BinaryFilter {
 		return this.threshold;
 	}
 
+	@SuppressWarnings("checkstyle:NestedForDepth")
 	@Override
 	protected int[] filterPixels(int width, int height, int[] inPixels, Rectangle transformedSpace) {
 		int[] outPixels = new int[width * height];

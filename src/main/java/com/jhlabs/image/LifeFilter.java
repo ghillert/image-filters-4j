@@ -63,7 +63,7 @@ public class LifeFilter extends BinaryFilter {
 					outPixels[index++] = (neighbours == 2 || neighbours == 3) ? pixel : 0xffffffff;
 				}
 				else {
-					outPixels[index++] = neighbours == 3 ? 0xff000000 : pixel;
+					outPixels[index++] = (neighbours == 3) ? 0xff000000 : pixel;
 				}
 			}
 

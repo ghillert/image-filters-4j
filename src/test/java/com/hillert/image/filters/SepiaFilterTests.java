@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Gunnar Hillert
  */
-final class SepiaFilterTests {
+public class SepiaFilterTests {
 
 	private final SepiaFilter filter = new SepiaFilter();
 

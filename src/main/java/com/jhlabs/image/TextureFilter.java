@@ -105,7 +105,7 @@ public class TextureFilter extends PointFilter implements java.io.Serializable {
 		float ny = this.m10 * x + this.m11 * y;
 		nx /= this.scale;
 		ny /= this.scale * this.stretch;
-		float f = this.turbulence == 1.0 ? Noise.noise2(nx, ny) : Noise.turbulence2(nx, ny, this.turbulence);
+		float f = (this.turbulence == 1.0) ? Noise.noise2(nx, ny) : Noise.turbulence2(nx, ny, this.turbulence);
 		f = (f * 0.5f) + 0.5f;
 		f = ImageMath.gain(f, this.gain);
 		f = ImageMath.bias(f, this.bias);

@@ -24,15 +24,14 @@
  */
 package com.hillert.image.filters;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import com.hillert.image.filters.support.ImageTestUtils;
+import com.jhlabs.image.GaussianFilter;
 import org.junit.jupiter.api.Test;
 
-import com.jhlabs.image.GaussianFilter;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * A set of test cases for validating the functionality of the {@link GaussianFilter} class.
@@ -53,7 +52,7 @@ import com.jhlabs.image.GaussianFilter;
  *
  * @author Gunnar Hillert
  */
-final class GaussianFilterTests {
+public class GaussianFilterTests {
 
 	/**
 	 * Verifies that applying the {@link GaussianFilter} to a BufferedImage with a solid color

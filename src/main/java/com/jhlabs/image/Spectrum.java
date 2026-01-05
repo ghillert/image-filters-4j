@@ -14,6 +14,7 @@ public class Spectrum {
 	}
 
 	/**
+	 * Convert a wavelength in nanometres to an RGB color value.
 	 * @param wavelength wavelength in nanometres
 	 */
 	public static int wavelengthToRGB(float wavelength) {

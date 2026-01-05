@@ -314,7 +314,7 @@ public class GradientFilter extends AbstractBufferedImageOp {
 
 	private float map(float v) {
 		if (this.repeat) {
-			v = v > 1.0 ? 2.0f - v : v;
+			v = (v > 1.0) ? (2.0f - v) : v;
 		}
 		switch (this.interpolation) {
 			case INT_CIRCLE_UP:

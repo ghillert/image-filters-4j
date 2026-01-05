@@ -27,18 +27,22 @@ package com.hillert.image.filters;
 
 import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+
 import com.hillert.image.filters.support.ImageTestUtils;
 import com.jhlabs.image.CausticsFilter;
 import org.junit.jupiter.api.Test;
-
-import javax.swing.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Integration-style tests that verify the {@link CausticsFilter}.
  */
-final class CausticsFilterTests {
+public class CausticsFilterTests {
 
 	private static final int FRAME_COUNT = 60;
 	private static final int FRAME_DELAY_MILLIS = 60;
@@ -86,7 +90,7 @@ final class CausticsFilterTests {
 	 * @return configured filter instance
 	 */
 	private static CausticsFilter buildFilter(float scale, int brightness, float amount, float turbulence,
-											  int samples, int backgroundColor) {
+											int samples, int backgroundColor) {
 		CausticsFilter filter = new CausticsFilter();
 		filter.setScale(scale);
 		filter.setBrightness(brightness);
@@ -174,7 +178,7 @@ final class CausticsFilterTests {
 			frame.setVisible(true);
 
 			int[] indexHolder = {0};
-			Timer timer = new Timer(FRAME_DELAY_MILLIS, event -> {
+			Timer timer = new Timer(FRAME_DELAY_MILLIS, (event) -> {
 				indexHolder[0] = (indexHolder[0] + 1) % icons.length;
 				label.setIcon(icons[indexHolder[0]]);
 			});

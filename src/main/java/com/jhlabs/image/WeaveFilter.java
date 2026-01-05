@@ -108,6 +108,7 @@ public class WeaveFilter extends PointFilter implements java.io.Serializable {
 		return this.shadeCrossings;
 	}
 
+	@SuppressWarnings("Checkstyle:NestedIfDepth")
 	@Override
 	public int filterRGB(int x, int y, int rgb) {
 		x += this.xWidth + this.xGap / 2;
@@ -158,8 +159,8 @@ public class WeaveFilter extends PointFilter implements java.io.Serializable {
 		int m = this.matrix[iyr][ixc];
 		if (inX) {
 			if (inY) {
-				v = m == 1 ? lrgbX : lrgbY;
-				v = ImageMath.mixColors(2 * (m == 1 ? dX : dY), v, 0xff000000);
+				v = (m == 1) ? lrgbX : lrgbY;
+				v = ImageMath.mixColors(2 * ((m == 1) ? dX : dY), v, 0xff000000);
 			}
 			else {
 				if (this.shadeCrossings) {

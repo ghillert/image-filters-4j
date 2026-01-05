@@ -19,7 +19,9 @@ import java.awt.Rectangle;
  * This class extends {@code WholeImageFilter}, meaning it requires the entire
  * image to be in memory for processing.
  *
- ElevationMap
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ *
  */
 public class MaximumFilter extends WholeImageFilter {
 

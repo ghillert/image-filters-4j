@@ -9,6 +9,9 @@ import java.awt.Rectangle;
 /**
  * An abstract superclass for filters which distort images in some way. The subclass only needs to override
  * two methods to provide the mapping between source and destination pixels.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public abstract class TransformFilter extends WholeImageFilter {
 
@@ -76,8 +79,8 @@ public abstract class TransformFilter extends WholeImageFilter {
 					float xWeight = out[0] - srcX;
 					float yWeight = out[1] - srcY;
 					int i = srcWidth * srcY + srcX;
-					int dx = srcX == srcWidth - 1 ? 0 : 1;
-					int dy = srcY == srcHeight - 1 ? 0 : srcWidth;
+					int dx = (srcX == (srcWidth - 1)) ? 0 : 1;
+					int dy = (srcY == (srcHeight - 1)) ? 0 : srcWidth;
 					rgb[0] = inPixels[i];
 					rgb[1] = inPixels[i + dx];
 					rgb[2] = inPixels[i + dy];

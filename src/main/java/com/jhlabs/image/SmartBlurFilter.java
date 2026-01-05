@@ -35,7 +35,7 @@ public class SmartBlurFilter extends AbstractBufferedImageOp {
 	}
 
 	/**
-	 * Convolve with a kernel consisting of one row
+	 * Convolve with a kernel consisting of one row.
 	 */
 	public void thresholdBlur(Kernel kernel, int[] inPixels, int[] outPixels, int width, int height, boolean alpha) {
 		int index = 0;
@@ -99,10 +99,10 @@ public class SmartBlurFilter extends AbstractBufferedImageOp {
 						}
 					}
 				}
-				a = af == 0 ? a1 : a / af;
-				r = rf == 0 ? r1 : r / rf;
-				g = gf == 0 ? g1 : g / gf;
-				b = bf == 0 ? b1 : b / bf;
+				a = (af == 0) ? a1 : (a / af);
+				r = (rf == 0) ? r1 : (r / rf);
+				g = (gf == 0) ? g1 : (g / gf);
+				b = (bf == 0) ? b1 : (b / bf);
 				int ia = alpha ? PixelUtils.clamp((int) (a + 0.5)) : 0xff;
 				int ir = PixelUtils.clamp((int) (r + 0.5));
 				int ig = PixelUtils.clamp((int) (g + 0.5));

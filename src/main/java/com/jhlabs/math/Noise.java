@@ -8,6 +8,9 @@ import java.util.Random;
 
 /**
  * Perlin Noise functions.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class Noise implements Function1D, Function2D, Function3D {
 

@@ -24,15 +24,16 @@
  */
 package com.hillert.image.filters;
 
-import com.jhlabs.image.GrayscaleFilter;
-import org.junit.jupiter.api.Test;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import javax.imageio.ImageIO;
+
+import com.jhlabs.image.GrayscaleFilter;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +44,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Gunnar Hillert
  */
-final class GettingStartedExampleTests {
+public class GettingStartedExampleTests {
 
 	@Test
 	void readImageApplyFilterAndWriteImageToFile() {

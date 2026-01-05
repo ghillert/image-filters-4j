@@ -194,15 +194,15 @@ public class MiscCompositeContext implements CompositeContext {
 						break;
 
 					case MiscComposite.DARKEN:
-						dor = dir < sr ? dir : sr;
-						dog = dig < sg ? dig : sg;
-						dob = dib < sb ? dib : sb;
+						dor = (dir < sr) ? dir : sr;
+						dog = (dig < sg) ? dig : sg;
+						dob = (dib < sb) ? dib : sb;
 						break;
 
 					case MiscComposite.LIGHTEN:
-						dor = dir > sr ? dir : sr;
-						dog = dig > sg ? dig : sg;
-						dob = dib > sb ? dib : sb;
+						dor = (dir > sr) ? dir : sr;
+						dog = (dig > sg) ? dig : sg;
+						dob = (dib > sb) ? dib : sb;
 						break;
 
 					case MiscComposite.AVERAGE:
@@ -348,9 +348,9 @@ public class MiscCompositeContext implements CompositeContext {
 						break;
 
 					case MiscComposite.PIN_LIGHT:
-						dor = sr > 127 ? Math.max(sr, dir) : Math.min(sr, dir);
-						dog = sg > 127 ? Math.max(sg, dig) : Math.min(sg, dig);
-						dob = sb > 127 ? Math.max(sb, dib) : Math.min(sb, dib);
+						dor = (sr > 127) ? Math.max(sr, dir) : Math.min(sr, dir);
+						dog = (sg > 127) ? Math.max(sg, dig) : Math.min(sg, dig);
+						dob = (sb > 127) ? Math.max(sb, dib) : Math.min(sb, dib);
 						break;
 
 					case MiscComposite.EXCLUSION:

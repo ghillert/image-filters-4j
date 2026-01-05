@@ -50,7 +50,7 @@ public class NoiseFilter extends PointFilter {
 	}
 
 	private int random(int x) {
-		x += (int) (((this.distribution == GAUSSIAN ? this.randomNumbers.nextGaussian() : 2 * this.randomNumbers.nextFloat() - 1)) * this.amount);
+		x += (int) ((((this.distribution == GAUSSIAN) ? this.randomNumbers.nextGaussian() : ((2 * this.randomNumbers.nextFloat()) - 1))) * this.amount);
 		if (x < 0) {
 			x = 0;
 		}
@@ -67,7 +67,7 @@ public class NoiseFilter extends PointFilter {
 		int g = (rgb >> 8) & 0xff;
 		int b = rgb & 0xff;
 		if (this.monochrome) {
-			int n = (int) (((this.distribution == GAUSSIAN ? this.randomNumbers.nextGaussian() : 2 * this.randomNumbers.nextFloat() - 1)) * this.amount);
+			int n = (int) ((((this.distribution == GAUSSIAN) ? this.randomNumbers.nextGaussian() : ((2 * this.randomNumbers.nextFloat()) - 1))) * this.amount);
 			r = PixelUtils.clamp(r + n);
 			g = PixelUtils.clamp(g + n);
 			b = PixelUtils.clamp(b + n);

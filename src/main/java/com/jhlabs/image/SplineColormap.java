@@ -10,6 +10,9 @@ import java.io.Serializable;
  * A Colormap implemented using Catmull-Rom colour splines. The map has a variable number
  * of knots with a minimum of four. The first and last knots give the tangent at the end
  * of the spline, and colours are interpolated from the second to the second-last knots.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class SplineColormap extends ArrayColormap implements Serializable {
 

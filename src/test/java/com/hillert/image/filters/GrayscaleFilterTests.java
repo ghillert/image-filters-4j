@@ -41,7 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * @author Gunnar Hillert
  */
-final class GrayscaleFilterTests {
+public class GrayscaleFilterTests {
 
 	private final GrayscaleFilter filter = new GrayscaleFilter();
 

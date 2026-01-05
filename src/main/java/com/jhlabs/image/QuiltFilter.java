@@ -119,11 +119,11 @@ public class QuiltFilter extends WholeImageFilter implements java.io.Serializabl
 			float smy2 = (float) Math.sin(2 * my);
 			float x1 = (float) (this.a * smx2 + this.b * smx2 * Math.cos(2 * my) +
 					this.c * Math.sin(4 * mx) + this.d * Math.sin(6 * mx) * Math.cos(4 * my) + this.k * x);
-			x1 = x1 >= 0 ? x1 - (int) x1 : x1 - (int) x1 + 1;
+			x1 = (x1 >= 0) ? (x1 - (int) x1) : ((x1 - (int) x1) + 1);
 
 			float y1 = (float) (this.a * smy2 + this.b * smy2 * Math.cos(2 * mx) +
 					this.c * Math.sin(4 * my) + this.d * Math.sin(6 * my) * Math.cos(4 * mx) + this.k * y);
-			y1 = y1 >= 0 ? y1 - (int) y1 : y1 - (int) y1 + 1;
+			y1 = (y1 >= 0) ? (y1 - (int) y1) : ((y1 - (int) y1) + 1);
 			x = x1;
 			y = y1;
 		}
@@ -133,11 +133,11 @@ public class QuiltFilter extends WholeImageFilter implements java.io.Serializabl
 			float my = ImageMath.PI * y;
 			float x1 = (float) (this.a * Math.sin(2 * mx) + this.b * Math.sin(2 * mx) * Math.cos(2 * my) +
 					this.c * Math.sin(4 * mx) + this.d * Math.sin(6 * mx) * Math.cos(4 * my) + this.k * x);
-			x1 = x1 >= 0 ? x1 - (int) x1 : x1 - (int) x1 + 1;
+			x1 = (x1 >= 0) ? (x1 - (int) x1) : ((x1 - (int) x1) + 1);
 
 			float y1 = (float) (this.a * Math.sin(2 * my) + this.b * Math.sin(2 * my) * Math.cos(2 * mx) +
 					this.c * Math.sin(4 * my) + this.d * Math.sin(6 * my) * Math.cos(4 * mx) + this.k * y);
-			y1 = y1 >= 0 ? y1 - (int) y1 : y1 - (int) y1 + 1;
+			y1 = (y1 >= 0) ? (y1 - (int) y1) : ((y1 - (int) y1) + 1);
 			x = x1;
 			y = y1;
 			int ix = (int) (width * x);

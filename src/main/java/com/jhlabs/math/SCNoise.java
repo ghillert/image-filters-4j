@@ -8,6 +8,9 @@ import java.util.Random;
 
 /**
  * Sparse Convolution Noise. This is computationally very expensive, but worth it.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
  */
 public class SCNoise implements Function1D, Function2D, Function3D {
 
