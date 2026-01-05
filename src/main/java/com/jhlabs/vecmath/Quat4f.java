@@ -76,14 +76,10 @@ public class Quat4f extends Tuple4f {
 				if (m.m22 > m.m11) {
 					i = 2;
 				}
-				else {
-				}
 			}
 			else {
 				if (m.m22 > m.m00) {
 					i = 2;
-				}
-				else {
 				}
 			}
 

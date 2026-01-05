@@ -79,7 +79,8 @@ public class PerspectiveFilter extends TransformFilter {
 			a12 = y1 - y0;
 			a22 = y2 - y1;
 			a32 = y0;
-			a13 = a23 = 0;
+			a13 = 0;
+			a23 = 0;
 		}
 		else {
 			a13 = (this.dx3 * this.dy2 - this.dx2 * this.dy3) / (this.dx1 * this.dy2 - this.dy1 * this.dx2);

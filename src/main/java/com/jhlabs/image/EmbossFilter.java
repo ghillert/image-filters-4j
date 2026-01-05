@@ -106,14 +106,16 @@ public class EmbossFilter extends WholeImageFilter {
 					Nx = bumpPixels[s1 - 1] + bumpPixels[s2 - 1] + bumpPixels[s3 - 1] - bumpPixels[s1 + 1] - bumpPixels[s2 + 1] - bumpPixels[s3 + 1];
 					Ny = bumpPixels[s3 - 1] + bumpPixels[s3] + bumpPixels[s3 + 1] - bumpPixels[s1 - 1] - bumpPixels[s1] - bumpPixels[s1 + 1];
 
+					int nDotL = Nx * Lx + Ny * Ly + NzLz;
+
 					if (Nx == 0 && Ny == 0) {
 						shade = background;
 					}
-					else if ((NdotL = Nx * Lx + Ny * Ly + NzLz) < 0) {
+					else if (nDotL < 0) {
 						shade = 0;
 					}
 					else {
-						shade = (int) (NdotL / Math.sqrt(Nx * Nx + Ny * Ny + Nz2));
+						shade = (int) (nDotL / Math.sqrt(Nx * Nx + Ny * Ny + Nz2));
 					}
 				}
 				else {

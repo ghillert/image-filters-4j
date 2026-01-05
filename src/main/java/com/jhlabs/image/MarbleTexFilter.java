@@ -135,7 +135,9 @@ public class MarbleTexFilter extends PointFilter implements java.io.Serializable
 			chaos = this.turbulenceFactor * Noise.turbulence2(nx, ny, this.turbulence);
 			t = (float) Math.sin(Math.sin(8. * chaos + 7 * nx + 3. * ny));
 
-			greenLayer = brownLayer = Math.abs(t);
+			final float layer = Math.abs(t);
+			greenLayer = layer;
+			brownLayer = layer;
 
 			perturb = (float) Math.sin(40. * chaos);
 			perturb = Math.abs(perturb);

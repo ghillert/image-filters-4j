@@ -130,7 +130,8 @@ public class WeaveFilter extends PointFilter implements java.io.Serializable {
 			dY = Math.abs(this.yWidth / 2 - ny) / this.yWidth / 2;
 		}
 		else {
-			dX = dY = 0;
+			dX = 0;
+			dY = 0;
 		}
 
 		if (this.shadeCrossings) {
@@ -138,11 +139,14 @@ public class WeaveFilter extends PointFilter implements java.io.Serializable {
 			cY = ImageMath.smoothStep(this.yWidth / 2, this.yWidth / 2 + this.yGap, Math.abs(this.yWidth / 2 - ny));
 		}
 		else {
-			cX = cY = 0;
+			cX = 0;
+			cY = 0;
 		}
 
 		if (this.useImageColors) {
-			lrgbX = lrgbY = rgb;
+			int localRgb = rgb;
+			lrgbX = localRgb;
+			lrgbY = localRgb;
 		}
 		else {
 			lrgbX = this.rgbX;

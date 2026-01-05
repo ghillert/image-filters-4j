@@ -39,7 +39,10 @@ public abstract class TransferFilter extends PointFilter {
 	}
 
 	protected void initialize() {
-		this.rTable = this.gTable = this.bTable = makeTable();
+		int[] table = makeTable();
+		this.rTable = table;
+		this.gTable = table;
+		this.bTable = table;
 	}
 
 	protected int[] makeTable() {

@@ -92,7 +92,9 @@ public class MedianFilter extends WholeImageFilter {
 				}
 				while (k < 9) {
 					argb[k] = 0xff000000;
-					r[k] = g[k] = b[k] = 0;
+					r[k] = 0;
+					g[k] = 0;
+					b[k] = 0;
 					k++;
 				}
 				outPixels[index++] = argb[rgbMedian(r, g, b)];

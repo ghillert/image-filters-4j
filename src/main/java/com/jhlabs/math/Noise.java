@@ -326,9 +326,10 @@ public class Noise implements Function1D, Function2D, Function3D {
 		}
 
 		for (i = B - 1; i >= 0; i--) {
-			k = p[i];
-			p[i] = p[j = random() % B];
-			p[j] = k;
+			int tmp = p[i];
+			j = random() % B;
+			p[i] = p[j];
+			p[j] = tmp;
 		}
 
 		for (i = 0; i < B + 2; i++) {

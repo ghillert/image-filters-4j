@@ -189,7 +189,9 @@ public class PixelUtils {
 				b1 = (s * b1 + m * (255 - b1)) / 255;
 				break;
 			case CLEAR:
-				r1 = g1 = b1 = 0xff;
+				r1 = 0xff;
+				g1 = 0xff;
+				b1 = 0xff;
 				break;
 			case DST_IN:
 				r1 = clamp((r2 * a1) / 255);

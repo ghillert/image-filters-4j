@@ -182,7 +182,8 @@ public class VariableBlurFilter extends AbstractBufferedImageOp {
 	}
 
 	public void setRadius(int radius) {
-		this.hRadius = this.vRadius = radius;
+		this.hRadius = radius;
+		this.vRadius = radius;
 	}
 
 	public int getRadius() {

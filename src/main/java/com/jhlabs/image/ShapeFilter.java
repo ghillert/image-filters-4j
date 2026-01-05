@@ -167,7 +167,10 @@ public class ShapeFilter extends WholeImageFilter {
 
 				if (m == 0) {
 					// default color
-					sa = sr = sg = sb = 0;
+					sa = 0;
+					sr = 0;
+					sg = 0;
+					sb = 0;
 				}
 				else {
 					// get V from map
@@ -185,7 +188,10 @@ public class ShapeFilter extends WholeImageFilter {
 					}
 
 					if (this.colormap == null) {
-						sr = sg = sb = (int) (v * 255);
+						int shade = (int) (v * 255);
+						sr = shade;
+						sg = shade;
+						sb = shade;
 					}
 					else {
 						int c = (this.colormap.getColor(v));
@@ -268,7 +274,9 @@ public class ShapeFilter extends WholeImageFilter {
 		r5 = r4 + width;
 
 		if (y == 0 || x == 0 || y == ymax + 2 || x == xmax + 2) {
-			return map[offset] = one;
+			int value = one;
+			map[offset] = value;
+			return value;
 		}
 
 		v = map[r2 + 2] + one;
@@ -310,7 +318,9 @@ public class ShapeFilter extends WholeImageFilter {
 		}
 
 		if (y == 1 || x == 1 || y == ymax + 1 || x == xmax + 1) {
-			return map[offset] = min;
+			int value = min;
+			map[offset] = value;
+			return value;
 		}
 
 		v = map[r1 + 1] + sqrt5;
@@ -353,7 +363,9 @@ public class ShapeFilter extends WholeImageFilter {
 			min = v;
 		}
 
-		return map[offset] = min;
+		int value = min;
+		map[offset] = value;
+		return value;
 	}
 
 	private int setValue(int[] map, int width, int offset) {
@@ -436,7 +448,9 @@ public class ShapeFilter extends WholeImageFilter {
 			min = v;
 		}
 
-		return map[offset] = min;
+		int value = min;
+		map[offset] = value;
+		return value;
 	}
 
 	public float gddistanceMap(int[] pixels, float[] map, int width, int height) {
@@ -524,7 +538,9 @@ public class ShapeFilter extends WholeImageFilter {
 					minimum++;
 				}
 
-				float_tmp = distp_cur[j + 1] = minimum + fraction / 256.0f;
+				float value = minimum + fraction / 256.0f;
+				distp_cur[j + 1] = value;
+				float_tmp = value;
 
 				if (float_tmp > max_iterations) {
 					max_iterations = float_tmp;
@@ -582,7 +598,10 @@ public class ShapeFilter extends WholeImageFilter {
 
 				if (m == 0) {
 					// default color
-					sa = sr = sg = sb = 0;
+					sa = 0;
+					sr = 0;
+					sg = 0;
+					sb = 0;
 				}
 				else {
 					// get V from map
@@ -600,7 +619,10 @@ public class ShapeFilter extends WholeImageFilter {
 					}
 
 					if (this.colormap == null) {
-						sr = sg = sb = (int) (v * 255);
+						int shade = (int) (v * 255);
+						sr = shade;
+						sg = shade;
+						sb = shade;
 					}
 					else {
 						int c = (this.colormap.getColor(v));

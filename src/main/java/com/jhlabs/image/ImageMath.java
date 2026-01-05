@@ -606,7 +606,10 @@ public class ImageMath {
 		inSegment = 1.0f;
 		outSegment = in[1];
 		sizfac = outSegment;
-		aSum = rSum = gSum = bSum = 0.0f;
+		aSum = 0.0f;
+		rSum = 0.0f;
+		gSum = 0.0f;
+		bSum = 0.0f;
 		rgb = source[srcIndex];
 		a = (rgb >> 24) & 0xff;
 		r = (rgb >> 16) & 0xff;
@@ -657,7 +660,9 @@ public class ImageMath {
 								((int) Math.min(gSum / sizfac, 255) << 8) |
 								(int) Math.min(bSum / sizfac, 255);
 				destIndex += stride;
-				rSum = gSum = bSum = 0.0f;
+				rSum = 0.0f;
+				gSum = 0.0f;
+				bSum = 0.0f;
 				inSegment = inSegment - outSegment;
 				outSegment = in[i + 1] - in[i];
 				sizfac = outSegment;

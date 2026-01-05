@@ -70,7 +70,12 @@ public class OilFilter extends WholeImageFilter {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				for (int i = 0; i < this.levels; i++) {
-					rHistogram[i] = gHistogram[i] = bHistogram[i] = rTotal[i] = gTotal[i] = bTotal[i] = 0;
+					rHistogram[i] = 0;
+					gHistogram[i] = 0;
+					bHistogram[i] = 0;
+					rTotal[i] = 0;
+					gTotal[i] = 0;
+					bTotal[i] = 0;
 				}
 
 				for (int row = -this.range; row <= this.range; row++) {

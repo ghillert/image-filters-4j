@@ -272,7 +272,8 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 					py = this.random.nextFloat();
 					break;
 				case SQUARE:
-					px = py = 0.5f;
+					px = 0.5f;
+					py = 0.5f;
 					if (this.randomness != 0) {
 						px += this.randomness * (this.random.nextFloat() - 0.5);
 						py += this.randomness * (this.random.nextFloat() - 0.5);

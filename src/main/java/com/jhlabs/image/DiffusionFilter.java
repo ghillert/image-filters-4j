@@ -112,7 +112,10 @@ public class DiffusionFilter extends WholeImageFilter {
 				int b1 = rgb1 & 0xff;
 
 				if (!this.colorDither) {
-					r1 = g1 = b1 = (r1 + g1 + b1) / 3;
+					int gray = (r1 + g1 + b1) / 3;
+					r1 = gray;
+					g1 = gray;
+					b1 = gray;
 				}
 
 				int r2 = map[div[r1]];

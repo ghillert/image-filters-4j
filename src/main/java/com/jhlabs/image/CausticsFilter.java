@@ -30,7 +30,11 @@ public class CausticsFilter extends WholeImageFilter {
 	private float s;
 	private float c;
 
+	/**
+	 * Construct a CausticsFilter.
+	 */
 	public CausticsFilter() {
+		super();
 	}
 
 	public void setScale(float scale) {
@@ -144,9 +148,7 @@ public class CausticsFilter extends WholeImageFilter {
 							float srcX = sx + this.scale * focus * xDisplacement * ca;
 							float srcY = sy + this.scale * focus * yDisplacement * ca;
 
-							if (srcX < 0 || srcX >= outWidth - 1 || srcY < 0 || srcY >= outHeight - 1) {
-							}
-							else {
+							if (!(srcX < 0) && !(srcX >= outWidth - 1) && !(srcY < 0) && !(srcY >= outHeight - 1)) {
 								int i = ((int) srcY) * outWidth + (int) srcX;
 								int rgb = pixels[i];
 								int r = (rgb >> 16) & 0xff;
@@ -179,27 +181,26 @@ public class CausticsFilter extends WholeImageFilter {
 						float srcY = sy + this.scale * focus * yDisplacement;
 
 						if (srcX < 0 || srcX >= outWidth - 1 || srcY < 0 || srcY >= outHeight - 1) {
+							continue;
 						}
-						else {
-							int i = ((int) srcY) * outWidth + (int) srcX;
-							int rgb = pixels[i];
-							int r = (rgb >> 16) & 0xff;
-							int g = (rgb >> 8) & 0xff;
-							int b = rgb & 0xff;
-							r += v;
-							g += v;
-							b += v;
-							if (r > 255) {
-								r = 255;
-							}
-							if (g > 255) {
-								g = 255;
-							}
-							if (b > 255) {
-								b = 255;
-							}
-							pixels[i] = 0xff000000 | (r << 16) | (g << 8) | b;
+						int i = ((int) srcY) * outWidth + (int) srcX;
+						int rgb = pixels[i];
+						int r = (rgb >> 16) & 0xff;
+						int g = (rgb >> 8) & 0xff;
+						int b = rgb & 0xff;
+						r += v;
+						g += v;
+						b += v;
+						if (r > 255) {
+							r = 255;
 						}
+						if (g > 255) {
+							g = 255;
+						}
+						if (b > 255) {
+							b = 255;
+						}
+						pixels[i] = 0xff000000 | (r << 16) | (g << 8) | b;
 					}
 				}
 			}

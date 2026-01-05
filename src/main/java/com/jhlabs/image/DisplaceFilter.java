@@ -84,7 +84,8 @@ public class DisplaceFilter extends TransformFilter {
 		}
 		mapPixels = null;
 		dst = super.filter(src, dst);
-		this.xmap = this.ymap = null;
+		this.xmap = null;
+		this.ymap = null;
 		return dst;
 	}
 

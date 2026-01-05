@@ -175,7 +175,9 @@ public class DitherFilter extends PointFilter implements java.io.Serializable {
 	}
 
 	protected void initialize() {
-		this.rows = this.cols = (int) Math.sqrt(this.matrix.length);
+		int size = (int) Math.sqrt(this.matrix.length);
+		this.rows = size;
+		this.cols = size;
 		this.map = new int[this.levels];
 		for (int i = 0; i < this.levels; i++) {
 			int v = 255 * i / (this.levels - 1);
@@ -210,7 +212,10 @@ public class DitherFilter extends PointFilter implements java.io.Serializable {
 		}
 		else {
 			int value = (r + g + b) / 3;
-			r = g = b = this.map[(this.mod[value] > v) ? (this.div[value] + 1) : this.div[value]];
+			int dithered = this.map[(this.mod[value] > v) ? (this.div[value] + 1) : this.div[value]];
+			r = dithered;
+			g = dithered;
+			b = dithered;
 		}
 		return a | (r << 16) | (g << 8) | b;
 	}

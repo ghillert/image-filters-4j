@@ -34,7 +34,9 @@ public class RippleFilter extends TransformFilter {
 	public RippleFilter() {
 		this.xAmplitude = 5.0f;
 		this.yAmplitude = 0.0f;
-		this.xWavelength = this.yWavelength = 16.0f;
+		float wavelength = 16.0f;
+		this.xWavelength = wavelength;
+		this.yWavelength = wavelength;
 	}
 
 	/**

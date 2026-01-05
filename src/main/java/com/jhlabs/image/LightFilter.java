@@ -126,7 +126,8 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 			this.envPixels = getRGB(environmentMap, 0, 0, this.envWidth, this.envHeight, null);
 		}
 		else {
-			this.envWidth = this.envHeight = 1;
+			this.envWidth = 1;
+			this.envHeight = 1;
 			this.envPixels = null;
 		}
 	}
@@ -236,7 +237,9 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 					// Complicated and slower method
 					// Calculate four normals using the gradients in +/- X/Y directions
 					int count = 0;
-					normal.x = normal.y = normal.z = 0;
+					normal.x = 0;
+					normal.y = 0;
+					normal.z = 0;
 					float m0 = width45 * bump.evaluate(nx, ny);
 					float m1 = (x > 0) ? ((width45 * bump.evaluate(nx - 1.0f, ny)) - m0) : -2;
 					float m2 = (y > 0) ? ((width45 * bump.evaluate(nx, ny - 1.0f)) - m0) : -2;
@@ -535,7 +538,8 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 
 		public void getNormalAt(int x, int y, int width, int height, Vector3f normal) {
 			float distance = 0;
-			normal.x = normal.y = 0;
+			normal.x = 0;
+			normal.y = 0;
 			normal.z = 0.707f;
 			switch (this.shape) {
 				case RECTANGLE:

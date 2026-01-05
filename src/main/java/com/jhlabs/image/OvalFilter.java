@@ -25,8 +25,15 @@ public class OvalFilter extends PointFilter {
 	@Override
 	public void setDimensions(int width, int height) {
 		super.setDimensions(width, height);
-		this.centreX = this.a = width / 2;
-		this.centreY = this.b = height / 2;
+		final float halfWidth = width / 2.0f;
+		final float halfHeight = height / 2.0f;
+
+		this.centreX = halfWidth;
+		this.a = halfWidth;
+
+		this.centreY = halfHeight;
+		this.b = halfHeight;
+
 		this.a2 = this.a * this.a;
 		this.b2 = this.b * this.b;
 	}
