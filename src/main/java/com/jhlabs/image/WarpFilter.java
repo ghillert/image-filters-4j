@@ -108,7 +108,7 @@ public class WarpFilter extends WholeImageFilter {
 //			setRGB.setRGB(0, 0, width, height, outPixels);
 		}
 		else {
-			WarpGrid newGrid = new WarpGrid(this.sourceGrid.rows, this.sourceGrid.cols, width, height);
+			WarpGrid newGrid = new WarpGrid(this.sourceGrid.getRows(), this.sourceGrid.getCols(), width, height);
 			for (int i = 0; i < this.frames; i++) {
 				float t = (float) i / (this.frames - 1);
 				this.sourceGrid.lerp(t, this.destGrid, newGrid);
@@ -139,7 +139,7 @@ public class WarpFilter extends WholeImageFilter {
 	}
 
 	public void morph(int[] srcPixels, int[] destPixels, int[] outPixels, WarpGrid srcGrid, WarpGrid destGrid, int width, int height, float t) {
-		WarpGrid newGrid = new WarpGrid(srcGrid.rows, srcGrid.cols, width, height);
+		WarpGrid newGrid = new WarpGrid(srcGrid.getRows(), srcGrid.getCols(), width, height);
 		srcGrid.lerp(t, destGrid, newGrid);
 		srcGrid.warp(srcPixels, width, height, srcGrid, newGrid, outPixels);
 		int[] destPixels2 = new int[width * height];

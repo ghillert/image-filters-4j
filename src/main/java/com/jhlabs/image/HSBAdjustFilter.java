@@ -14,9 +14,9 @@ import java.awt.Color;
  */
 public class HSBAdjustFilter extends PointFilter {
 
-	public float hFactor;
-	public float sFactor;
-	public float bFactor;
+	private float hFactor;
+	private float sFactor;
+	private float bFactor;
 	private final float[] hsb = new float[3];
 
 	public HSBAdjustFilter() {

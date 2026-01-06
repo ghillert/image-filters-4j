@@ -33,8 +33,30 @@ import java.awt.Rectangle;
  */
 public class PolarFilter extends TransformFilter {
 
+	/**
+	 * A constant representing the transformation type for converting coordinates
+	 * from rectangular (cartesian) to polar format in the {@code PolarFilter}.
+	 * This transformation maps pixel coordinates from the rectangular grid
+	 * to their corresponding positions in a polar coordinate system.
+	 */
 	public static final int RECT_TO_POLAR = 0;
+
+	/**
+	 * A constant representing the type of transformation where polar coordinates
+	 * are converted to rectangular coordinates.
+	 * Typically used in filters or transformations that perform such conversions.
+	 */
 	public static final int POLAR_TO_RECT = 1;
+
+	/**
+	 * A constant representing the type of transformation for inverting pixels
+	 * within a circle. This value is used in conjunction with the PolarFilter
+	 * class to specify a type of transformation where the image data is inverted
+	 * within a circular region.
+	 * <p>
+	 * It is typically used to create effects based on polar coordinate
+	 * transformations.
+	 */
 	public static final int INVERT_IN_CIRCLE = 2;
 
 	private int type;

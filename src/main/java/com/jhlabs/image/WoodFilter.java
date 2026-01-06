@@ -23,10 +23,10 @@ public class WoodFilter extends RGBImageFilter implements java.io.Serializable {
 	private float scale = 100;
 	private float stretch = 1.0f;
 	private float angle = 0.0f;
-	public float rings = 0.5f;
-	public float turbulence = 1.0f;
-	public float gain = 0.8f;
-	public float bias = 0.1f;
+	private float rings = 0.5f;
+	private float turbulence = 1.0f;
+	private float gain = 0.8f;
+	private float bias = 0.1f;
 	private float m00 = 1.0f;
 	private float m01 = 0.0f;
 	private float m10 = 0.0f;

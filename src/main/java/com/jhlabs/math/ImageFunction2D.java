@@ -11,10 +11,45 @@ import java.awt.image.PixelGrabber;
 import com.jhlabs.image.ImageMath;
 import com.jhlabs.image.PixelUtils;
 
+/**
+ * The {@code ImageFunction2D} class provides functionality for representing and
+ * manipulating a 2D function derived from an image. The class allows evaluation
+ * of pixel values based on given coordinates and supports multiple edge handling
+ * modes for out-of-bound pixel sampling.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class ImageFunction2D implements Function2D {
 
+	/**
+	 * A constant representing the `ZERO` edge action mode for the {@code ImageFunction2D} class.
+	 * Specifies that out-of-bound pixel accesses should return a value of zero.
+	 * <p>
+	 * This mode is used when handling images to determine how to process coordinates
+	 * that lie outside the actual dimensions of the image. If this mode is set,
+	 * any sampling of pixels outside the image bounds will return a default value of 0.
+	 */
 	public static final int ZERO = 0;
+
+	/**
+	 * A constant representing the `CLAMP` edge action mode for the {@code ImageFunction2D} class.
+	 * Specifies that out-of-bound pixel accesses should be clamped to the nearest valid pixel
+	 * within the image boundary.
+	 * <p>
+	 * This mode is used when handling images to determine how to process coordinates
+	 * that lie outside the actual dimensions of the image. If this mode is set,
+	 * any sampling of pixels outside the image bounds will return the value of
+	 * the nearest edge pixel.
+	 */
 	public static final int CLAMP = 1;
+
+	/**
+	 * A constant used to specify the "wrap" edge action behavior in the ImageFunction2D class.
+	 * This behavior applies when sampling pixels outside the image bounds, causing the
+	 * coordinates to wrap around to the opposite edge of the image. This is typically used
+	 * when creating seamless or tiled textures.
+	 */
 	public static final int WRAP = 2;
 
 	protected int[] pixels;

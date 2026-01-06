@@ -14,7 +14,18 @@ import java.util.Random;
  */
 public class NoiseFilter extends PointFilter {
 
+	/**
+	 * Denotes the Gaussian distribution type for generating random noise.
+	 * This constant is used to specify that the noise should follow a Gaussian
+	 * (normal) distribution when being applied to an image.
+	 */
 	public static final int GAUSSIAN = 0;
+
+	/**
+	 * Denotes the uniform distribution type for generating random noise.
+	 * This constant is used to specify that the noise should follow a uniform
+	 * distribution when being applied to an image.
+	 */
 	public static final int UNIFORM = 1;
 
 	private int amount = 25;
@@ -22,7 +33,19 @@ public class NoiseFilter extends PointFilter {
 	private boolean monochrome = false;
 	private final Random randomNumbers = new Random();
 
+	/**
+	 * Constructs a new NoiseFilter instance with default settings.
+	 * <p>
+	 * The default configuration includes:
+	 * - A noise amount of 25.
+	 * - A uniform distribution for noise generation.
+	 * - Color noise (monochrome disabled).
+	 * <p>
+	 * This filter can be applied to images to add random noise, either using
+	 * a Gaussian or uniform distribution, and optionally in monochrome or full color.
+	 */
 	public NoiseFilter() {
+		super();
 	}
 
 	public void setAmount(int amount) {

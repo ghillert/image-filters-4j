@@ -16,8 +16,25 @@ import java.awt.image.BufferedImage;
  */
 public class MotionBlurFilter extends AbstractBufferedImageOp {
 
+	/**
+	 * A constant representing the linear motion blur type. This is one of the
+	 * possible configurations for applying a motion blur effect in the
+	 * {@code MotionBlurFilter} class.
+	 */
 	public static final int LINEAR = 0;
+
+	/**
+	 * A constant representing the radial motion blur type in the {@code MotionBlurFilter}.
+	 * This type applies a radial blur around a central point, simulating a spinning motion effect.
+	 */
 	public static final int RADIAL = 1;
+
+	/**
+	 * A constant representing the ZOOM mode for the motion blur filter.
+	 * When this mode is selected, the motion blur effect will be applied
+	 * in a manner that simulates a zooming motion, creating a radial blur
+	 * effect centered on the image.
+	 */
 	public static final int ZOOM = 2;
 
 	private float angle = 0.0f;
@@ -27,7 +44,21 @@ public class MotionBlurFilter extends AbstractBufferedImageOp {
 	private float rotation = 0.0f;
 	private boolean wrapEdges = false;
 
+	/**
+	 * A filter that applies a motion blur effect to an image. Motion blur is simulated
+	 * by combining several translated and blended copies of the image at varying
+	 * intensities and directions, based on specified parameters.
+	 * <p>
+	 * The filter supports different modes of motion blur, including linear, radial,
+	 * and zoom, each of which can be adjusted through various attributes such as angle,
+	 * distance, zoom, and rotation. Edge wrapping behavior can also be configured to
+	 * determine how the filter handles borders of the image.
+	 * <p>
+	 * This class extends AbstractBufferedImageOp and overrides its filtering behavior
+	 * to implement the motion blur effect.
+	 */
 	public MotionBlurFilter() {
+		super();
 	}
 
 	public void setAngle(float angle) {

@@ -20,15 +20,37 @@ public class RippleFilter extends TransformFilter {
 
 	static final long serialVersionUID = 5101667633854087384L;
 
+	/**
+	 * A constant representing the sine wave type in the ripple filter.
+	 * This value is used to configure the filter to apply sine wave-based transformations
+	 * to the input image.
+	 */
 	public static final int SINE = 0;
+
+	/**
+	 * A constant representing a sawtooth waveform type that can be used to create ripple effects
+	 * in the {@code RippleFilter}. This waveform produces a repeated linear ascending and descending
+	 * pattern, commonly used in graphical transformations to achieve jagged ripple effects.
+	 */
 	public static final int SAWTOOTH = 1;
+
+	/**
+	 * This constant represents the triangular waveform type for the ripple effect
+	 * in the associated filter. It is used to specify that the ripple should
+	 * follow a triangular pattern when applied.
+	 */
 	public static final int TRIANGLE = 2;
+
+	/**
+	 * Constant representing the noise wave type in the ripple filter.
+	 * Used to apply a noise-based distortion pattern to an image.
+	 */
 	public static final int NOISE = 3;
 
-	public float xAmplitude;
-	public float yAmplitude;
-	public float xWavelength;
-	public float yWavelength;
+	private float xAmplitude;
+	private float yAmplitude;
+	private float xWavelength;
+	private float yWavelength;
 	private int waveType;
 
 	/**

@@ -16,11 +16,11 @@ import java.io.Serializable;
  */
 public class SplineColormap extends ArrayColormap implements Serializable {
 
-	public int numKnots = 4;
-	public int[] xKnots = {
+	private int numKnots = 4;
+	private int[] xKnots = {
 			0, 0, 255, 255
 	};
-	public int[] yKnots = {
+	private int[] yKnots = {
 			0xff000000, 0xff000000, 0xffffffff, 0xffffffff,
 	};
 

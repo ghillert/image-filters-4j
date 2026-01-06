@@ -8,7 +8,7 @@ package com.jhlabs.image;
  * The DitherFilter class applies dithering to an image using a specified dithering matrix.
  * It is a subclass of {@link PointFilter} and can process pixel data to achieve color reduction
  * and effects based on dithering techniques.
- *
+ * <p>
  * This class supports standard dithering matrices such as ordered dithering, clustered
  * dithering, and halftone dithering, and provides flexibility for custom matrices.
  *
@@ -19,28 +19,102 @@ public class DitherFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 2408287445119636967L;
 
-	protected static final int[] ditherMagic2x2Matrix = {
+	/**
+	 * A 2x2 dithering matrix used for ordered dithering in image processing.
+	 * The matrix is designed to distribute quantization error systematically
+	 * across neighboring pixels, helping to produce smoother gradients.
+	 * <p>
+	 * The matrix values:
+	 * - 0, 2
+	 * - 3, 1
+	 * <p>
+	 * Each value in the matrix represents the threshold level for dithering at the corresponding position.
+	 * The thresholds are normalized and applied to determine whether a pixel's value is rounded up or down
+	 * during quantization.
+	 */
+	public static final int[] ditherMagic2x2Matrix = {
 			0, 2,
 			3, 1
 	};
-	protected static final int[] ditherMagic4x4Matrix = {
+
+	/**
+	 * A 4x4 dithering matrix used for ordered dithering in image processing.
+	 * <p>
+	 * This matrix is commonly used to create a smoother gradient or simulate
+	 * intermediate colors in monochromatic images by distributing quantization errors
+	 * spatially. The values in the matrix are used to determine the dithering threshold for
+	 * each pixel, which then decides whether a pixel's intensity level is incremented
+	 * or left unchanged.
+	 * <p>
+	 * The matrix contains predefined thresholds arranged in a specific pattern to evenly
+	 * distribute quantization artifacts over the image, thereby reducing visual banding.
+	 * <p>
+	 * The matrix values are as follows:
+	 * 0, 14, 3, 13,
+	 * 11, 5, 8, 6,
+	 * 12, 2, 15, 1,
+	 * 7, 9, 4, 10.
+	 * <p>
+	 * This static field is constant and shared across all instances that require
+	 * 4x4 dithering for image manipulation.
+	 */
+	public static final int[] ditherMagic4x4Matrix = {
 			0, 14, 3, 13,
 			11, 5, 8, 6,
 			12, 2, 15, 1,
 			7, 9, 4, 10
 	};
+
+	/**
+	 * A 4x4 ordered dithering matrix used for image dithering. The matrix defines
+	 * a specific pattern for distributing quantization error to produce a visually
+	 * appealing result when reducing the color depth of an image.
+	 * <p>
+	 * The values in the matrix are normalized thresholds used to determine how
+	 * to distribute error across adjacent pixels. When applied in a dithering
+	 * algorithm, this matrix helps to create smoother transitions and prevent
+	 * noticeable banding or abrupt color changes.
+	 */
 	public static final int[] ditherOrdered4x4Matrix = {
 			0, 8, 2, 10,
 			12, 4, 14, 6,
 			3, 11, 1, 9,
 			15, 7, 13, 5
 	};
+
+	/**
+	 * A 4x4 dithering matrix used in the dithering process to create ordered dithering effects.
+	 * Each element in the matrix represents the threshold level for modifying pixel intensities.
+	 * This matrix defines a diagonal lines pattern and is used by filters for rendering.
+	 * <p>
+	 * The values in the matrix are laid out in row-major order, representing:
+	 * <p>
+	 * Row 1: 0, 1, 2, 3
+	 * Row 2: 4, 5, 6, 7
+	 * Row 3: 8, 9, 10, 11
+	 * Row 4: 12, 13, 14, 15
+	 */
 	public static final int[] ditherLines4x4Matrix = {
 			0, 1, 2, 3,
 			4, 5, 6, 7,
 			8, 9, 10, 11,
 			12, 13, 14, 15
 	};
+
+	/**
+	 * A 6x6 halftone dithering matrix designed for thresholding pixel values at 90-degree offset angles.
+	 * This matrix is typically used in image dithering techniques to simulate shades of gray
+	 * in black-and-white or limited color displays by varying the density and arrangement of pixels.
+	 * <p>
+	 * The matrix contains predefined threshold values ranging from 0 to 36, organized in a 6x6 grid.
+	 * These values determine the pixel intensity at each corresponding position in the image.
+	 * Lower threshold values correspond to lighter regions, while higher values represent darker areas.
+	 * <p>
+	 * This matrix, when applied to an image, generates a halftone effect with a dot pattern
+	 * rotated or aligned at a 90-degree angle, resulting in a visually structured dithering effect.
+	 * It is suitable for various graphic and visual rendering applications where
+	 * an analog halftone or artistic style is desired.
+	 */
 	public static final int[] dither90Halftone6x6Matrix = {
 			29, 18, 12, 19, 30, 34,
 			17, 7, 4, 8, 20, 28,
@@ -55,7 +129,9 @@ public class DitherFilter extends PointFilter implements java.io.Serializable {
 	 * by Robert Ulichney, MIT Press, ISBN 0-262-21009-6.
 	 */
 
-	/* Order-6 ordered dither */
+	/**
+	 * Order-6 ordered dither.
+	 **/
 	public static final int[] ditherOrdered6x6Matrix = {
 			1, 59, 15, 55, 2, 56, 12, 52,
 			33, 17, 47, 31, 34, 18, 44, 28,
@@ -133,14 +209,14 @@ public class DitherFilter extends PointFilter implements java.io.Serializable {
 			56, 32, 24, 23, 22, 31, 35, 53, 71, 95, 103, 104, 105, 96, 92, 74,
 			62, 55, 47, 37, 36, 46, 54, 61, 65, 72, 80, 90, 91, 81, 73, 66};
 
-	public int[] matrix;
-	public int rows;
-	public int cols;
-	public int levels;
+	private int[] matrix;
+	private int rows;
+	private int cols;
+	private int levels;
 	protected int[] mod;
 	protected int[] div;
 	protected int[] map;
-	public boolean colorDither;
+	private boolean colorDither;
 	private boolean initialized = false;
 
 	/**
@@ -172,6 +248,14 @@ public class DitherFilter extends PointFilter implements java.io.Serializable {
 
 	public int getLevels() {
 		return this.levels;
+	}
+
+	public boolean isColorDither() {
+		return this.colorDither;
+	}
+
+	public void setColorDither(boolean colorDither) {
+		this.colorDither = colorDither;
 	}
 
 	protected void initialize() {

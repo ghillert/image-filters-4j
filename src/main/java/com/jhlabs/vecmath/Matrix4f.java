@@ -8,21 +8,84 @@ package com.jhlabs.vecmath;
  */
 public class Matrix4f {
 
+	/**
+	 * The matrix element at row 0, column 0 of a 4x4 matrix.
+	 */
 	public float m00;
+
+	/**
+	 * The matrix element at row 0, column 1 of a 4x4 matrix.
+	 */
 	public float m01;
+
+	/**
+	 * The matrix element at row 0, column 2 of a 4x4 matrix.
+	 */
 	public float m02;
+
+	/**
+	 * The matrix element at row 0, column 3 of a 4x4 matrix.
+	 */
 	public float m03;
+
+	/**
+	 * The matrix element at row 1, column 0 of a 4x4 matrix.
+	 */
 	public float m10;
+
+	/**
+	 * The matrix element at row 1, column 1 of a 4x4 matrix.
+	 */
 	public float m11;
+
+	/**
+	 * The matrix element at row 1, column 2 of a 4x4 matrix.
+	 */
 	public float m12;
+
+	/**
+	 * The matrix element at row 1, column 3 of a 4x4 matrix.
+	 */
 	public float m13;
+
+	/**
+	 * The matrix element at row 2, column 0 of a 4x4 matrix.
+	 */
 	public float m20;
+
+	/**
+	 * The matrix element at row 2, column 1 of a 4x4 matrix.
+	 */
 	public float m21;
+
+	/**
+	 * The matrix element at row 2, column 2 of a 4x4 matrix.
+	 */
 	public float m22;
+
+	/**
+	 * The matrix element at row 2, column 3 of a 4x4 matrix.
+	 */
 	public float m23;
+
+	/**
+	 * The matrix element at row 3, column 0 of a 4x4 matrix.
+	 */
 	public float m30;
+
+	/**
+	 * The matrix element at row 3, column 1 of a 4x4 matrix.
+	 */
 	public float m31;
+
+	/**
+	 * The matrix element at row 3, column 2 of a 4x4 matrix.
+	 */
 	public float m32;
+
+	/**
+	 * The matrix element at row 3, column 3 of a 4x4 matrix.
+	 */
 	public float m33;
 
 	public Matrix4f() {

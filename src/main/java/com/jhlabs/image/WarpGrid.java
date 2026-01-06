@@ -23,10 +23,10 @@ public class WarpGrid implements java.io.Serializable {
 
 	static final long serialVersionUID = 4312410199770201968L;
 
-	public float[] xGrid = null;
-	public float[] yGrid = null;
-	public int rows;
-	public int cols;
+	private float[] xGrid = null;
+	private float[] yGrid = null;
+	private int rows;
+	private int cols;
 
 	public WarpGrid(int rows, int cols, int w, int h) {
 		this.rows = rows;
@@ -198,4 +198,35 @@ public class WarpGrid implements java.io.Serializable {
 		}
 	}
 
+	public float[] getXGrid() {
+		return this.xGrid;
+	}
+
+	public void setXGrid(float[] xGrid) {
+		this.xGrid = xGrid;
+	}
+
+	public float[] getYGrid() {
+		return this.yGrid;
+	}
+
+	public void setYGrid(float[] yGrid) {
+		this.yGrid = yGrid;
+	}
+
+	public int getRows() {
+		return this.rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getCols() {
+		return this.cols;
+	}
+
+	public void setCols(int cols) {
+		this.cols = cols;
+	}
 }

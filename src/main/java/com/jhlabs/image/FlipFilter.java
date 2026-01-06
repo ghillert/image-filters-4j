@@ -16,11 +16,45 @@ import java.awt.image.WritableRaster;
  */
 public class FlipFilter extends AbstractBufferedImageOp {
 
+	/**
+	 * Constant representing a horizontal flip operation.
+	 * This value is used to specify that an image should be flipped
+	 * along its horizontal axis in the {@code FlipFilter} class.
+	 */
 	public static final int FLIP_H = 1;
+
+	/**
+	 * A constant representing the vertical flip operation, where the image is flipped
+	 * along its horizontal axis. This value is used to specify the type of operation
+	 * applied by the {@code FlipFilter} class during image processing.
+	 */
 	public static final int FLIP_V = 2;
+
+	/**
+	 * A constant used to specify an image flip operation that combines both horizontal and vertical flips.
+	 * When applied, this operation reflects the image across both axes, effectively rotating it
+	 * 180 degrees while inverting its orientation.
+	 */
 	public static final int FLIP_HV = 3;
+
+	/**
+	 * Constant representing a 90-degree clockwise image flip operation.
+	 * This value can be used to specify the desired flip operation
+	 * in the {@link FlipFilter} when manipulating images.
+	 */
 	public static final int FLIP_90CW = 4;
+
+	/**
+	 * A constant representing a 90-degree counterclockwise flip operation.
+	 * This value is used to specify the type of flip transformation to be
+	 * applied to an image using the FlipFilter class.
+	 */
 	public static final int FLIP_90CCW = 5;
+
+	/**
+	 * A constant representing a 180-degree rotation of an image.
+	 * Used as an operation type in the {@code FlipFilter} class to rotate images by 180 degrees.
+	 */
 	public static final int FLIP_180 = 6;
 
 	private int operation;

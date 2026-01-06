@@ -14,9 +14,13 @@ import java.awt.Rectangle;
  */
 public class DilateFilter extends BinaryFilter {
 
-	public int threshold = 2;
+	private int threshold = 2;
 
+	/**
+	 * Construct a DilateFilter.
+	 */
 	public DilateFilter() {
+		super();
 	}
 
 	/**
@@ -28,7 +32,7 @@ public class DilateFilter extends BinaryFilter {
 	}
 
 	/**
-	 * Return the threshold - the number of neighbouring pixels for dilation to occur.
+	 * Return the threshold - the number of neighbouring pixels for dilation to occur. Defaults to 2.
 	 * @return the current threshold
 	 */
 	public int getThreshold() {

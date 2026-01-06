@@ -36,23 +36,84 @@ import com.jhlabs.vecmath.Vector3f;
  */
 public class LightFilter extends WholeImageFilter implements Serializable {
 
+	/**
+	 * Constant representing the option to derive colors directly from the image.
+	 * This constant is used in the context of defining the source of colors during
+	 * the light filtering process.
+	 */
 	public static final int COLORS_FROM_IMAGE = 0;
+
+	/**
+	 * A constant representing a color source option for the `LightFilter` class.
+	 * This constant is typically used to indicate that colors should be derived
+	 * directly from the image being processed.
+	 * <p>
+	 * The `COLORS_CONSTANT` variable serves as a predefined mode for the filter
+	 * to interpret how colors are applied to the lighting effects.
+	 */
 	public static final int COLORS_CONSTANT = 1;
 
+	/**
+	 * A constant representing the bump source type where bump mapping is derived from an image.
+	 * This value is used in conjunction with the bump mapping functionality of the `LightFilter` class.
+	 */
 	public static final int BUMPS_FROM_IMAGE = 0;
+
+	/**
+	 * A constant used to specify that bump mapping should be derived from the alpha channel
+	 * of an image. This setting is used in conjunction with lighting and shading computations
+	 * to simulate surface irregularities and enhance the visual realism of rendered objects.
+	 */
 	public static final int BUMPS_FROM_IMAGE_ALPHA = 1;
+
+	/**
+	 * A constant representing the use of a bump map derived from a predefined map
+	 * in the lighting filter. This value is used to specify the bump source
+	 * within the lighting effect configuration.
+	 */
 	public static final int BUMPS_FROM_MAP = 2;
+
+	/**
+	 * Indicates that bump mapping for the lighting effect is derived from a beveled surface.
+	 * This constant is used to specify the source of bump data in the lighting filter.
+	 * It represents a predefined method for creating bump patterns based on bevel effects.
+	 */
 	public static final int BUMPS_FROM_BEVEL = 3;
 
+	/**
+	 * Represents the ambient lighting configuration in the {@code LightFilter} class.
+	 * This constant is used to indicate an ambient light source, which provides uniform
+	 * lighting that does not depend on direction or position.
+	 */
 	public static final int AMBIENT = 0;
+
+	/**
+	 * A constant representing a distant light source in the lighting model.
+	 * This value is used to simulate directional lighting, where the light
+	 * is considered to originate from an infinite distance, providing parallel
+	 * rays across the surface being shaded.
+	 */
 	public static final int DISTANT = 1;
+
+	/**
+	 * Represents the identifier for a point light source in the lighting model.
+	 * This constant is used to distinguish a point light from other types of lights
+	 * such as ambient, distant, or spot lights. Point lights emit light from a
+	 * specific position in all directions, simulating a localized light source.
+	 */
 	public static final int POINT = 2;
+
+	/**
+	 * Represents a constant value used to indicate a spotlight lighting effect in the LightFilter.
+	 * This value is typically used to specify a specific light source type when configuring
+	 * the light effects or rendering properties of the filter.
+	 */
 	public static final int SPOT = 3;
 
 	private float bumpHeight;
 	private float bumpSoftness;
 	private float viewDistance = 10000.0f;
-	Material material;
+	private Material material;
 	private final Vector lights;
 	private int colorSource = COLORS_FROM_IMAGE;
 	private int bumpSource = BUMPS_FROM_IMAGE;
@@ -69,7 +130,7 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 	private final Color4f specular_color;
 	private final Vector3f tmpv;
 	private final Vector3f tmpv2;
-	public NormalEvaluator normalEvaluator = new NormalEvaluator();
+	private NormalEvaluator normalEvaluator = new NormalEvaluator();
 
 	public LightFilter() {
 		this.lights = new Vector();
@@ -171,6 +232,14 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 
 	public Vector getLights() {
 		return this.lights;
+	}
+
+	public NormalEvaluator getNormalEvaluator() {
+		return this.normalEvaluator;
+	}
+
+	public void setNormalEvaluator(NormalEvaluator normalEvaluator) {
+		this.normalEvaluator = normalEvaluator;
 	}
 
 	protected static final float r255 = 1.0f / 255.0f;
@@ -491,18 +560,100 @@ public class LightFilter extends WholeImageFilter implements Serializable {
 		return "Stylize/Light Effects...";
 	}
 
-	public class NormalEvaluator {
+	/**
+	 * The NormalEvaluator class provides functionality to evaluate normals at a specified point
+	 * on a shape. It supports various shapes and bevel types, allowing for detailed control
+	 * over the surface's appearance.
+	 * <p>
+	 * Shapes:
+	 * - RECTANGLE
+	 * - ROUNDRECT
+	 * - ELLIPSE
+	 * <p>
+	 * Bevels:
+	 * - LINEAR
+	 * - SIN
+	 * - CIRCLE_UP
+	 * - CIRCLE_DOWN
+	 * - SMOOTH
+	 * - PULSE
+	 * - SMOOTH_PULSE
+	 * - THING
+	 */
+	public static class NormalEvaluator {
+
+		/**
+		 * A constant representing the rectangle shape type.
+		 * This value can be used to specify that a certain operation
+		 * or property in the enclosing class should represent or process
+		 * a rectangular shape.
+		 */
 		public static final int RECTANGLE = 0;
+
+		/**
+		 * A constant representing the ROUNDRECT shape type.
+		 * This shape type typically denotes a rectangle with rounded corners.
+		 */
 		public static final int ROUNDRECT = 1;
+
+		/**
+		 * Represents the shape type for an ellipse. This constant is used to specify
+		 * that the desired shape is an ellipse when assigning shapes in the
+		 * NormalEvaluator class.
+		 */
 		public static final int ELLIPSE = 2;
 
+		/**
+		 * Represents the LINEAR interpolation type for evaluating shapes or patterns.
+		 * It is typically used in mathematical or graphical computations where a
+		 * linear transition or blending is required.
+		 */
 		public static final int LINEAR = 0;
+
+		/**
+		 * Represents the SIN shape type used in the NormalEvaluator class.
+		 * This constant can be used to specify a sine wave shape pattern
+		 * for normal evaluation or related operations.
+		 */
 		public static final int SIN = 1;
+
+		/**
+		 * Represents a specific shape type used within the NormalEvaluator class, indicating
+		 * an upward-facing circle. This constant is used to set or evaluate the shape
+		 * property of an object.
+		 */
 		public static final int CIRCLE_UP = 2;
+
+		/**
+		 * Represents a constant integer value used in the evaluation process to define a specific shape or behavior
+		 * related to a circle pointing downward. This constant is part of the NormalEvaluator class and may contribute
+		 * to shape determination or other evaluation functions within the class's context.
+		 */
 		public static final int CIRCLE_DOWN = 3;
+
+		/**
+		 * A constant representing the "smooth" shape type used for rendering or evaluation.
+		 * This constant is used to specify a smooth transition or curve in certain geometric or graphical computations.
+		 */
 		public static final int SMOOTH = 4;
+
+		/**
+		 * A constant representing the PULSE shape type. This value is used to specify a pulsing or oscillating
+		 * shape effect within the NormalEvaluator class. The PULSE type typically denotes a repetitive
+		 * pattern or motion applied to the evaluated surface when rendering or processing graphical elements.
+		 */
 		public static final int PULSE = 5;
+
+		/**
+		 * Represents a smooth blending of multiple pulse effects in the evaluation process.
+		 * This constant can be used to specify a smooth transition between pulse shapes
+		 * in graphical transformations or visualization scenarios.
+		 */
 		public static final int SMOOTH_PULSE = 6;
+
+		/**
+		 * A constant representing a thing shape type used in the NormalEvaluator class.
+		 */
 		public static final int THING = 7;
 
 		private int margin = 10;

@@ -9,33 +9,170 @@ import java.util.Random;
 
 /**
  * Some more useful math functions for image processing.
- * These are becoming obsolete as we move to Java2D. Use MiscComposite instead.
+ * These are becoming obsolete as we move to Java2D. Use {@link com.jhlabs.composite.MiscComposite} instead.
  *
  * @author Jerry Huxtable
  * @author Gunnar Hillert
  */
 public class PixelUtils {
 
+	/**
+	 * A constant representing the "replace" operation mode within the PixelUtils class.
+	 * This operation mode replaces the existing pixel color value with a new one during pixel manipulation.
+	 */
 	public static final int REPLACE = 0;
+
+	/**
+	 * A constant representing the "normal" operation mode within the PixelUtils class.
+	 * This operation mode performs a standard pixel blending operation without any specific modification.
+	 */
 	public static final int NORMAL = 1;
+
+	/**
+	 * A constant representing the minimum value threshold.
+	 * Used to define a fixed value of 2 for operations or calculations
+	 * where a minimum bound is required.
+	 */
 	public static final int MIN = 2;
+
+	/**
+	 * A constant representing the maximum operational value or limit for certain computations
+	 * or processes within the PixelUtils class.
+	 */
 	public static final int MAX = 3;
+
+	/**
+	 * Defines an operation constant representing the "add" blend mode,
+	 * where the pixel values of two images are combined by adding
+	 * their respective channel values.
+	 */
 	public static final int ADD = 4;
+
+	/**
+	 * Represents an operation mode used for pixel manipulation that performs
+	 * subtraction between pixel values. This value is used within methods
+	 * related to image processing to define behavior when combining or
+	 * modifying pixel data.
+	 */
 	public static final int SUBTRACT = 5;
+
+	/**
+	 * A constant representing the "difference" operation in pixel manipulation.
+	 * This is typically used to compute the absolute difference between two pixel values
+	 * or colors during image processing operations, emphasizing the variation between them.
+	 */
 	public static final int DIFFERENCE = 6;
+
+	/**
+	 * A constant representing the multiplication blending mode in the {@code PixelUtils} class.
+	 * This mode is typically used for combining pixel values by multiplying their color components.
+	 */
 	public static final int MULTIPLY = 7;
+
+	/**
+	 * Represents the operation identifier for the "HUE" blending mode or transformation
+	 * in the context of pixel manipulation. This constant is typically used in methods or
+	 * processes where pixel values need to be combined, adjusted, or analyzed based on their
+	 * hue component within the HSB (Hue, Saturation, Brightness) color model.
+	 */
 	public static final int HUE = 8;
+
+	/**
+	 * Represents the operation mode or constant for adjusting the saturation property
+	 * in image processing tasks. Saturation refers to the intensity or vividness of a color.
+	 * A higher saturation value corresponds to more vibrant colors, while lower values result
+	 * in muted or grayscale tones.
+	 */
 	public static final int SATURATION = 9;
+
+	/**
+	 * Represents the value component of the HSV (Hue, Saturation, Value) color model.
+	 * In the HSV model, the value component determines the brightness of a color.
+	 * It ranges between 0 (black) and a maximum value, typically used in color manipulation
+	 * and operations.
+	 */
 	public static final int VALUE = 10;
+
+	/**
+	 * Represents the "COLOR" operation mode used in pixel manipulation.
+	 * This constant is typically used to define a specific blending or
+	 * color processing operation in image processing utilities.
+	 */
 	public static final int COLOR = 11;
+
+	/**
+	 * A constant representing the "SCREEN" operation in pixel-based image processing.
+	 * This operation is often used in blending modes to achieve a "lighten" effect by
+	 * combining two pixel values. The SCREEN operation typically inverts the values
+	 * of both pixels, multiplies them, and then inverts the result to create the final value.
+	 */
 	public static final int SCREEN = 12;
+
+	/**
+	 * Represents the "AVERAGE" blending mode used in pixel operations.
+	 * This constant indicates a mode where the average of two pixel values
+	 * is calculated to blend them.
+	 *
+	 * Typically used in conjunction with methods that combine or manipulate
+	 * pixel values, such as {@code combinePixels}, to produce visual effects
+	 * that depend on averaging.
+	 */
 	public static final int AVERAGE = 13;
+
+	/**
+	 * The OVERLAY constant represents a specific blending mode used for combining
+	 * pixel values in image processing. This mode overlays one color onto another
+	 * to achieve a visually pleasing combination by preserving highlights and shadows
+	 * of the base color while using the blend color to saturate or desaturate the result.
+	 * <p>
+	 * Typically, the overlay mode enhances contrast and provides emphasis to
+	 * blended visuals, making it a common choice in graphic editing and compositing
+	 * tasks.
+	 */
 	public static final int OVERLAY = 14;
+
+	/**
+	 * Represents the CLEAR blending operation constant used in pixel manipulation.
+	 * This operation typically sets the target pixel to a fully transparent state,
+	 * effectively clearing its color and alpha information.
+	 */
 	public static final int CLEAR = 15;
+
+	/**
+	 * Represents the EXCHANGE blending operation constant used in pixel manipulation.
+	 * This operation swaps the source and destination pixel values, effectively
+	 * exchanging their colors.
+	 */
 	public static final int EXCHANGE = 16;
+
+	/**
+	 * Represents the dissolve blend mode operation used in image processing.
+	 * This constant is used to define a blending mode where pixels from the source
+	 * and destination images are combined in a manner that simulates dissolving or
+	 * random transparency effects. Typically applied during the combination of two
+	 * images or while rendering transitions.
+	 */
 	public static final int DISSOLVE = 17;
+
+	/**
+	 * Represents the "DST_IN" blending operation constant used in pixel manipulation.
+	 * The "DST_IN" operation retains the destination pixel's alpha while blending the
+	 * source pixel only in areas where both source and destination pixels overlap.
+	 */
 	public static final int DST_IN = 18;
+
+	/**
+	 * A constant representing the alpha blending operation type, often used in image processing
+	 * to handle transparency and blending of colors.
+	 */
 	public static final int ALPHA = 19;
+
+	/**
+	 * A constant representing an operation that converts the alpha channel of a pixel
+	 * to grayscale intensity. The conversion applies a formula or transformation where
+	 * the transparency (alpha) value of the pixel is interpreted as a grayscale value,
+	 * effectively mapping transparency levels to shades of gray.
+	 */
 	public static final int ALPHA_TO_GRAY = 20;
 
 	private static final Random randomGenerator = new Random();
@@ -55,6 +192,15 @@ public class PixelUtils {
 		return c;
 	}
 
+	/**
+	 * Interpolates between two integer values based on a given fraction
+	 * and clamps the result to the range 0 to 255.
+	 * @param v1 the starting integer value
+	 * @param v2 the ending integer value
+	 * @param f a fraction between 0 and 1 representing the interpolation factor,
+	 *          where 0 yields v1 and 1 yields v2
+	 * @return the interpolated and clamped integer value
+	 */
 	public static int interpolate(int v1, int v2, float f) {
 		return clamp((int) (v1 + f * (v2 - v1)));
 	}

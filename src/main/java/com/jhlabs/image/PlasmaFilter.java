@@ -27,7 +27,7 @@ public class PlasmaFilter extends WholeImageFilter implements java.io.Serializab
 
 	static final long serialVersionUID = 6491871753122667752L;
 
-	public float turbulence = 1.0f;
+	private float turbulence = 1.0f;
 	private float scaling = 0.0f;
 	private Colormap colormap = new LinearColormap();
 	private final Random randomGenerator;

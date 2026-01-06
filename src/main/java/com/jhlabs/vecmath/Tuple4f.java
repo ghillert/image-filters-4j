@@ -7,9 +7,33 @@ package com.jhlabs.vecmath;
  * @author Gunnar Hillert
  */
 public class Tuple4f {
+
+	/**
+	 * Represents the x-component of a 4-dimensional tuple.
+	 * This field is primarily used to store and manipulate the first element of the tuple.
+	 * It can represent values such as the x-coordinate in a 3D or 4D space, the red color channel in a color tuple,
+	 * or a component of a quaternion or other mathematical constructs that extend the Tuple4f class.
+	 */
 	public float x;
+
+	/**
+	 * The y component of the 4-tuple (x, y, z, w).
+	 * Represents the second coordinate value in a 4D vector.
+	 * Typically used in mathematical operations involving 4D points or tuples.
+	 */
 	public float y;
+
+	/**
+	 * The third component of the 4-tuple represented as a floating-point value.
+	 * Typically used to represent the z-coordinate in a 3D or 4D vector or tuple.
+	 */
 	public float z;
+
+	/**
+	 * Represents the fourth component of a four-dimensional tuple or vector.
+	 * Typically used in mathematical computations involving 4D vectors, where
+	 * it may represent a homogeneous coordinate or an additional scalar value.
+	 */
 	public float w;
 
 	public Tuple4f() {

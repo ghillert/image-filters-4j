@@ -16,16 +16,71 @@ import java.awt.image.BufferedImage;
  */
 public class GradientFilter extends AbstractBufferedImageOp {
 
+	/**
+	 * A constant representing a linear gradient type. This value is used to define the type of gradient
+	 * to be applied when configuring the {@code GradientFilter}.
+	 * <p>
+	 * The linear gradient interpolates colors in a straight line between two defined points.
+	 */
 	public static final int LINEAR = 0;
+
+	/**
+	 * Constant representing the bilinear interpolation type for gradient generation.
+	 * This is used to specify the interpolation mode in gradient rendering algorithms,
+	 * determining how color transitions between gradient points are calculated.
+	 */
 	public static final int BILINEAR = 1;
+
+	/**
+	 * Represents a gradient type for radial gradient generation.
+	 * Used in gradient-related operations to apply a radial gradient effect.
+	 */
 	public static final int RADIAL = 2;
+
+	/**
+	 * Represents the conical gradient type, used to define a gradient effect
+	 * where colors wrap around a point in a cone-like fashion.
+	 */
 	public static final int CONICAL = 3;
+
+	/**
+	 * A constant representing the "Biconical" gradient type used in the {@code GradientFilter} class.
+	 * This gradient type creates a pattern resembling two conical gradients mirrored or aligned.
+	 */
 	public static final int BICONICAL = 4;
+
+	/**
+	 * Defines an integer constant representing the "SQUARE" gradient type.
+	 * This constant is used to specify a square-shaped gradient in the gradient filter.
+	 */
 	public static final int SQUARE = 5;
 
+	/**
+	 * A constant representing the "linear" interpolation type used in gradient calculations.
+	 * This mode defines a straightforward, linear progression between two colors
+	 * across a gradient's span.
+	 */
 	public static final int INT_LINEAR = 0;
+
+	/**
+	 * Represents the upward radial gradient interpolation mode used in the gradient filtering process.
+	 * This constant is used to define a specific type of interpolation when rendering gradient effects.
+	 * Typically, it determines how colors are blended radially from the center
+	 * outward in an upward-oriented direction.
+	 */
 	public static final int INT_CIRCLE_UP = 1;
+
+	/**
+	 * Represents a specific interpolation method for gradient generation in the {@code GradientFilter} class.
+	 * The value {@code INT_CIRCLE_DOWN} specifies circular interpolation with a downward effect.
+	 */
 	public static final int INT_CIRCLE_DOWN = 2;
+
+	/**
+	 * A constant representing the "smooth" interpolation method used in gradient generation.
+	 * This value is typically applied to define the interpolation behavior of a gradient,
+	 * ensuring a smooth transition between colors for higher visual quality.
+	 */
 	public static final int INT_SMOOTH = 3;
 
 	private float angle = 0;
@@ -43,9 +98,25 @@ public class GradientFilter extends AbstractBufferedImageOp {
 	private int interpolation = INT_LINEAR;
 	private int paintMode = PixelUtils.NORMAL;
 
+	/**
+	 * Constructs a new instance of the GradientFilter class.
+	 * This default constructor initializes the filter with default settings,
+	 * allowing further configuration via the provided setters or other constructor overloads.
+	 */
 	public GradientFilter() {
+		super();
 	}
 
+	/**
+	 * Constructs a new GradientFilter with specified points, colors, and rendering options.
+	 * @param p1          the starting point of the gradient.
+	 * @param p2          the ending point of the gradient.
+	 * @param color1      the color at the starting point of the gradient.
+	 * @param color2      the color at the ending point of the gradient.
+	 * @param repeat      a boolean indicating whether the gradient should repeat.
+	 * @param type        the type of gradient to apply (e.g., LINEAR, RADIAL, etc.).
+	 * @param interpolation the interpolation mode to use (e.g., INT_LINEAR, INT_SMOOTH, etc.).
+	 */
 	public GradientFilter(Point p1, Point p2, int color1, int color2, boolean repeat, int type, int interpolation) {
 		this.p1 = p1;
 		this.p2 = p2;

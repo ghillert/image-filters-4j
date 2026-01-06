@@ -12,9 +12,33 @@ package com.jhlabs.image;
  */
 public class Histogram {
 
+	/**
+	 * Represents the index for the red color channel in a histogram.
+	 * This constant is used to identify and access frequency or statistical data
+	 * related to the red channel in an image histogram.
+	 */
 	public static final int RED = 0;
+
+	/**
+	 * A constant representing the green color channel in the context of image histogram analysis.
+	 * This value is used to identify and interact with the green channel when performing
+	 * operations on image histograms, such as retrieving frequency or calculating statistical properties.
+	 */
 	public static final int GREEN = 1;
+
+	/**
+	 * A constant representing the blue color channel index within the histogram.
+	 * The value 2 corresponds to the index used to access blue channel data for image processing
+	 * tasks such as analyzing the intensity distribution of the blue component in an image.
+	 */
 	public static final int BLUE = 2;
+
+	/**
+	 * A constant representing the gray channel in the histogram analysis.
+	 * The value of this constant is used as an identifier for operations
+	 * or queries related to the gray channel within the context of image
+	 * processing or analysis.
+	 */
 	public static final int GRAY = 3;
 
 	protected int[][] histogram;

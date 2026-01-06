@@ -15,8 +15,38 @@ import java.awt.Rectangle;
  */
 public abstract class TransformFilter extends WholeImageFilter {
 
+	/**
+	 * Constant representing the "ZERO" edge action.
+	 * <p>
+	 * This edge action sets pixels outside the image bounds to black (RGB value 0).
+	 * It is primarily used in image transformation filters to handle regions
+	 * where sampling pixels exceed the image's dimensions.
+	 * <p>
+	 * Typically used in conjunction with image distortion or transformation
+	 * filters to define how the edges of the image are managed.
+	 */
 	public static final int ZERO = 0;
+
+	/**
+	 * Constant representing the "CLAMP" edge action.
+	 * <p>
+	 * This edge action clamps the coordinates of samples that are outside the image
+	 * boundaries to the edges of the image. It ensures that any pixel values beyond
+	 * the bounds of the image are set to the value of the nearest pixel within the image.
+	 * <p>
+	 * Commonly used in image manipulation and transformation filters to handle boundary
+	 * conditions in a way that minimizes visual artifacts caused by out-of-bound sampling.
+	 */
 	public static final int CLAMP = 1;
+
+	/**
+	 * A constant representing the "wrap" edge action. When applying a transformation or filter,
+	 * this edge action causes the input image to wrap around at the edges, creating a seamless
+	 * appearance as pixels are sampled from the opposite edge.
+	 * <p>
+	 * Typically used in conjunction with image transformations to handle out-of-bounds
+	 * pixel sampling behavior.
+	 */
 	public static final int WRAP = 2;
 
 	protected int edgeAction = ZERO;

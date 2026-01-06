@@ -12,9 +12,31 @@ package com.jhlabs.image;
  */
 public class ImageMath {
 
+	/**
+	 * The mathematical constant π (pi), defined as the ratio of a circle's circumference to its diameter.
+	 * This value is represented as a single-precision floating-point approximation.
+	 * It can be used in various mathematical calculations involving circles, angles, and trigonometric functions.
+	 */
 	public static final float PI = (float) Math.PI;
+
+	/**
+	 * Represents half the value of π (pi), a mathematical constant commonly used in geometry and trigonometry.
+	 * This constant is useful for calculations involving angles, specifically in radians, where it refers to 90 degrees.
+	 */
 	public static final float HALF_PI = (float) Math.PI / 2.0f;
+
+	/**
+	 * A constant representing one-quarter of the mathematical constant π (pi).
+	 * It is commonly used in applications involving circular or trigonometric
+	 * computations where a quarter of π is required.
+	 */
 	public static final float QUARTER_PI = (float) Math.PI / 4.0f;
+
+	/**
+	 * Represents the mathematical constant 2π (two times the value of π).
+	 * This constant is commonly used in trigonometric and geometric calculations
+	 * where a full circle or periodicity is involved.
+	 */
 	public static final float TWO_PI = (float) Math.PI * 2.0f;
 
 	/**

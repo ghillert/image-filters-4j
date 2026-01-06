@@ -7,8 +7,26 @@ package com.jhlabs.vecmath;
  * @author Gunnar Hillert
  */
 public class Tuple3f {
+
+	/**
+	 * Represents the x-component of a 3-dimensional tuple or vector.
+	 * This field is commonly used to store or manipulate the x-coordinate
+	 * in 3D space.
+	 */
 	public float x;
+
+	/**
+	 * Represents the y-component of a 3-dimensional tuple or vector.
+	 * This field is commonly used to store or manipulate the y-coordinate
+	 * in 3D space.
+	 */
 	public float y;
+
+	/**
+	 * The z component of a three-dimensional tuple.
+	 * Represents the z-coordinate in a 3D space.
+	 * This value can be directly accessed or modified.
+	 */
 	public float z;
 
 	public Tuple3f() {

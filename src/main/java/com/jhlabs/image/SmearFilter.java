@@ -12,12 +12,33 @@ public class SmearFilter extends WholeImageFilter implements java.io.Serializabl
 
 	static final long serialVersionUID = 6491871753122667752L;
 
+	/**
+	 * Represents a constant value used to specify the "Crosses" shape type in the {@code SmearFilter}.
+	 * This value is used as a parameter to determine the shape applied in the filter's smearing effect.
+	 */
 	public static final int CROSSES = 0;
+
+	/**
+	 * A constant representing the "lines" shape type used in the SmearFilter.
+	 * This value is primarily used to specify that the filter should generate or process a "lines" shape.
+	 */
 	public static final int LINES = 1;
+
+	/**
+	 * Constant representing the shape type "CIRCLES" used in the smear filter.
+	 * This value is utilized to define or identify circular shapes during
+	 * the processing of image transformation effects in the {@code SmearFilter} class.
+	 */
 	public static final int CIRCLES = 2;
+
+	/**
+	 * A constant representing the square shape type for the SmearFilter.
+	 * The value is used to specify the application of square-based smearing effects.
+	 */
 	public static final int SQUARES = 3;
 
 	private final Colormap colormap = new LinearColormap();
+
 	private float angle = 0;
 	private float density = 0.5f;
 	private float scatter = 0.0f;

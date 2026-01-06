@@ -27,26 +27,26 @@ package com.hillert.image.filters;
 import java.awt.image.BufferedImage;
 
 import com.hillert.image.filters.support.ImageTestUtils;
-import com.jhlabs.image.CellularFilter;
+import com.jhlabs.image.DitherFilter;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Integration-style tests that verify the {@link CellularFilter}.
+ * Integration-style tests that verify the {@link DitherFilter}.
  *
  * @author Gunnar Hillert
  */
-public class CellularFilterTests {
+public class DitherFilterTests {
 
-	private final CellularFilter filter = new CellularFilter();
+	private final DitherFilter filter = new DitherFilter();
 
 	/**
-	 * Applies the cellular filter to the sample image and ensures dimensions and alpha
+	 * Applies the dither filter to the sample image and ensures dimensions and alpha
 	 * are preserved while at least one pixel is changed.
 	 */
 	@Test
-	void appliesCellularFilterToSampleImage() {
+	void appliesDitherFilterToSampleImage() {
 		final BufferedImage original = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
 		final BufferedImage result = this.filter.filter(original, null);
 
@@ -58,11 +58,11 @@ public class CellularFilterTests {
 		for (int y = 0; y < original.getHeight(); y++) {
 			for (int x = 0; x < original.getWidth(); x++) {
 				final int originalRgb = original.getRGB(x, y);
-				final int cellularRgb = result.getRGB(x, y);
+				final int ditheredRgb = result.getRGB(x, y);
 
-				assertThat(alpha(cellularRgb)).isEqualTo(alpha(originalRgb));
+				assertThat(alpha(ditheredRgb)).isEqualTo(alpha(originalRgb));
 
-				if (originalRgb != cellularRgb) {
+				if (originalRgb != ditheredRgb) {
 					pixelChanged = true;
 				}
 			}
@@ -76,18 +76,18 @@ public class CellularFilterTests {
 	}
 
 	/**
-	 * Entry point for the program, which demonstrates the application of a Cellular
+	 * Entry point for the program, which demonstrates the application of a Dither
 	 * filter to an image and displays the original and processed images side by side.
 	 * @param args command-line arguments (not used in this program)
 	 */
 	public static void main(final String[] args) {
 		final BufferedImage originalImage = ImageTestUtils.loadImage(ImageTestUtils.TEST_IMAGE_RESOURCE);
-		final CellularFilter cellularFilter = new CellularFilter();
-		cellularFilter.setAmount(2.0f);
-		cellularFilter.setScale(12.0f);
-		cellularFilter.setRandomness(1.5f);
-		final BufferedImage filteredImage = cellularFilter.filter(originalImage, null);
-		ImageTestUtils.showSwingUI(originalImage, filteredImage, "Cellular Filter Preview");
+		final DitherFilter ditherFilter = new DitherFilter();
+		ditherFilter.setColorDither(false);
+		ditherFilter.setLevels(2);
+		ditherFilter.setMatrix(DitherFilter.ditherMagic2x2Matrix);
+		final BufferedImage filteredImage = ditherFilter.filter(originalImage, null);
+		ImageTestUtils.showSwingUI(originalImage, filteredImage, "Dither Filter Preview");
 	}
 
 }

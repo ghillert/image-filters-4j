@@ -65,8 +65,8 @@ public class GaussianFilter extends ConvolveFilter {
 		src.getRGB(0, 0, width, height, inPixels, 0, width);
 
 		if (this.radius > 0) {
-			convolveAndTranspose(this.kernel, inPixels, outPixels, width, height, this.alpha, CLAMP_EDGES);
-			convolveAndTranspose(this.kernel, outPixels, inPixels, height, width, this.alpha, CLAMP_EDGES);
+			convolveAndTranspose(this.kernel, inPixels, outPixels, width, height, this.isAlpha(), CLAMP_EDGES);
+			convolveAndTranspose(this.kernel, outPixels, inPixels, height, width, this.isAlpha(), CLAMP_EDGES);
 		}
 
 		dst.setRGB(0, 0, width, height, inPixels, 0, width);

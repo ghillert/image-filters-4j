@@ -4,13 +4,23 @@
 
 package com.jhlabs.image;
 
+/**
+ * A filter that adjusts the red, green, and blue components of an image.
+ * The adjustment is applied by scaling each color channel by a specified factor.
+ * <p>
+ * This filter extends the {@code PointFilter} class, allowing for point-by-point
+ * modification of image pixels.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class RGBAdjustFilter extends PointFilter implements java.io.Serializable {
 
 	static final long serialVersionUID = 3509907597266563800L;
 
-	public float rFactor;
-	public float gFactor;
-	public float bFactor;
+	private float rFactor;
+	private float gFactor;
+	private float bFactor;
 
 	public RGBAdjustFilter() {
 		this(0, 0, 0);

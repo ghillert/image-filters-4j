@@ -4,21 +4,34 @@
 
 package com.jhlabs.image;
 
+import java.io.Serial;
+
 import com.jhlabs.math.Function2D;
 import com.jhlabs.math.Noise;
 
+/**
+ * A class that applies a texture filter to an image by manipulating pixel data.
+ * This filter uses noise and turbulence functions to create texture effects
+ * and supports various transformations such as scaling, stretching, rotation,
+ * and color mapping. The filter extends {@code PointFilter} and can be applied
+ * to an image on a per-pixel basis.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class TextureFilter extends PointFilter implements java.io.Serializable {
 
+	@Serial
 	static final long serialVersionUID = -7538331862272404352L;
 
 	private float scale = 32;
 	private float stretch = 1.0f;
 	private float angle = 0.0f;
-	public float amount = 1.0f;
-	public float turbulence = 1.0f;
-	public float gain = 0.5f;
-	public float bias = 0.5f;
-	public int operation;
+	private float amount = 1.0f;
+	private float turbulence = 1.0f;
+	private float gain = 0.5f;
+	private float bias = 0.5f;
+	private int operation;
 	private float m00 = 1.0f;
 	private float m01 = 0.0f;
 	private float m10 = 0.0f;
@@ -26,7 +39,15 @@ public class TextureFilter extends PointFilter implements java.io.Serializable {
 	private Colormap colormap = new Gradient();
 	private Function2D function = new Noise();
 
+	/**
+	 * Creates a new instance of the TextureFilter class.
+	 * This class is designed to provide various texture transformations
+	 * and effects such as scaling, stretching, turbulence, and applying
+	 * custom color maps. The filter manipulates RGB values based on
+	 * configurable parameters.
+	 */
 	public TextureFilter() {
+		super();
 	}
 
 	public void setAmount(float amount) {

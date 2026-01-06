@@ -20,14 +20,34 @@ import java.awt.image.Kernel;
  */
 public class ConvolveFilter extends AbstractBufferedImageOp {
 
-	static final long serialVersionUID = 2239251672685254626L;
+	/**
+	 * A constant indicating an edge action where no special treatment is applied
+	 * to the edges of an image during convolution. Pixels near the edge of the
+	 * image are implicitly treated as having a value of zero outside the bounds
+	 * of the image.
+	 * <p>
+	 * This value is typically used as a parameter to specify the behavior of
+	 * edge handling in convolution operations, such as when applying a kernel to
+	 * an image.
+	 */
+	public static final int ZERO_EDGES = 0;
 
-	public static int ZERO_EDGES = 0;
-	public static int CLAMP_EDGES = 1;
-	public static int WRAP_EDGES = 2;
+	/**
+	 * Indicates that the edge pixels of an image should be clamped to the nearest valid pixels
+	 * during convolution operations. This ensures that any references to pixels outside the
+	 * image boundaries are replaced with the closest edge pixel.
+	 */
+	public static final int CLAMP_EDGES = 1;
+
+	/**
+	 * A constant used to specify the edge action for convolution operations in the {@code ConvolveFilter} class.
+	 * When this value is set, the filter wraps the pixel values around the edges of the image during the convolution process.
+	 * This can be useful for achieving seamless effects or handling boundary conditions in certain image processing scenarios.
+	 */
+	public static final int WRAP_EDGES = 2;
 
 	protected Kernel kernel = null;
-	public boolean alpha = true;
+	private boolean alpha = true;
 	private int edgeAction = CLAMP_EDGES;
 
 	/**
@@ -59,7 +79,6 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
 	/**
 	 * Construct a filter with the given 3x3 kernel.
-	 *
 	 * @param kernel the convolution kernel
 	 */
 	public ConvolveFilter(Kernel kernel) {
@@ -80,6 +99,14 @@ public class ConvolveFilter extends AbstractBufferedImageOp {
 
 	public int getEdgeAction() {
 		return this.edgeAction;
+	}
+
+	public boolean isAlpha() {
+		return this.alpha;
+	}
+
+	public void setAlpha(boolean alpha) {
+		this.alpha = alpha;
 	}
 
 	@Override

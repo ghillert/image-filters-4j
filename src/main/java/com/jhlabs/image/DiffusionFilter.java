@@ -25,7 +25,7 @@ public class DiffusionFilter extends WholeImageFilter {
 	private int sum = 3 + 5 + 7 + 1;
 	private boolean serpentine = true;
 	private boolean colorDither = true;
-	public int levels = 6;
+	private int levels = 6;
 
 	/**
 	 * Construct a DiffusionFilter.
@@ -66,14 +66,26 @@ public class DiffusionFilter extends WholeImageFilter {
 		}
 	}
 
+	/**
+	 * Retrieves the matrix used for diffusion filtering.
+	 * @return an array of integers representing the diffusion matrix
+	 */
 	public int[] getMatrix() {
 		return this.matrix;
 	}
 
+	/**
+	 * Sets the number of levels to be used in the diffusion filter.
+	 * @param levels the number of levels for the diffusion process. Default is 6.
+	 */
 	public void setLevels(int levels) {
 		this.levels = levels;
 	}
 
+	/**
+	 * Retrieves the number of levels used in the diffusion filter.
+	 * @return the number of levels applied during the diffusion process.
+	 */
 	public int getLevels() {
 		return this.levels;
 	}

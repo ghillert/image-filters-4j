@@ -23,10 +23,41 @@ import com.jhlabs.math.VLNoise;
  */
 public class FBMFilter extends PointFilter implements Cloneable {
 
+	/**
+	 * Represents the type of noise filter to be applied in the FBM filtering process.
+	 * This constant is used to specify a standard noise function.
+	 * It is part of the configuration options for generating textures or patterns
+	 * using the {@link FBMFilter} class.
+	 */
 	public static final int NOISE = 0;
+
+	/**
+	 * Constant representing the "RIDGED" noise type used in the {@link FBMFilter}.
+	 * This noise type emphasizes ridged patterns, often used in procedural
+	 * texture generation for creating terrains, clouds, and other natural phenomena.
+	 */
 	public static final int RIDGED = 1;
+
+	/**
+	 * Constant representing the VL Noise basis type used in the {@link FBMFilter}.
+	 * This value is used to configure the noise generation algorithm within
+	 * the {@link FBMFilter}, specifically for creating textures and procedural patterns
+	 * based on VL Noise.
+	 */
 	public static final int VLNOISE = 2;
+
+	/**
+	 * A constant representing the "SCNOISE" noise type used in the {@link FBMFilter} class.
+	 * This value is associated with using a specific type of noise function for generating fractal-based
+	 * patterns or textures. It may be used in conjunction with the filter's operations and settings
+	 * to define the noise behavior in the resulting processed image.
+	 */
 	public static final int SCNOISE = 3;
+
+	/**
+	 * A constant representing the "Cellular" noise basis type used in procedural texture generation.
+	 * This value can be used to configure the noise generation behavior in the associated filter.
+	 */
 	public static final int CELLULAR = 4;
 
 	private float scale = 32;

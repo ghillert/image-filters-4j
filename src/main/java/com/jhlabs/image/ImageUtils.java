@@ -29,9 +29,24 @@ import java.awt.image.WritableRaster;
  */
 public abstract class ImageUtils {
 
+	/**
+	 * Represents the integer value of a specific RGBA color used to indicate a selected state.
+	 * The value is defined as `0xff000000`, which corresponds to a fully opaque black color.
+	 */
 	public static final int SELECTED = 0xff000000;
+
+	/**
+	 * Represents an unselected state or value. This constant is commonly used
+	 * to indicate a state where no selection has been made or to reset a state
+	 * to its default, non-selected state. Its value is represented as 0x00000000,
+	 * which corresponds to a fully transparent black color.
+	 */
 	public static final int UNSELECTED = 0x00000000;
 
+	/**
+	 * Represents a placeholder or default image used in various image processing operations.
+	 * This image is typically used as a fallback or default image when no specific image is available.
+	 */
 	public static BufferedImage backgroundImage = null;
 
 	public static BufferedImage createImage(ImageProducer producer) {

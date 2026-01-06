@@ -15,9 +15,29 @@ import java.awt.Rectangle;
 
 public class ShapeFilter extends WholeImageFilter {
 
+	/**
+	 * Represents the linear type for shape filtering operations. This value is used to specify
+	 * a linear filtering mode when applying transformations or filters to an image.
+	 */
 	public static final int LINEAR = 0;
+
+	/**
+	 * Constant representing the upward direction for circular filtering operations.
+	 * Typically used as a type or mode identifier in the {@code ShapeFilter} class.
+	 */
 	public static final int CIRCLE_UP = 1;
+
+	/**
+	 * A constant representing the "CIRCLE_DOWN" shape type in the ShapeFilter class.
+	 * This type is used to define a filtering operation where the shape effect simulates
+	 * a circular indentation or depression within an image.
+	 */
 	public static final int CIRCLE_DOWN = 2;
+
+	/**
+	 * A constant representing the "smooth" filtering type.
+	 * It is used to specify a smoothing operation in the ShapeFilter.
+	 */
 	public static final int SMOOTH = 3;
 
 	private float factor = 1.0f;
