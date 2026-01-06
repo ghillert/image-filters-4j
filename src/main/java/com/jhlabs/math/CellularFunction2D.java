@@ -6,15 +6,32 @@ package com.jhlabs.math;
 
 import java.util.Random;
 
+/**
+ * A class that implements a 2D cellular function. This function uses a random
+ * number generator to simulate a grid of points in a 2D space and evaluates the
+ * function based on distances between these points and the input coordinates.
+ * The results of the function are influenced by the coefficients for the distances,
+ * an optional angular component, and a distance power value.
+ * <p>
+ * This class is designed to be used as a generator for spatially varying values
+ * based on cellular noise principles, often useful in procedural texture generation.
+ *
+ * @author Jerry Huxtable
+ * @author Gunnar Hillert
+ */
 public class CellularFunction2D implements Function2D {
 
-	public float distancePower = 2;
-	public boolean cells = false;
-	public boolean angular = false;
+	private static final float distancePower = 2;
+	private static final boolean angular = false;
 	private final float[] coefficients = {1, 0, 0, 0};
 	private final Random random = new Random();
 	private Point[] results = null;
 
+	/**
+	 * Constructs an instance of the CellularFunction2D class.
+	 * This constructor initializes an internal array of Point objects with a default size of 2.
+	 * Each Point object in the array is initialized to a new instance with default field values.
+	 */
 	public CellularFunction2D() {
 		this.results = new Point[2];
 		for (int j = 0; j < this.results.length; j++) {

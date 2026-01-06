@@ -620,14 +620,11 @@ public class CellularFilter extends WholeImageFilter implements Function2D, Muta
 	 * Represents a point in a coordinate space with additional attributes commonly used in
 	 * cellular filtering operations.
 	 */
-	public class Point {
-		public int index;
-		public float x;
-		public float y;
-		public float dx;
-		public float dy;
-		public float cubeX;
-		public float cubeY;
-		public float distance;
+	static class Point {
+		float x;
+		float y;
+		float dx;
+		float dy;
+		float distance;
 	}
 }
